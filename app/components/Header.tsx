@@ -1,12 +1,16 @@
+"use client";
+import { useRef } from "react";
 import Image from "next/image";
-import { BsSearch } from "react-icons/bs";
-import { CgProfile } from "react-icons/cg";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useScrollFixed } from "@/hooks/useScrollFixed";
 import LinkBuilder from "@/components/NavLink";
+import IconNav from "./IconNav";
 
 export default function Header() {
+  const navRef = useRef<HTMLDivElement>(null);
+  const isFixed = useScrollFixed(navRef);
+
   return (
-    <header className="bg-black">
+    <header className="bg-black relative">
       <div className="container mx-auto">
         <div className="flex justify-between items-center py-10">
           <Image
@@ -16,24 +20,26 @@ export default function Header() {
             className="object-contain w-auto h-auto"
             alt="Logo"
           />
-          <div className="flex gap-5 text-white text-3xl">
-            <BsSearch className="cursor-pointer hover:text-white/90 transition duration-200" />
-            <CgProfile className="cursor-pointer hover:text-white/90 transition duration-200" />
-            <AiOutlineShoppingCart className="cursor-pointer hover:text-white/90 transition duration-200" />
-          </div>
+          <IconNav />
         </div>
       </div>
 
-      <div className="w-full bg-black z-50 sticky">
+      <div
+        className={`w-full bg-black z-50 ${isFixed ? "fixed top-0 transition-all duration-200" : ""}`}
+        ref={navRef}
+      >
         <div className="container mx-auto z-50">
-          <nav className="text-white w-full flex gap-4 z-50">
-            <LinkBuilder href="/" text="Home" />
-            <LinkBuilder href="/shop" text="Shop" />
-            <LinkBuilder href="/keyboard" text="Keyboard Categories" />
-            <LinkBuilder href="/groupbuy" text="Group Buy" />
-            <LinkBuilder href="/readytouse" text="Ready To Use" />
-            <LinkBuilder href="/pbtfans" text=" PBTfans" />
-          </nav>
+          <div className="flex justify-between items-center">
+            <nav className="text-white w-full flex items-center gap-4 z-50">
+              <LinkBuilder href="/" text="Home" />
+              <LinkBuilder href="/shop" text="Shop" />
+              <LinkBuilder href="/keyboard" text="Keyboard Categories" />
+              <LinkBuilder href="/groupbuy" text="Group Buy" />
+              <LinkBuilder href="/readytouse" text="Ready To Use" />
+              <LinkBuilder href="/pbtfans" text=" PBTfans" />
+            </nav>
+            {isFixed && <IconNav />}
+          </div>
         </div>
       </div>
     </header>

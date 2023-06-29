@@ -1,12 +1,11 @@
 import Category from "@/components/Category";
-import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Categories from "./components/Categories";
+import InstagramPostsSection from "./components/InstagramPostsSection";
 
 export default function Home() {
   return (
     <div className="pb-48">
-      <Header />
       <Hero />
       <section className="container mx-auto grid grid-cols-2 gap-6 mt-10 h-96">
         <Category
@@ -19,6 +18,7 @@ export default function Home() {
         />
       </section>
       <Categories />
+      <InstagramPostsSection />
     </div>
   );
 }
