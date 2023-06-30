@@ -1,11 +1,6 @@
 import { instaPostsImages } from "@/data";
 import { ReactNode } from "react";
 
-export interface LinkProps {
-  href: string;
-  text: string;
-}
-
 export type instaPostsImagesType = {
   src: string,
   alt: string,
@@ -35,3 +30,10 @@ export type CategorySectionProps = {
   href: string;
   promise?: Promise<ProductParams[]>;
 };
+
+
+export type navDataType = {
+  href: string;
+  title: string;
+  icon?: any;
+}

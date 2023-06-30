@@ -1,4 +1,5 @@
-import { instaPostsImagesType } from "@/types/types";
+import { navDataType, instaPostsImagesType } from "@/types/types";
+
 
 export const instaPostsImages: instaPostsImagesType[] = [
   {
@@ -36,5 +37,63 @@ export const instaPostsImages: instaPostsImagesType[] = [
     alt: "insta feed 6",
     description: "",
     route: "",
+  },
+];
+
+export const shopData: navDataType[] = [
+  {
+    href: "collection/keyboard",
+    title: "Keyboard",
+  },
+  {
+    href: "collection/keycaps",
+    title: "Keycaps",
+  },
+  {
+    href: "collection/switches",
+    title: "Switches",
+  },
+  {
+    href: "collection/case",
+    title: "Case",
+  },
+  {
+    href: "pcb",
+    title: "PCB",
+  },
+  {
+    href: "plate",
+    title: "Plate",
+  },
+];
+
+export const rdyToUseData: navDataType[] = [
+  {
+    href: "collection/20-keyboard",
+    title: "20% Keyboard",
+  },
+  {
+    href: "collection/60-keyboard",
+    title: "60% Keyboard",
+  },
+  {
+    href: "collection/65-keyboard",
+    title: "65% Keyboard",
+  },
+  {
+    href: "collection/75-keyboard",
+    title: "75% Keyboard",
+  },
+  {
+    href: "collection/80-keyboard",
+    title: "80% Keyboard",
+  },
+  {
+    href: "collection/95-keyboard",
+    title: "95% Keyboard",
+  },
+  {
+    href: "collection/100-keyboard",
+    title: "100% Keyboard",
   },
 ];

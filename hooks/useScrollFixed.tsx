@@ -5,11 +5,7 @@ export const useScrollFixed = (ref: RefObject<HTMLElement>) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (ref.current && window.scrollY > ref.current.offsetTop) {
-        setIsFixed(true);
-      } else {
-        setIsFixed(false);
-      }
+      setIsFixed(window.scrollY > ref.current!.offsetTop);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -17,7 +13,7 @@ export const useScrollFixed = (ref: RefObject<HTMLElement>) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [ref]);
+  }, []);
 
   return isFixed;
 };

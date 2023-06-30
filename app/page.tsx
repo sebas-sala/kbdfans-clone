@@ -5,7 +5,7 @@ import InstagramPostsSection from "./components/InstagramPostsSection";
 
 export default function Home() {
   return (
-    <div className="pb-48">
+    <div className="pb-48 overflow-y-auto">
       <Hero />
       <section className="container mx-auto grid grid-cols-2 gap-6 mt-10 h-96">
         <Category
