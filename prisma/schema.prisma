@@ -9,3 +9,48 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  username String
+  role     Role   @default(USER)
+  cart     Cart?
+  password String
+  cartId   Int    @unique
+}
+
+model Cart {
+  id       Int       @id @default(autoincrement())
+  products Product[]
+  userId   Int       @unique
+  User     User      @relation(fields: [userId], references: [id])
+}
+
+model Product {
+  id         Int             @id @default(autoincrement())
+  name       String
+  price      Int
+  categories Category[]
+  cartId     Int?
+  images     ProductImages[]
+  Cart       Cart?           @relation(fields: [cartId], references: [id])
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  products Product[]
+}
+
+model ProductImages {
+  id        Int      @id @default(autoincrement())
+  url       String
+  Product   Product? @relation(fields: [productId], references: [id])
+  productId Int?
+}
+
+enum Role {
+  USER
+  ADMIN
+}
