@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
+    "@prisma/client": "^4.16.2",
     "@splidejs/react-splide": "^0.7.12",
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
@@ -31,8 +32,10 @@
     "@testing-library/react": "^14.0.0",
     "@types/jest-image-snapshot": "^6.1.0",
     "@vitejs/plugin-react": "^4.0.1",
+    "eslint-config-prettier": "^8.8.0",
     "happy-dom": "^9.20.3",
     "jest-image-snapshot": "^6.1.0",
+    "prisma": "^4.16.2",
     "vitest": "^0.32.2"
   }
 }

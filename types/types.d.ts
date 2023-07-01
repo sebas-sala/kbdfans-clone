@@ -2,11 +2,11 @@ import { instaPostsImages } from "@/data";
 import { ReactNode, Dispatch, SetStateAction } from "react";
 
 export type instaPostsImagesType = {
-  src: string,
-  alt: string,
-  description: string,
-  route: string,
-}
+  src: string;
+  alt: string;
+  description: string;
+  route: string;
+};
 
 export interface HeroSliderProps {
   img: string;
@@ -23,7 +23,7 @@ export type ButtonProps = {
 
 export type ProductParams = {
   text: string;
-}
+};
 
 export type CategorySectionProps = {
   text: string;
@@ -31,9 +31,8 @@ export type CategorySectionProps = {
   promise?: Promise<ProductParams[]>;
 };
 
-
 export type navDataType = {
   href: string;
   title: string;
   icon?: any;
-}
+};

@@ -6,7 +6,7 @@ type CartContextType = {
   setShowCart: (show: boolean) => void;
 };
 
-const CartContext = createContext<CartContextType>({
+export const CartContext = createContext<CartContextType>({
   showCart: false,
   setShowCart: () => {},
 });

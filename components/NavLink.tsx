@@ -16,14 +16,14 @@ const NavLink = ({ data, text, href }: props) => {
     <div
       onMouseLeave={() => setShow(false)}
       onMouseEnter={() => setShow(true)}
-      className="py-4"
+      className='py-4'
     >
-      <Link href={href} className="font-bold tracking-wider px-4">
+      <Link href={href} className='font-bold tracking-wider px-4'>
         {text}
       </Link>
       {show && text !== "Home" && (
         <motion.div
-          className="mt-4 pt-1 flex w-56 flex-col absolute z-50 text-sm font-semibold py-4 bg-black px-4 border-b-2 border-white shadow-lg"
+          className='mt-4 pt-1 flex w-56 flex-col absolute z-50 text-sm font-semibold py-4 bg-black px-4 border-b-2 border-white shadow-lg'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
@@ -31,7 +31,11 @@ const NavLink = ({ data, text, href }: props) => {
           }}
         >
           {data?.map((item, index) => (
-            <Link href={item.href} key={index} className="py-1 hover:text-white text-gray-300 transition">
+            <Link
+              href={item.href}
+              key={index}
+              className='py-1 hover:text-white text-gray-300 transition'
+            >
               {item.title}
             </Link>
           ))}

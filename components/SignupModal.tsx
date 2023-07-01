@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const SignupModal = () => {
-  return (
-    <div>SignupModal</div>
-  )
-}
+  return <div>SignupModal</div>;
+};
 
-export default SignupModal
+export default SignupModal;
