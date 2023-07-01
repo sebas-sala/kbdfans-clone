@@ -1,5 +1,5 @@
 import { instaPostsImages } from "@/data";
-import { ReactNode } from "react";
+import { ReactNode, Dispatch, SetStateAction } from "react";
 
 export type instaPostsImagesType = {
   src: string,

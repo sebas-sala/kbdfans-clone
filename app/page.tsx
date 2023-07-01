@@ -1,9 +1,18 @@
+"use client";
+
+import { useContext } from "react";
 import Category from "@/components/Category";
 import Hero from "./components/Hero";
 import Categories from "./components/Categories";
 import InstagramPostsSection from "./components/InstagramPostsSection";
+import { NavContext } from "@/context/NavProvider";
+import CartModal from "@/components/CartModal";
+import LoginModal from "@/components/LoginModal";
+import SignupModal from "@/components/SignupModal";
 
 export default function Home() {
+  const { showCart, showLoginModal, showSignupModal } = useContext(NavContext);
+
   return (
     <div className="pb-48 overflow-y-auto">
       <Hero />
@@ -19,6 +28,9 @@ export default function Home() {
       </section>
       <Categories />
       <InstagramPostsSection />
+      {showCart && <CartModal />}
+      {showLoginModal && <LoginModal />}
+      {showSignupModal && <SignupModal />}
     </div>
   );
 }

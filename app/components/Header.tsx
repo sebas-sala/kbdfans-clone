@@ -1,5 +1,3 @@
-"use client";
-import { useRef } from "react";
 import Image from "next/image";
 import IconNav from "./IconNav";
 import StickyNav from "./StickyNav";
