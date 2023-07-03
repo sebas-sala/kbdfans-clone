@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import { useScrollFixed } from "@/hooks/useScrollFixed"
 import NavLink from "@/components/NavLink"
-import { rdyToUseData, shopData } from "@/data"
+import { navlinks } from "@/data/links"
 import IconNav from "./IconNav"
 
 const FixedNav = () => {
@@ -16,13 +16,14 @@ const FixedNav = () => {
     >
       <div className='container mx-auto flex justify-between items-center'>
         <nav className='text-white w-full flex items-center gap-4 z-50'>
-          <NavLink text='Home' href='' />
-          <NavLink data={shopData} text='Shop' href='all' />
-          <NavLink
-            data={rdyToUseData}
-            text='Ready To Use'
-            href='ready-to-use'
-          />
+          {navlinks.map((link, index) => (
+            <NavLink
+              key={index}
+              text={link.text}
+              href={link.href}
+              data={link.data}
+            />
+          ))}
         </nav>
         {isFixed && <IconNav />}
       </div>

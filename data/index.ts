@@ -1,5 +1,4 @@
-import { navDataType, instaPostsImagesType } from "@/types/types";
-
+import { navDataType, instaPostsImagesType } from "@/types/types"
 
 export const instaPostsImages: instaPostsImagesType[] = [
   {
@@ -38,7 +37,7 @@ export const instaPostsImages: instaPostsImagesType[] = [
     description: "",
     route: "",
   },
-];
+]
 
 export const shopData: navDataType[] = [
   {
@@ -65,7 +64,7 @@ export const shopData: navDataType[] = [
     href: "plate",
     title: "Plate",
   },
-];
+]
 
 export const rdyToUseData: navDataType[] = [
   {
@@ -96,4 +95,4 @@ export const rdyToUseData: navDataType[] = [
     href: "collection/100-keyboard",
     title: "100% Keyboard",
   },
-];
+]

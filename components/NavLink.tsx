@@ -1,16 +1,16 @@
-import { useState } from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { navDataType } from "@/types/types";
+import { useState } from "react"
+import Link from "next/link"
+import { motion } from "framer-motion"
+import { navDataType } from "@/types/types"
 
 type props = {
-  text: string;
-  href: string;
-  data?: navDataType[];
-};
+  text: string
+  href: string
+  data?: navDataType[]
+}
 
 const NavLink = ({ data, text, href }: props) => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
 
   return (
     <div
@@ -42,7 +42,7 @@ const NavLink = ({ data, text, href }: props) => {
         </motion.div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default NavLink;
+export default NavLink
