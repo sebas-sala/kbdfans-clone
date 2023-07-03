@@ -7,12 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest"
+    "test": "vitest",
+    "create": "ts-node ./prisma/seed.js"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.15",
+    "@chakra-ui/next-js": "^2.1.4",
+    "@chakra-ui/react": "^2.7.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@prisma/client": "^4.16.2",
     "@splidejs/react-splide": "^0.7.12",
+    "@supabase/supabase-js": "^2.26.0",
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
@@ -26,6 +31,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
     "tailwindcss": "3.3.2",
+    "ts-node": "^10.9.1",
     "typescript": "5.1.5"
   },
   "devDependencies": {

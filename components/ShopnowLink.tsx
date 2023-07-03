@@ -1,11 +1,16 @@
-import Link, { LinkProps } from "next/link";
+import Link from "next/link"
 
-const ShopnowLink = ({ href }: LinkProps) => {
+type Props = {
+  href: string
+  text: string
+}
+
+const UnderlineLink: React.FC<Props> = ({ href, text }) => {
   return (
     <Link href={href} className='underline text-gray-500'>
-      Shop now
+      {text}
     </Link>
-  );
-};
+  )
+}
 
-export default ShopnowLink;
+export default UnderlineLink

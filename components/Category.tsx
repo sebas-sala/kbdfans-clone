@@ -1,6 +1,6 @@
-import { CategoryProps } from "@/types/types";
-import Image from "next/image";
-import PrimaryLink from "./PrimaryLink";
+import { CategoryProps } from "@/types/types"
+import Image from "next/image"
+import PrimaryLink from "./PrimaryLink"
 
 const Category = ({ text, img }: CategoryProps) => {
   return (
@@ -11,7 +11,7 @@ const Category = ({ text, img }: CategoryProps) => {
         <Image src={img} fill className='object-cover rounded-2xl' alt={text} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Category;
+export default Category
