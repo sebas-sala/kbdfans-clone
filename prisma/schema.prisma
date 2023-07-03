@@ -11,13 +11,13 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
   username String
-  role     Role   @default(USER)
+  isAdmin  Boolean @default(false)
   cart     Cart?
   password String
-  cartId   Int    @unique
+  cartId   Int     @unique
 }
 
 model Cart {
@@ -48,9 +48,4 @@ model ProductImages {
   url       String
   Product   Product? @relation(fields: [productId], references: [id])
   productId Int?
-}
-
-enum Role {
-  USER
-  ADMIN
 }
