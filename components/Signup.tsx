@@ -1,5 +1,6 @@
 import { useDisclosure } from "@chakra-ui/react"
 import { Dialog } from "./Dialog"
+import SignupForm from "./SignupForm"
 
 const Signup = () => {
   const { isOpen, onClose, onOpen } = useDisclosure()
@@ -13,7 +14,7 @@ const Signup = () => {
         Create Account
       </button>
       <Dialog isOpen={isOpen} onClose={onClose} title='Signup'>
-        <p>Signup</p>
+        <SignupForm />
       </Dialog>
     </>
   )

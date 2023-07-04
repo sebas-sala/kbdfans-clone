@@ -1,18 +1,32 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Products } from "@/types/db"
 
-const Product = ({ id, src, name, price }: Products) => {
+const Product = ({ id, images, name, price }: Products) => {
+  const [img, setImg] = useState("")
+
+  useEffect(() => {
+    if (images.length > 0) setImg(images[0].url)
+  }, [images])
+
   return (
-    <div className='flex flex-col items-center gap-3 relative'>
+    <div className='flex flex-col items-center gap-3 shadow-lg max-h-[450px]'>
       <Image
-        src={src}
-        fill
+        src={img}
+        width={500}
+        height={500}
         alt={name}
-        className='object-cover object-center top-0 left-0'
+        className='w-full h-60 object-cover object-center top-0 left-0 rounded-2xl'
       />
-      <div className='w-full h-80 rounded-3xl bg-green-500'>di</div>
-      <p>{name}</p>
-      <p>{price}</p>
+      <div className='px-10 max-w-full'>
+        <p className='truncate max-w-full'>
+          {name}
+          rsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrs
+        </p>
+        <p>{price}</p>
+      </div>
     </div>
   )
 }

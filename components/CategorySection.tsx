@@ -18,16 +18,19 @@ const CategorySection = async ({ title, text, href, promise }: Props) => {
         <h3 className='text-4xl font-semibold'>{title}</h3>
         <UnderlineLink href={href} text={text} />
       </div>
-      <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5 mt-9'>
-        {products?.map((product) => (
-          <Product
-            key={product.id}
-            src={product.src}
-            name={product.name}
-            price={product.price}
-            id={product.id}
-          />
-        ))}
+      <div className='flex scrollbar-hide sm:grid sm:grid-cols-2 overflow-x-scroll md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-5 mt-9'>
+        {products?.map((product) => {
+          const images = product.images
+          return (
+            <Product
+              key={product.id}
+              images={images}
+              name={product.name}
+              price={product.price}
+              id={product.id}
+            />
+          )
+        })}
       </div>
     </section>
   )

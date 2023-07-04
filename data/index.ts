@@ -96,3 +96,27 @@ export const rdyToUseData: navDataType[] = [
     title: "100% Keyboard",
   },
 ]
+
+export const footerLinks = [
+  { name: "--->", href: "" },
+  { name: "AliExpress", href: "https://www.aliexpress.com/" },
+  { name: "Shopee Philippines", href: "https://shopee.ph/" },
+  { name: "Shopee Singapore", href: "https://shopee.sg/" },
+  { name: "Shopee Malaysia", href: "https://shopee.com.my/" },
+  { name: "Shopee Thailand", href: "https://shopee.co.th/" },
+  { name: "Shopee Indonesia", href: "https://shopee.co.id/" },
+  { name: "Wholesale", href: "https://www.example.com/wholesale" },
+  { name: "Terms of Service", href: "https://www.example.com/terms" },
+  { name: "Privacy policy", href: "https://www.example.com/privacy" },
+  { name: "Group Buy Policy", href: "https://www.example.com/group-buy" },
+  { name: "Shipping Policy", href: "https://www.example.com/shipping" },
+  { name: "Refund policy", href: "https://www.example.com/refund" },
+  { name: "Affiliate", href: "https://www.example.com/affiliate" },
+  { name: "Return order", href: "https://www.example.com/return" },
+  { name: "Discord", href: "https://www.example.com/discord" },
+  { name: "/r/KBDfans", href: "https://www.reddit.com/r/KBDfans" },
+  { name: "Contact Us", href: "https://www.example.com/contact" },
+  { name: "About Us", href: "https://www.example.com/about" },
+  { name: "Resources", href: "https://www.example.com/resources" },
+  { name: "Gift Card", href: "https://www.example.com/gift-card" },
+]
