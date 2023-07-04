@@ -5,16 +5,17 @@ import { useScrollFixed } from "@/hooks/useScrollFixed"
 import NavLink from "@/components/NavLink"
 import { navlinks } from "@/data/links"
 import IconNav from "./IconNav"
+import Container from "@/components/Container"
 
-const FixedNav = () => {
-  const navRef = useRef<HTMLDivElement>(null)
-  const isFixed = useScrollFixed(navRef)
+type Props = {
+  isSticky: boolean
+}
+
+const StickyNav = (props: Props) => {
+  const { isSticky } = props
   return (
-    <div
-      className={`w-full bg-black z-50 ${isFixed ? "fixed left-0 top-0" : ""}`}
-      ref={navRef}
-    >
-      <div className='container mx-auto flex justify-between items-center'>
+    <div className='sticky top-0 w-full bg-black z-50'>
+      <Container styles='container mx-auto flex justify-between items-center'>
         <nav className='text-white w-full flex items-center gap-4 z-50'>
           {navlinks.map((link, index) => (
             <NavLink
@@ -25,10 +26,10 @@ const FixedNav = () => {
             />
           ))}
         </nav>
-        {isFixed && <IconNav />}
-      </div>
+        {isSticky && <IconNav />}
+      </Container>
     </div>
   )
 }
 
-export default FixedNav
+export default StickyNav

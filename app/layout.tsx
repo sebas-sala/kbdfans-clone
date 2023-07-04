@@ -3,6 +3,7 @@ import ChakraProvider from "./ChakraProvider"
 import Footer from "./components/Footer"
 import Header from "./components/Header"
 import "./globals.css"
+import StickyNav from "./components/StickyNav"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -18,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={` ${inter.className} overflow-y-scroll`}>
+      <body className={` ${inter.className} overflow-y-scroll relative`}>
         <ChakraProvider>
           <Header />
           {children}

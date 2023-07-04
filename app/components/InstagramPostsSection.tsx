@@ -42,34 +42,32 @@ const InstagramPostsSection = () => {
       {images.map(({ src, alt }, index) => {
         const feedKey = `feed${index + 1}`
         return (
-          <>
-            <div
-              className='relative w-full cursor-pointer'
-              key={index}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={() => handleMouseLeave(index)}
-            >
-              <Image
-                src={src}
-                width={800}
-                height={300}
-                alt={alt}
-                className='w-full h-full object-cover'
-              />
-              {showFeed[feedKey] && (
-                <motion.div
-                  className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center'
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    duration: 0.3,
-                  }}
-                >
-                  <AiOutlineInstagram className='text-white text-4xl' />
-                </motion.div>
-              )}
-            </div>
-          </>
+          <div
+            className='relative w-full cursor-pointer'
+            key={index}
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={() => handleMouseLeave(index)}
+          >
+            <Image
+              src={src}
+              width={800}
+              height={300}
+              alt={alt}
+              className='w-full h-full object-cover'
+            />
+            {showFeed[feedKey] && (
+              <motion.div
+                className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                  duration: 0.3,
+                }}
+              >
+                <AiOutlineInstagram className='text-white text-4xl' />
+              </motion.div>
+            )}
+          </div>
         )
       })}
     </section>

@@ -1,19 +1,21 @@
-import { useEffect, useState, RefObject } from "react";
+"use client"
+
+import { useEffect, useState, RefObject } from "react"
 
 export const useScrollFixed = (ref: RefObject<HTMLElement>) => {
-  const [isFixed, setIsFixed] = useState(false);
+  const [isSticky, setIsSticky] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsFixed(window.scrollY > ref.current!.offsetTop);
-    };
+      if (ref.current) setIsSticky(window.scrollY > ref.current.offsetTop)
+    }
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll)
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [ref])
 
-  return isFixed;
-};
+  return isSticky
+}

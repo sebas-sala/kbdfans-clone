@@ -18,7 +18,7 @@ const Hero = () => {
       }}
     >
       {splideImages.map((image, index) => (
-        <SplideSlide key={index}>
+        <SplideSlide key={index} className='relative'>
           <Image
             src={image.src}
             width={13000}
