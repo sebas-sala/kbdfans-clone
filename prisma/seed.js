@@ -582,9 +582,16 @@ const createData = async () => {
       keycaps.map((elem) => prisma.product.create({ data: elem }))
     )
 
-    // Create Images
-
     // Create Keyboards
+    const createdKeyboards = await Promise.all(
+      keyboards.map((elem) => prisma.product.create({ data: elem }))
+    )
+
+    // Create Images
+    const createdImages = await Promise.all(
+      images.map((elem) => prisma.productImages.create({ data: elem }))
+    )
+
     console.log("Datos creados y almacenados en Supabase.")
   } catch (error) {
     console.error("Ocurrió un error al crear los datos:", error)
