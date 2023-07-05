@@ -12,7 +12,7 @@ const Product = ({ id, images, name, price }: Products) => {
   }, [images])
 
   return (
-    <div className='flex flex-col items-center gap-3 shadow-lg max-h-[450px]'>
+    <div className='flex max-w-full flex-col items-center gap-3 shadow-lg max-h-[450px]'>
       <Image
         src={img}
         width={500}
