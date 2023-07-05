@@ -28,24 +28,34 @@ model Cart {
 }
 
 model Product {
-  id         Int             @id @default(autoincrement())
+  id         Int                    @id @default(autoincrement())
   name       String
-  price      Int
-  categories Category[]
-  cartId     Int?
+  price      Float
+  stock      Int
   images     ProductImages[]
-  Cart       Cart?           @relation(fields: [cartId], references: [id])
+  cart       Cart[]
+  categories CategoriesOnProducts[]
 }
 
 model Category {
-  id      Int       @id @default(autoincrement())
-  name    String
-  Product Product[]
+  id       Int                    @id @default(autoincrement())
+  name     String
+  products CategoriesOnProducts[]
+}
+
+model CategoriesOnProducts {
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  createdAt  DateTime @default(now())
+
+  @@id([categoryId, productId])
 }
 
 model ProductImages {
-  id        Int      @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   url       String
-  Product   Product? @relation(fields: [productId], references: [id])
-  productId Int?
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
 }
