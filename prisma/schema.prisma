@@ -38,9 +38,9 @@ model Product {
 }
 
 model Category {
-  id       Int       @id @default(autoincrement())
-  name     String
-  products Product[]
+  id      Int       @id @default(autoincrement())
+  name    String
+  Product Product[]
 }
 
 model ProductImages {
