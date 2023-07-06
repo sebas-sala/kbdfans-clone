@@ -16,7 +16,6 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@prisma/client": "^4.16.2",
-    "@splidejs/react-splide": "^0.7.12",
     "@supabase/supabase-js": "^2.26.0",
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
@@ -42,7 +41,6 @@
     "@vitejs/plugin-react": "^4.0.1",
     "eslint-config-prettier": "^8.8.0",
     "happy-dom": "^9.20.3",
-    "jest-image-snapshot": "^6.1.0",
     "prisma": "^4.16.2",
     "vitest": "^0.32.2"
   }

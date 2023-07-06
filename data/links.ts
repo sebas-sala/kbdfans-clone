@@ -14,12 +14,12 @@ export const navlinks: navLinksType[] = [
   },
   {
     text: "Shop",
-    href: "/all",
+    href: "/collections/all",
     data: shopData,
   },
   {
     text: "Ready To Use",
-    href: "/ready-to-use",
+    href: "/collections/ready-to-use",
     data: rdyToUseData,
   },
 ]

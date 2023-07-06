@@ -21,6 +21,7 @@ export default function Header() {
               width={150}
               height={150}
               className='object-contain w-auto h-auto'
+              priority
               alt='Logo'
             />
             {!isSticky && <IconNav />}

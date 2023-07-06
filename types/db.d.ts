@@ -8,6 +8,11 @@ export type Products = {
   id: number | string
   name: string
   price: number
-  categories?: []
+  stock: number
   images: ProductImages[]
+}
+
+export type Categories = {
+  id: number | string
+  name: string
 }

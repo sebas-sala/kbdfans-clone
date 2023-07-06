@@ -7,7 +7,7 @@ export const useScrollFixed = (ref: RefObject<HTMLElement>) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (ref.current) setIsSticky(window.scrollY > ref.current.offsetTop)
+      if (ref.current) setIsSticky(window.scrollY > ref.current.offsetHeight)
     }
 
     window.addEventListener("scroll", handleScroll)

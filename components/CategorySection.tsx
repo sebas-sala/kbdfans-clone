@@ -3,10 +3,10 @@ import UnderlineLink from "./ShopnowLink"
 import { Products } from "@/types/db"
 
 type Props = {
-  title: string
-  text: string
-  href: string
-  promise?: Promise<Products[]>
+  title?: string
+  text?: string
+  href?: string
+  promise: Promise<Products[]>
 }
 
 const CategorySection = async ({ title, text, href, promise }: Props) => {
@@ -15,22 +15,20 @@ const CategorySection = async ({ title, text, href, promise }: Props) => {
   return (
     <section className='py-10'>
       <div className='text-center'>
-        <h3 className='text-4xl font-semibold'>{title}</h3>
-        <UnderlineLink href={href} text={text} />
+        {title && <h3 className='text-4xl font-semibold'>{title}</h3>}
+        {href && text && <UnderlineLink href={href} text={text} />}
       </div>
-      <div className='flex scrollbar-hide sm:grid sm:grid-cols-2 overflow-x-auto md:overflow-x-hidden md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-5 mt-9'>
-        {products?.map((product) => {
-          const images = product.images
-          return (
-            <Product
-              key={product.id}
-              images={images}
-              name={product.name}
-              price={product.price}
-              id={product.id}
-            />
-          )
-        })}
+      <div className='flex scrollbar-hide sm:grid sm:grid-cols-2 place-content-center place-items-center justify-items-center overflow-x-auto md:overflow-x-hidden md:grid-cols-2 lg:grid-cols-4 md:gap-14 mt-9'>
+        {products?.map(({ images, id, name, price, stock }) => (
+          <Product
+            key={id}
+            images={images}
+            name={name}
+            price={price}
+            id={id}
+            stock={stock}
+          />
+        ))}
       </div>
     </section>
   )

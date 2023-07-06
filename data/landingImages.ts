@@ -1,14 +1,14 @@
 export const splideImages = [
   {
-    src: "https://cdn.shopify.com/s/files/1/1473/3902/files/ronin_home.jpg",
+    src: "/../public/images/slide1.webp",
     alt: "splide1",
   },
   {
-    src: "https://cdn.shopify.com/s/files/1/1473/3902/files/BOG_banner_1024x1024.jpg?v=1685672495",
+    src: "/../public/images/slide2.webp",
     alt: "splide2",
   },
   {
-    src: "https://cdn.shopify.com/s/files/1/1473/3902/files/untitled.915_1024x1024.jpg",
+    src: "/../public/images/slide3.webp",
     alt: "splide3",
   },
 ]

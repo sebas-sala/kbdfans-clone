@@ -39,7 +39,7 @@ const InstagramPostsSection = () => {
 
   return (
     <section className='flex w-full min-h-max'>
-      {images.map(({ src, alt }, index) => {
+      {images.map(({ src, description }, index) => {
         const feedKey = `feed${index + 1}`
         return (
           <div
@@ -52,7 +52,7 @@ const InstagramPostsSection = () => {
               src={src}
               width={800}
               height={300}
-              alt={alt}
+              alt={description}
               className='w-full h-full object-cover'
             />
             {showFeed[feedKey] && (
