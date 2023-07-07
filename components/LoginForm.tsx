@@ -7,7 +7,7 @@ import {
   Input,
   InputRightElement,
 } from "@chakra-ui/react"
-import ShopnowLink from "./ShopnowLink"
+import Link from "next/link"
 
 const LoginForm = () => {
   const [show, setShow] = useState(false)
@@ -43,8 +43,12 @@ const LoginForm = () => {
         Login
       </button>
       <div className='flex justify-center items-center mt-6 gap-4'>
-        <ShopnowLink href='/account/register' text='Create an Account' />
-        <ShopnowLink href='/' text='Return to Store' />
+        <Link href='/account/register' className='underline text-gray-500'>
+          Create an Account
+        </Link>
+        <Link href='/' className='underline text-gray-500'>
+          Return to Store
+        </Link>
       </div>
     </FormControl>
   )

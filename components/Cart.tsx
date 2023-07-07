@@ -1,29 +1,28 @@
-import { FC, useState } from "react"
-import { useDisclosure } from "@chakra-ui/react"
-import { AiOutlineShoppingCart } from "react-icons/ai"
+import { useState } from "react"
 import CartIcon from "./CartIcon"
-import SideModal from "./SideModal"
+import Drawer from "./Drawer"
+import { AiOutlineShoppingCart } from "react-icons/ai"
 
-const Cart: FC = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+const Cart = () => {
   const [cartItems, setCartItems] = useState<any>([])
 
   return (
-    <>
-      <AiOutlineShoppingCart
-        className='cursor-pointer hover:text-white/90 transition duration-200'
-        onClick={onOpen}
-      />
-      <SideModal
-        title='Cart'
-        isOpen={isOpen}
-        onClose={onClose}
-        items={cartItems}
-        Icon={<CartIcon />}
-      >
-        <form></form>
-      </SideModal>
-    </>
+    <Drawer
+      headerText='Cart'
+      size='sm'
+      placement='right'
+      icon={<AiOutlineShoppingCart />}
+      bodyStyles='flex flex-col gap-4 justify-center items-center'
+    >
+      {cartItems.length > 0 ? (
+        <div></div>
+      ) : (
+        <div className='flex flex-col gap-4 justify-center items-center'>
+          <CartIcon />
+          <p>Your cart is empty.</p>
+        </div>
+      )}
+    </Drawer>
   )
 }
 

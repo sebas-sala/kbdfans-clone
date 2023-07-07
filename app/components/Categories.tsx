@@ -1,42 +1,54 @@
 import { Suspense } from "react"
 import Container from "@/components/Container"
-import CategorySection from "@/components/CategorySection"
+import ProductsFetchingSection from "@/components/ProductsFetchingSection"
 import { getProductsByCategory } from "@/app/api/products/products"
 
-const Categories = () => {
-  const PCB = getProductsByCategory(12, 10)
-  const keycaps = getProductsByCategory(9, 5)
-  const switches = getProductsByCategory(10, 5)
-  const keyboards = getProductsByCategory(1, 5)
+const Categories = async () => {
+  const PCBData = getProductsByCategory(12, 10)
+  const keycapsData = getProductsByCategory(9, 5)
+  const switchesData = getProductsByCategory(10, 5)
+  const keyboardsData = getProductsByCategory(1, 5)
+
+  const [PCB, keycaps, switches, keyboards] = await Promise.all([
+    PCBData,
+    keycapsData,
+    switchesData,
+    keyboardsData,
+  ])
 
   return (
     <Container>
       <Suspense fallback={<div>Loading...</div>}>
-        <CategorySection
+        <ProductsFetchingSection
           title='Fully Assembled Keyboard'
           href=''
-          text='Shop'
+          linkText='Shop'
           promise={keyboards}
         />
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
-        <CategorySection
+        <ProductsFetchingSection
           title='Keyboard Switches'
-          text='Shop'
+          linkText='Shop'
           href=''
           promise={switches}
         />
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
-        <CategorySection
+        <ProductsFetchingSection
           title='Keyboard Keycaps'
-          text='See more'
+          linkText='See more'
           href=''
           promise={keycaps}
         />
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
-        <CategorySection title='PCB' href='' text='Shop' promise={PCB} />
+        <ProductsFetchingSection
+          title='PCB'
+          href=''
+          linkText='Shop'
+          promise={PCB}
+        />
       </Suspense>
     </Container>
   )

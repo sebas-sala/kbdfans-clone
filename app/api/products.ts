@@ -1,3 +1,4 @@
+import { Products } from "@/types/db"
 import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
@@ -31,39 +32,17 @@ export const getProducts = async () => {
   }
 }
 
-export const getProductsByCategory = async (
-  categoryId: number,
-  take: number
-) => {
+export const fetchProductsByCategory = async (categoryId: number) => {
   try {
-    const products = await prisma.product.findMany({
-      where: {
-        categories: {
-          some: {
-            categoryId: categoryId,
-          },
-        },
-      },
-      include: {
-        categories: true,
-        images: true,
-      },
-      take,
-    })
-    return products
+    const res = await fetch(
+      `http://localhost:3000/api/productsByCategory/${categoryId}`
+    )
+    if (!res.ok) {
+      throw new Error("Failed to fetch data")
+    }
+    return res.json()
   } catch (error) {
     console.error(error)
-  } finally {
-    await prisma.$disconnect()
-  }
-}
-
-export const getCategories = async () => {
-  try {
-    const categories = await prisma.category.findMany()
-    return categories
-  } catch (e) {
-    console.error(e)
   } finally {
     await prisma.$disconnect()
   }
