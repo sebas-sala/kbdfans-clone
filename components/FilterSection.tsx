@@ -1,12 +1,37 @@
+"use client"
+import { useState, useEffect } from "react"
 import { MenuItem, Checkbox } from "@/components/Menu"
+import {
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderMark,
+} from "@/components/SliderComponent"
 import MenuComponent from "./MenuComponent"
 import Container from "./Container"
 import { Categories } from "@/types/db"
 import { fetchCategories } from "@/app/api/categories/categories"
+import { useQuery } from "react-query"
 
-export default async function FilterSection() {
-  const categories: Categories[] = await fetchCategories()
-  console.log(categories)
+export default function FilterSection() {
+  const [price, setPrice] = useState(1000)
+  const { isLoading, error, data } = useQuery(["categories"], fetchCategories)
+
+  useEffect(() => {
+    console.log(price)
+  }, [price])
+
+  if (isLoading) return "Loading..."
+
+  if (error) return "An error has ocurred" + error.message
+
+  const keyboardCategories: Categories[] = data.slice(0, 8)
+
+  const handlePrice = (number: string) => {
+    const newPrice = parseInt(number)
+    setPrice(newPrice)
+  }
 
   return (
     <Container>
@@ -16,19 +41,41 @@ export default async function FilterSection() {
             <div></div>
           </MenuComponent>
           <MenuComponent text='Product Type'>
-            {categories?.map(({ id, name, _count }) => (
-              <MenuItem key={id} gap={4}>
-                <Checkbox />
-                <p>{name}</p>
+            {data?.map(({ id, name, _count }) => (
+              <MenuItem key={id} className='flex justify-between'>
+                <div className='flex items-center gap-4'>
+                  <Checkbox />
+                  <p>{name}</p>
+                </div>
                 <p>{_count.products}</p>
               </MenuItem>
             ))}
           </MenuComponent>
           <MenuComponent text='Keyboard Category'>
-            <div></div>
+            {keyboardCategories?.map(({ id, name, _count }) => (
+              <MenuItem key={id} className='flex justify-between'>
+                <div className='flex items-center gap-4'>
+                  <Checkbox />
+                  <p>{name}</p>
+                </div>
+                <p>{_count.products}</p>
+              </MenuItem>
+            ))}
           </MenuComponent>
           <MenuComponent text='Price'>
-            <div></div>
+            <MenuItem>
+              <p>{price}</p>
+              <Slider
+                aria-label='slider-ex-1'
+                defaultValue={price}
+                onChange={(e) => handlePrice(e.target.value)}
+              >
+                <SliderTrack>
+                  <SliderFilledTrack />
+                </SliderTrack>
+                <SliderThumb />
+              </Slider>
+            </MenuItem>
           </MenuComponent>
         </div>
         <div>

@@ -1,7 +1,7 @@
 export const fetchCategories = async () => {
   try {
     const response = await fetch("http://localhost:3000/api/categories", {
-      next: { revalidate: 60 },
+      cache: "no-cache",
     })
     if (!response.ok) throw new Error("Failed to fetch categories")
     return response.json()
