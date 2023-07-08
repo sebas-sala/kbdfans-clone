@@ -1,20 +1,13 @@
 import { Suspense } from "react"
 import Container from "@/components/Container"
 import ProductsFetchingSection from "@/components/ProductsFetchingSection"
-import { getProductsByCategory } from "@/app/api/products/products"
+import { getProductsByCategoryId } from "../api/products/products"
 
 const Categories = async () => {
-  const PCBData = getProductsByCategory(12, 10)
-  const keycapsData = getProductsByCategory(9, 5)
-  const switchesData = getProductsByCategory(10, 5)
-  const keyboardsData = getProductsByCategory(1, 5)
-
-  const [PCB, keycaps, switches, keyboards] = await Promise.all([
-    PCBData,
-    keycapsData,
-    switchesData,
-    keyboardsData,
-  ])
+  const keyboardsData = getProductsByCategoryId(1, 5)
+  const switchesData = getProductsByCategoryId(10, 5)
+  const keycapsData = getProductsByCategoryId(9, 5)
+  const PCBData = getProductsByCategoryId(12, 10)
 
   return (
     <Container>
@@ -23,7 +16,7 @@ const Categories = async () => {
           title='Fully Assembled Keyboard'
           href=''
           linkText='Shop'
-          promise={keyboards}
+          promise={keyboardsData}
         />
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
@@ -31,7 +24,7 @@ const Categories = async () => {
           title='Keyboard Switches'
           linkText='Shop'
           href=''
-          promise={switches}
+          promise={switchesData}
         />
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
@@ -39,7 +32,7 @@ const Categories = async () => {
           title='Keyboard Keycaps'
           linkText='See more'
           href=''
-          promise={keycaps}
+          promise={keycapsData}
         />
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
@@ -47,7 +40,7 @@ const Categories = async () => {
           title='PCB'
           href=''
           linkText='Shop'
-          promise={PCB}
+          promise={PCBData}
         />
       </Suspense>
     </Container>

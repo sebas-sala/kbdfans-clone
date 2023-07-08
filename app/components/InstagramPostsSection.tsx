@@ -3,44 +3,58 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { AiOutlineInstagram } from "react-icons/ai"
 import Image from "next/image"
-import { instaPostsImages as images } from "@/data"
+import { instaPostsImages } from "@/data"
 
-interface Feed {
-  [key: string]: boolean
+type Feed = {
+  id: number
+  showFeed: boolean
 }
 
-const generateInitialShowFeed = (numFeeds: number): Feed => {
-  const initialShowFeed: Feed = {}
-  for (let i = 1; i <= numFeeds; i++) {
-    initialShowFeed[`feed${i}`] = false
+const generateInitialShowFeed = (numFeeds: number): Feed[] => {
+  const initialShowFeed: Feed[] = []
+  for (let i = 0; i < numFeeds; i++) {
+    initialShowFeed.push({
+      id: i,
+      showFeed: false,
+    })
   }
   return initialShowFeed
 }
 
 const InstagramPostsSection = () => {
-  const [showFeed, setShowFeed] = useState<Feed>(
-    generateInitialShowFeed(images.length)
+  const [feeds, setFeeds] = useState<Feed[]>(
+    generateInitialShowFeed(instaPostsImages.length)
   )
 
-  const updateShowFeed = (index: number, value: boolean) => {
-    setShowFeed((prevShowFeed) => ({
-      ...prevShowFeed,
-      [`feed${index + 1}`]: value,
-    }))
+  const updateShowFeed = (id: number, value: boolean) => {
+    setFeeds((prevFeeds) =>
+      prevFeeds.map((feed) =>
+        feed.id === id ? { ...feed, showFeed: value } : feed
+      )
+    )
   }
 
-  const handleMouseEnter = (index: number) => {
-    updateShowFeed(index, true)
+  const handleClick = (id: number) => {
+    for (const feed of feeds) {
+      if (feed.id !== id) {
+        feed.showFeed = false
+      }
+    }
+    updateShowFeed(id, true)
   }
 
-  const handleMouseLeave = (index: number) => {
-    updateShowFeed(index, false)
+  const handleMouseEnter = (id: number) => {
+    updateShowFeed(id, true)
+  }
+
+  const handleMouseLeave = (id: number) => {
+    updateShowFeed(id, false)
   }
 
   return (
     <section className='flex w-full min-h-max'>
-      {images.map(({ src, description }, index) => {
-        const feedKey = `feed${index + 1}`
+      {instaPostsImages.map(({ src, description }, index) => {
+        const feed = feeds.find((feed) => feed.id === index)
         return (
           <div
             className='relative w-full cursor-pointer'
@@ -54,8 +68,9 @@ const InstagramPostsSection = () => {
               height={300}
               alt={description}
               className='w-full h-full object-cover'
+              onClick={() => handleClick(index)}
             />
-            {showFeed[feedKey] && (
+            {feed?.showFeed && (
               <motion.div
                 className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center'
                 initial={{ opacity: 0 }}

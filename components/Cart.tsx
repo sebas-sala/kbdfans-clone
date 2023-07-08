@@ -1,5 +1,5 @@
 import { useState } from "react"
-import CartIcon from "./CartIcon"
+import CartIcon from "./Icons/CartIcon"
 import Drawer from "./Drawer"
 import { AiOutlineShoppingCart } from "react-icons/ai"
 

@@ -1,36 +1,21 @@
 "use client"
 import { useState, useEffect } from "react"
-import { useQuery } from "react-query"
+import useSWR from "swr"
 import { MenuItem, Checkbox } from "@chakra-ui/react"
-import { fetchCategories } from "@/app/api/categories/categories"
 import Container from "../../../../components/Container"
 import Menu from "../../../../components/Menu"
+import { getCategories } from "@/app/api/categories/categories"
 import { Categories } from "@/types/db"
 
-export default function FilterSection() {
+export default async function FilterSection() {
   const [price, setPrice] = useState(1000)
-  const { isLoading, error, data } = useQuery<Categories[]>(
-    ["categories"],
-    fetchCategories
+  const { data, error, isLoading } = useSWR<Categories[]>(
+    "categories",
+    getCategories
   )
 
-  useEffect(() => {
-    console.log(price)
-  }, [price])
-
-  if (isLoading) return "Loading..."
-
-  if (error) {
-    console.log(error)
-    return "An error has occurred." + error
-  }
-
-  const keyboardCategories: Categories[] | undefined = data?.slice(0, 8)
-
-  const handlePrice = (number: string) => {
-    const newPrice = parseInt(number)
-    setPrice(newPrice)
-  }
+  if (error) return <div>Failed to load</div>
+  if (isLoading) return <div>Loading...</div>
 
   return (
     <Container>
@@ -51,7 +36,7 @@ export default function FilterSection() {
             ))}
           </Menu>
           <Menu buttonText='Keyboard Category'>
-            {keyboardCategories?.map(({ id, name, _count }) => (
+            {data?.map(({ id, name, _count }) => (
               <MenuItem key={id} className='flex justify-between'>
                 <div className='flex items-center gap-4'>
                   <Checkbox />

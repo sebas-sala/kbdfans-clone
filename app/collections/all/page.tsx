@@ -1,11 +1,11 @@
 import { Suspense } from "react"
 import Container from "@/components/Container"
 import FilterSection from "@/app/collections/all/components/FilterSection"
-import { fetchProducts } from "@/app/api/products/products"
+import { getProducts } from "@/app/api/products/products"
 import ProductsFetchingSection from "@/components/ProductsFetchingSection"
 
 export default function AllPage() {
-  const products = fetchProducts()
+  const products = getProducts()
 
   return (
     <>
