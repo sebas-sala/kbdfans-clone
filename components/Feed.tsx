@@ -29,7 +29,7 @@ const Feed: React.FC<Props> = ({ src, description }) => {
       width={800}
       height={300}
       alt={description}
-      className='w-full h-full object-cover'
+      className='h-full w-full object-cover'
     />
   )
 
@@ -43,14 +43,14 @@ const Feed: React.FC<Props> = ({ src, description }) => {
       {NewImage}
       {hovered && (
         <motion.div
-          className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center'
+          className='absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
             duration: 0.3,
           }}
         >
-          <AiOutlineInstagram className='text-white text-4xl' />
+          <AiOutlineInstagram className='text-4xl text-white' />
         </motion.div>
       )}
 

@@ -13,14 +13,14 @@ export default function Header() {
 
   return (
     <>
-      <header className='bg-black relative' ref={headerRef}>
+      <header className='relative bg-black' ref={headerRef}>
         <Container>
-          <div className='flex justify-between items-center py-6'>
+          <div className='flex items-center justify-between py-6'>
             <Image
               src='/../public/images/logo.avif'
               width={150}
               height={150}
-              className='object-contain w-auto h-auto'
+              className='h-auto w-auto object-contain'
               priority
               alt='Logo'
             />

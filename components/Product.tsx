@@ -7,7 +7,7 @@ const Product = ({ id, images, name, price }: Products) => {
 
   return (
     <Link
-      className='flex max-w-full flex-col items-center gap-3 shadow-lg max-h-[450px]'
+      className='flex max-h-[450px] max-w-full flex-col items-center gap-3 shadow-lg'
       href={`collections/all/${id}`}
     >
       <Image
@@ -15,10 +15,10 @@ const Product = ({ id, images, name, price }: Products) => {
         width={500}
         height={500}
         alt={name}
-        className='w-full h-60 object-cover object-center top-0 left-0 rounded-2xl'
+        className='left-0 top-0 h-60 w-full rounded-2xl object-cover object-center'
       />
-      <div className='px-10 max-w-full'>
-        <p className='truncate max-w-full'>
+      <div className='max-w-full px-10'>
+        <p className='max-w-full truncate'>
           {name}
           rsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrsrs
         </p>

@@ -23,7 +23,7 @@ const ProductsFetchingSection = async ({
         {title && <h3 className='text-4xl font-semibold'>{title}</h3>}
         {href && linkText && <Link href={href}>{linkText}</Link>}
       </div>
-      <div className='flex scrollbar-hide sm:grid sm:grid-cols-2 place-content-center place-items-center justify-items-center overflow-x-auto md:overflow-x-hidden md:grid-cols-2 lg:grid-cols-4 md:gap-14 mt-9'>
+      <div className='mt-9 flex place-content-center place-items-center justify-items-center overflow-x-auto scrollbar-hide sm:grid sm:grid-cols-2 md:grid-cols-2 md:gap-14 md:overflow-x-hidden lg:grid-cols-4'>
         {products?.map(({ images, id, name, price, stock }) => (
           <Product
             images={images}

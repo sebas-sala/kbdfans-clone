@@ -4,7 +4,7 @@ import LoginForm from "./LoginForm"
 const Login = () => {
   const Trigger = () => {
     return (
-      <button className='cursor-pointer hover:text-gray-400 transition duration-300'>
+      <button className='cursor-pointer transition duration-300 hover:text-gray-400'>
         Login
       </button>
     )

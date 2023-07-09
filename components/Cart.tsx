@@ -17,7 +17,7 @@ const Cart = () => {
       {cartItems.length > 0 ? (
         <div></div>
       ) : (
-        <div className='flex flex-col gap-4 justify-center items-center'>
+        <div className='flex flex-col items-center justify-center gap-4'>
           <CartIcon />
           <p>Your cart is empty.</p>
         </div>

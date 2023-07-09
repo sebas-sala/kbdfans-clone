@@ -21,7 +21,7 @@ export const Dialog: React.FC<Props> = ({ children, title, trigger }) => {
       <div onClick={onOpen}>{trigger}</div>
       <Modal size='xl' isCentered isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent className='py-10 px-8'>
+        <ModalContent className='px-8 py-10'>
           <ModalHeader className='mx-auto text-4xl font-bold'>
             {title}
           </ModalHeader>

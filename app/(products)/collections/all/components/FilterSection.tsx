@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react"
 import useSWR from "swr"
 import { MenuItem, Checkbox } from "@chakra-ui/react"
-import Container from "../../../../components/Container"
-import Menu from "../../../../components/Menu"
+import Container from "@/components/Container"
+import Menu from "@/components/Menu"
 import { getCategories } from "@/app/api/categories/categories"
 import { Categories } from "@/types/db"
 
@@ -19,7 +19,7 @@ export default async function FilterSection() {
 
   return (
     <Container>
-      <section className='w-full flex gap-20 justify-between'>
+      <section className='flex w-full justify-between gap-20'>
         <div className='flex gap-4'>
           <Menu buttonText='Availability'>
             <div></div>

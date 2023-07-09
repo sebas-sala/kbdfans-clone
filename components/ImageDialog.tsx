@@ -39,7 +39,7 @@ const ImageDialog: React.FC<Props> = ({
         <ModalBody className='flex'>
           <div className='relative h-96 w-4/6'>{image}</div>
           <div className='flex-1'>
-            <ModalHeader className='text-4xl font-bold border-b '>
+            <ModalHeader className='border-b text-4xl font-bold '>
               {title}
             </ModalHeader>
             {children}

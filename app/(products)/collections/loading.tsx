@@ -1,6 +1,6 @@
 const Loading = () => {
   return (
-    <div className='w-full h-screen grid place-content-center'>
+    <div className='grid h-screen w-full place-content-center'>
       <p>Loading...</p>
     </div>
   )

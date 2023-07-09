@@ -25,7 +25,7 @@ const Dropdown: React.FC<Props> = ({ children, trigger }) => {
       <div className='z-[60]'>
         {show && (
           <motion.div
-            className='pt-4 flex flex-col absolute left-0 z-50 pl-4 pr-10 text-sm font-semibold py-4 bg-black border-b-2 border-white shadow-lg'
+            className='absolute left-0 z-50 flex flex-col border-b-2 border-white bg-black py-4 pl-4 pr-10 pt-4 text-sm font-semibold shadow-lg'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{

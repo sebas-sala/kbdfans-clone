@@ -12,16 +12,16 @@ const StickyNav = (props: Props) => {
   const { isSticky } = props
 
   return (
-    <div className='sticky top-0 w-full bg-black z-50'>
+    <div className='sticky top-0 z-50 w-full bg-black'>
       <Container styles='container mx-auto flex justify-between items-center'>
-        <nav className='text-white w-full flex items-center gap-4 z-50'>
-          <Link href='/' className='font-bold tracking-wider p-4'>
+        <nav className='z-50 flex w-full items-center gap-4 text-white'>
+          <Link href='/' className='p-4 font-bold tracking-wider'>
             Home
           </Link>
           {navlinks.map((links, index) => {
             const { href, data, text } = links
             const trigger = (
-              <Link href={href} className='font-bold tracking-wider p-4'>
+              <Link href={href} className='p-4 font-bold tracking-wider'>
                 {text}
               </Link>
             )
@@ -31,7 +31,7 @@ const StickyNav = (props: Props) => {
                   <Link
                     href={link.href}
                     key={index}
-                    className='hover:text-white text-gray-300 transition truncate py-1'
+                    className='truncate py-1 text-gray-300 transition hover:text-white'
                   >
                     {link.title}
                   </Link>

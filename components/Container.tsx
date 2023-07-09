@@ -7,7 +7,7 @@ type Props = {
 
 const Container: FC<Props> = ({ children, styles }) => {
   return (
-    <div className={`container mx-auto px-10 md:px-0 relative ${styles}`}>
+    <div className={`container relative mx-auto px-10 md:px-0 ${styles}`}>
       {children}
     </div>
   )

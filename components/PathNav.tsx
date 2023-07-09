@@ -1,17 +1,19 @@
 "use client"
 
-import { useSearchParams } from "next/navigation"
 import Link from "next/link"
-import { useEffect } from "react"
+import { useSelectedLayoutSegments } from "next/navigation"
 
 const PathNav = () => {
-  const searchParams = useSearchParams()
+  const segments = useSelectedLayoutSegments()
 
-  useEffect(() => {
-    console.log(useSearchParams)
-  }, [searchParams])
-
-  return <div>{searchParams}</div>
+  return (
+    <nav className='container mx-auto'>
+      <ul className='flex gap-4'>
+        <Link href='/'>Home</Link>
+        <Link href={segments}>{segments}</Link>
+      </ul>
+    </nav>
+  )
 }
 
 export default PathNav

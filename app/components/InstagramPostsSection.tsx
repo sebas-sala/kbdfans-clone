@@ -3,7 +3,7 @@ import { instaPostsImages } from "@/data"
 
 const InstagramPostsSection = () => {
   return (
-    <section className='flex w-full min-h-max'>
+    <section className='flex min-h-max w-full'>
       {instaPostsImages.map(({ src, description }, index) => (
         <Feed key={index} src={src} description={description} />
       ))}

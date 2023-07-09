@@ -8,13 +8,13 @@ import Dropdown from "@/components/Dropdown"
 const IconNav = () => {
   const Trigger = () => {
     return (
-      <CgProfile className='cursor-pointer hover:text-white/90 transition duration-200' />
+      <CgProfile className='cursor-pointer transition duration-200 hover:text-white/90' />
     )
   }
 
   return (
-    <div className='flex gap-5 text-white text-3xl p-2'>
-      <BsSearch className='cursor-pointer hover:text-white/90 transition duration-200' />
+    <div className='flex gap-5 p-2 text-3xl text-white'>
+      <BsSearch className='cursor-pointer transition duration-200 hover:text-white/90' />
       <span>
         <Dropdown trigger={<Trigger />}>
           <Login />

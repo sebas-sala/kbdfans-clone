@@ -2,7 +2,6 @@ import { Products } from "@/types/db"
 import ProductImageSection from "./components/ProductImageSection"
 import ProductInfo from "./components/ProductInfo"
 import { getProductById } from "@/app/api/products/products"
-import PathNav from "@/components/PathNav"
 
 type Props = {
   params: {
@@ -21,7 +20,6 @@ const ProductPage = async ({ params }: Props) => {
 
   return (
     <>
-      <PathNav />
       <main className='flex'>
         <ProductImageSection images={images} alt={product.name} />
         <ProductInfo product={product} />

@@ -38,17 +38,17 @@ const SignupForm = () => {
         </InputRightElement>
       </InputGroup>
       <button
-        className='w-full px-4 py-2 rounded-md mt-8 bg-blue-400 text-white hover:bg-blue-500'
+        className='mt-8 w-full rounded-md bg-blue-400 px-4 py-2 text-white hover:bg-blue-500'
         onClick={handleSubmit}
         type='submit'
       >
         Signup
       </button>
-      <div className='flex justify-center items-center mt-6 gap-4'>
-        <Link href='/account/register' className='underline text-gray-500'>
+      <div className='mt-6 flex items-center justify-center gap-4'>
+        <Link href='/account/register' className='text-gray-500 underline'>
           Create an Account
         </Link>
-        <Link href='/' className='underline text-gray-500'>
+        <Link href='/' className='text-gray-500 underline'>
           Return To Store
         </Link>
       </div>

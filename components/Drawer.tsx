@@ -40,10 +40,10 @@ const Drawer: React.FC<Props> = ({
       >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader className='flex justify-between items-center'>
+          <DrawerHeader className='flex items-center justify-between'>
             <span>{headerText}</span>
             <AiFillCloseCircle
-              className='text-3xl text-gray-200 cursor-pointer hover:outline rounded-full outline-black outline-2 hover:text-gray-400'
+              className='cursor-pointer rounded-full text-3xl text-gray-200 outline-2 outline-black hover:text-gray-400 hover:outline'
               onClick={onClose}
             />
           </DrawerHeader>
