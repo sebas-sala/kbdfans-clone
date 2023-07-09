@@ -1,24 +1,25 @@
-"use client";
-import { createContext, useState, ReactNode } from "react";
+"use client"
+import { createContext, ReactNode } from "react"
+import { CartType } from "@/types/types"
+import useCartStore from "@/hooks/useCart"
 
-type CartContextType = {
-  showCart: boolean;
-  setShowCart: (show: boolean) => void;
-};
+export const CartContext = createContext<CartType>({
+  cartItems: [],
+  addToCart: () => {},
+  removeFromCart: () => {},
+  setCartItems: () => [],
+})
 
-export const CartContext = createContext<CartContextType>({
-  showCart: false,
-  setShowCart: () => {},
-});
+type CartProps = {
+  children: ReactNode
+}
 
-const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [showCart, setShowCart] = useState(false);
+const CartProvider: React.FC<CartProps> = ({ children }) => {
+  const cartStore = useCartStore()
 
   return (
-    <CartContext.Provider value={{ showCart, setShowCart }}>
-      {children}
-    </CartContext.Provider>
-  );
-};
+    <CartContext.Provider value={cartStore}>{children}</CartContext.Provider>
+  )
+}
 
-export default CartProvider;
+export default CartProvider

@@ -10,15 +10,15 @@ import {
 type Props = {
   children: React.ReactNode
   title: string
-  Button?: React.ReactNode
+  trigger: React.ReactNode
 }
 
-export const Dialog: React.FC<Props> = ({ children, title, Button }) => {
+export const Dialog: React.FC<Props> = ({ children, title, trigger }) => {
   const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
     <>
-      <div onClick={onOpen}>{Button}</div>
+      <div onClick={onOpen}>{trigger}</div>
       <Modal size='xl' isCentered isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent className='py-10 px-8'>

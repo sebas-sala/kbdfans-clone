@@ -1,11 +1,15 @@
 import Image from "next/image"
 import { Products } from "@/types/db"
+import Link from "next/link"
 
 const Product = ({ id, images, name, price }: Products) => {
   const firstImage = images[0].url
 
   return (
-    <div className='flex max-w-full flex-col items-center gap-3 shadow-lg max-h-[450px]'>
+    <Link
+      className='flex max-w-full flex-col items-center gap-3 shadow-lg max-h-[450px]'
+      href={`collections/all/${id}`}
+    >
       <Image
         src={firstImage}
         width={500}
@@ -20,7 +24,7 @@ const Product = ({ id, images, name, price }: Products) => {
         </p>
         <p>{price}</p>
       </div>
-    </div>
+    </Link>
   )
 }
 

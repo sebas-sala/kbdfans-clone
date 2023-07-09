@@ -5,7 +5,7 @@ const Signup = () => {
   return (
     <Dialog
       title='Signup'
-      Button={
+      trigger={
         <button className='cursor-pointer hover:text-gray-400 transition duration-300'>
           Signup
         </button>

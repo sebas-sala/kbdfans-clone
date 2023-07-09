@@ -26,12 +26,12 @@ const ProductsFetchingSection = async ({
       <div className='flex scrollbar-hide sm:grid sm:grid-cols-2 place-content-center place-items-center justify-items-center overflow-x-auto md:overflow-x-hidden md:grid-cols-2 lg:grid-cols-4 md:gap-14 mt-9'>
         {products?.map(({ images, id, name, price, stock }) => (
           <Product
-            key={id}
             images={images}
             name={name}
             price={price}
             id={id}
             stock={stock}
+            key={id}
           />
         ))}
       </div>

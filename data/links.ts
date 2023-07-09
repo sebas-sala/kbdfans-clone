@@ -9,10 +9,6 @@ type navLinksType = {
 
 export const navlinks: navLinksType[] = [
   {
-    text: "Home",
-    href: "/",
-  },
-  {
     text: "Shop",
     href: "/collections/all",
     data: shopData,

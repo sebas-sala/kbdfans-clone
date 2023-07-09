@@ -1,4 +1,4 @@
-type ProductImages = {
+export type ProductImages = {
   id: number | string
   productId: number | string
   url: string

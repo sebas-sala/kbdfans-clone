@@ -48,3 +48,23 @@ export const getProductsByCategoryId = async (
     await prisma.$disconnect()
   }
 }
+
+export const getProductById = async (productId: number | string) => {
+  try {
+    const product = await prisma.product.findUnique({
+      where: {
+        id: Number(productId),
+      },
+      include: {
+        categories: true,
+        images: true,
+      },
+    })
+    return product
+  } catch (e) {
+    console.error(e)
+    return null
+  } finally {
+    await prisma.$disconnect()
+  }
+}
