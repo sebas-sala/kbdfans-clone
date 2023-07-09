@@ -10,7 +10,7 @@ import {
 type Props = {
   children: React.ReactNode
   title: string
-  Button: React.ReactNode
+  Button?: React.ReactNode
 }
 
 export const Dialog: React.FC<Props> = ({ children, title, Button }) => {
