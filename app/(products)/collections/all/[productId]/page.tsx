@@ -19,12 +19,10 @@ const ProductPage = async ({ params }: Props) => {
   const images = product.images
 
   return (
-    <>
-      <main className='flex'>
-        <ProductImageSection images={images} alt={product.name} />
-        <ProductInfo product={product} />
-      </main>
-    </>
+    <main className='container mx-auto flex min-h-screen'>
+      <ProductImageSection images={images} alt={product.name} />
+      <ProductInfo product={product} />
+    </main>
   )
 }
 

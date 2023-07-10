@@ -10,8 +10,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [
-    require("tailwind-scrollbar-hide"),
-    require("prettier-plugin-tailwindcss"),
-  ],
+  plugins: [require("tailwind-scrollbar-hide")],
 }

@@ -1,11 +1,11 @@
 export type ProductImages = {
-  id: number | string
+  id: number
   productId: number | string
   url: string
 }
 
 export type Products = {
-  id: number | string
+  id: number
   name: string
   price: number
   stock: number
@@ -13,7 +13,7 @@ export type Products = {
 }
 
 export type Categories = {
-  id: number | string
+  id: number
   name: string
   _count: {
     products: number
