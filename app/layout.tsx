@@ -1,7 +1,6 @@
 import { Inter } from "next/font/google"
-import ChakraProvider from "./ChakraProvider"
+import Providers from "../lib/Providers"
 import CartProvider from "@/contexts/CartContext"
-
 import Footer from "./components/Footer"
 import Header from "./components/Header"
 import "./globals.css"
@@ -21,13 +20,13 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={` ${inter.className} overflow-y-scroll relative`}>
-        <ChakraProvider>
+        <Providers>
           <CartProvider>
             <Header />
             {children}
             <Footer />
           </CartProvider>
-        </ChakraProvider>
+        </Providers>
       </body>
     </html>
   )

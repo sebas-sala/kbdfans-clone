@@ -11,11 +11,10 @@ const ProductInfo = ({ product }: Props) => {
   const { addToCart, removeFromCart, cartItems, setCartItems } =
     useContext(CartContext)
 
-    const handleClick = () => {
-      addToCart(product)
-      setCartItems([...cartItems, product])
-      
-    }
+  const handleClick = () => {
+    addToCart(product)
+    setCartItems([...cartItems, product])
+  }
 
   return (
     <section className='space-y-10'>

@@ -1,45 +1,69 @@
 "use client"
 import { useState } from "react"
-import {
-  FormControl,
-  Button,
-  InputGroup,
-  Input,
-  InputRightElement,
-} from "@chakra-ui/react"
+import { useForm, SubmitHandler } from "react-hook-form"
 import Link from "next/link"
+import { User } from "@/types/db"
+import { createUser } from "@/services/auth"
 
 const SignupForm = () => {
   const [show, setShow] = useState(false)
-  const handleSubmit = () => {}
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<User>()
+
+  const onSubmit: SubmitHandler<User> = async (data) => {
+    try {
+      const { username, email, password } = data
+      const res = await createUser(username, email, password)
+      console.log(res)
+    } catch (e) {
+      console.error(e)
+    }
+  }
   const handleClick = () => {
     setShow(!show)
   }
 
   return (
-    <FormControl className='flex flex-col items-center justify-center'>
-      <InputGroup className='mt-4'>
-        <Input type='email' placeholder='Email' />
-      </InputGroup>
-      <InputGroup className='mt-4'>
-        <Input type='text' placeholder='Username' />
-      </InputGroup>
-      <InputGroup size='md' className='mt-4'>
-        <Input
-          pr='4.5rem'
+    <form
+      className='flex flex-col items-center justify-center'
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className='space-y-5'>
+        <input
+          type='email'
+          placeholder='Email'
+          {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+          className='w-full py-2 pl-4 outline-blue-500 rounded-lg border'
+        />
+        {errors.email && "Email is required"}
+
+        <input
+          type='text'
+          placeholder='Username'
+          className='w-full py-2 pl-4 outline-blue-500 rounded-lg border'
+          {...register("username", { required: true, maxLength: 20 })}
+        />
+        {errors.username && "Username is required"}
+
+        <input
           type={show ? "text" : "password"}
           placeholder='Enter password'
+          className='w-full py-2 pl-4 outline-blue-500 rounded-lg border'
+          {...register("password", { required: true })}
         />
-        <InputRightElement width='4.5rem'>
-          <Button h='1.75rem' size='sm' onClick={handleClick}>
-            {show ? "Hide" : "Show"}
-          </Button>
-        </InputRightElement>
-      </InputGroup>
+        <button onClick={handleClick} type='button' className='mr-10'>
+          {show ? "Hide" : "Show"}
+        </button>
+        {errors.password && "Password is required"}
+      </div>
+
       <button
         className='mt-8 w-full rounded-md bg-blue-400 px-4 py-2 text-white hover:bg-blue-500'
-        onClick={handleSubmit}
         type='submit'
       >
         Signup
@@ -52,7 +76,7 @@ const SignupForm = () => {
           Return To Store
         </Link>
       </div>
-    </FormControl>
+    </form>
   )
 }
 

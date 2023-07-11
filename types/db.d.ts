@@ -19,3 +19,10 @@ export type Categories = {
     products: number
   }
 }
+
+export type User = {
+  id: int
+  username: string
+  email: string
+  password: string
+}
