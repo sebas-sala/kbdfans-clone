@@ -40,7 +40,8 @@ export const getUser = async (
         password,
       }),
     })
-    return res.json()
+    const data = await res.json()
+    return data.user
   } catch (e) {
     console.error(e)
     return null

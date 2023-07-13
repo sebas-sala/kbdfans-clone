@@ -26,16 +26,16 @@ const Feed: React.FC<Props> = ({ src, description }) => {
   const NewImage = (
     <Image
       src={src}
-      width={800}
-      height={300}
+      fill
       alt={description}
+      sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
       className='h-full w-full object-cover'
     />
   )
 
   return (
     <div
-      className='relative w-full cursor-pointer'
+      className='relative h-full w-full cursor-pointer'
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onOpen}

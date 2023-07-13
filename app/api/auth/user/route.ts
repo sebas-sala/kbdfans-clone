@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server"
-import { User } from "@/types/db"
 import prisma from "@/lib/prisma"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 
@@ -10,17 +9,18 @@ export async function GET() {
     const { data, error } = await supabase.auth.getSession()
     console.log(data)
     if (error) {
-      throw new Error("Error al obtener la sesión del usuario")
+      throw new Error("Error to get session")
     }
-    if (data.session === null) {
-      return null
+    if (!data.session) {
+      console.log("prueba")
+      throw new Error("No session")
     }
-    const user: User = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
-        id: data.session?.user.id,
+        id: data.session.user.id,
       },
     })
-    return NextResponse.json(user as User)
+    return NextResponse.json(user)
   } catch (e) {
     console.log("Error al obtener los datos del usuario:", e)
     return null

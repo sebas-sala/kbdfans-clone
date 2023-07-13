@@ -1,7 +1,7 @@
 const CartIcon = () => {
   return (
     <svg width='56' viewBox='0 0 65 74' xmlns='http://www.w3.org/2000/svg'>
-      <g fill-rule='nonzero' fill='none'>
+      <g fillRule='nonzero' fill='none'>
         <path
           d='M64.407 9.856L53.605 0H11.371L.569 9.856A1.548 1.548 0 00.1 11.603c.235.619.843 1.031 1.524 1.031h61.727a1.62 1.62 0 001.522-1.031 1.545 1.545 0 00-.467-1.747z'
           fill='#C4C4C4'

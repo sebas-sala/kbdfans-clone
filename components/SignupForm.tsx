@@ -6,6 +6,8 @@ import Link from "next/link"
 import type { User } from "@/types/db"
 import { useRouter } from "next/navigation"
 import { createUser } from "@/services/auth"
+import Button from "./Button"
+import Form from "./Form"
 
 const SignupForm = () => {
   const [show, setShow] = useState(false)
@@ -19,9 +21,9 @@ const SignupForm = () => {
 
   const onSubmit: SubmitHandler<User> = async (data) => {
     try {
-      const { username, email, password } = data
-      if (!password || !username || !email) return
-      const res = await createUser(username, email, password)
+      const { email, username, password } = data
+      if (!email || !username || !password) return
+      const res = await createUser(email, username, password)
       if (res === null) {
         throw new Error("Error creating user")
       }
@@ -35,11 +37,8 @@ const SignupForm = () => {
   }
 
   return (
-    <form
-      className='flex flex-col items-center justify-center'
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className='space-y-5'>
+    <Form handleSubmit={handleSubmit(onSubmit)}>
+      <div className='space-y-5 mb-9'>
         <input
           type='email'
           placeholder='Email'
@@ -62,27 +61,18 @@ const SignupForm = () => {
           className='w-full py-2 pl-4 outline-blue-500 rounded-lg border'
           {...register("password", { required: true })}
         />
-        <button onClick={handleClick} type='button' className='mr-10'>
+        <button onClick={handleClick} type='button'>
           {show ? "Hide" : "Show"}
         </button>
         {errors.password && "Password is required"}
       </div>
-
-      <button
-        className='mt-8 w-full rounded-md bg-blue-400 px-4 py-2 text-white hover:bg-blue-500'
-        type='submit'
-      >
-        Signup
-      </button>
+      <Button type='submit'>Signup</Button>
       <div className='mt-6 flex items-center justify-center gap-4'>
-        <Link href='/account/register' className='text-gray-500 underline'>
-          Create an Account
-        </Link>
         <Link href='/' className='text-gray-500 underline'>
           Return To Store
         </Link>
       </div>
-    </form>
+    </Form>
   )
 }
 

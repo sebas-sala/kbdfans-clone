@@ -15,12 +15,14 @@ const Cart = () => {
   const { userData } = useContext(AuthContext)
 
   const { data, error, isLoading } = useSWR(
-    userData ? `/api/cart?userId=${userData.id}` : null,
+    userData ? `${userData.id}` : null,
     fetchCartProducts
   )
 
   useEffect(() => {
-    setCartItems(data)
+    if (data !== null) {
+      setCartItems(data)
+    }
   }, [data, setCartItems])
 
   if (error) return <div>failed to load</div>
@@ -34,7 +36,7 @@ const Cart = () => {
       icon={<AiOutlineShoppingCart />}
       bodyStyles='flex flex-col gap-4 justify-center items-center'
     >
-      {cartItems ? (
+      {cartItems && cartItems.length > 0 ? (
         cartItems.map((item) => (
           <div key={item.id} className='flex flex-col gap-2'>
             <Image src={item.images[0].url} alt={item.name} />

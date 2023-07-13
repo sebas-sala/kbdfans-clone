@@ -3,14 +3,14 @@ import { navlinks } from "@/data/links"
 import IconNav from "./IconNav"
 import Container from "@/components/Container"
 import Dropdown from "@/components/Dropdown"
+import { User } from "@/types/db"
 
 type Props = {
   isSticky: boolean
+  userData: User
 }
 
-const StickyNav = (props: Props) => {
-  const { isSticky } = props
-
+const StickyNav = ({ isSticky, userData }: Props) => {
   return (
     <div className='sticky top-0 z-50 w-full bg-black'>
       <Container styles='container mx-auto flex justify-between items-center'>
@@ -40,7 +40,7 @@ const StickyNav = (props: Props) => {
             )
           })}
         </nav>
-        {isSticky && <IconNav />}
+        {isSticky && <IconNav userData={userData} />}
       </Container>
     </div>
   )

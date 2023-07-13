@@ -14,7 +14,7 @@ const Categories = async () => {
       <Suspense fallback={<div>Loading...</div>}>
         <ProductsFetchingSection
           title='Fully Assembled Keyboard'
-          href=''
+          href='collection/keyboard'
           linkText='Shop'
           promise={keyboardsData}
         />
@@ -23,7 +23,7 @@ const Categories = async () => {
         <ProductsFetchingSection
           title='Keyboard Switches'
           linkText='Shop'
-          href=''
+          href='collection/switches'
           promise={switchesData}
         />
       </Suspense>
@@ -31,14 +31,14 @@ const Categories = async () => {
         <ProductsFetchingSection
           title='Keyboard Keycaps'
           linkText='See more'
-          href=''
+          href='collection/keycaps'
           promise={keycapsData}
         />
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
         <ProductsFetchingSection
           title='PCB'
-          href=''
+          href='collection/pcb'
           linkText='Shop'
           promise={PCBData}
         />

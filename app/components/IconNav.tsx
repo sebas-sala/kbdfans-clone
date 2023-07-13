@@ -4,8 +4,13 @@ import Login from "@/components/Login"
 import Signup from "@/components/Signup"
 import Cart from "@/components/Cart"
 import Dropdown from "@/components/Dropdown"
+import { User } from "@/types/db"
 
-const IconNav = () => {
+type Props = {
+  userData: User
+}
+
+const IconNav = ({ userData }: Props) => {
   const Trigger = () => {
     return (
       <CgProfile className='cursor-pointer transition duration-200 hover:text-white/90' />
@@ -16,10 +21,14 @@ const IconNav = () => {
     <div className='flex gap-5 p-2 text-3xl text-white'>
       <BsSearch className='cursor-pointer transition duration-200 hover:text-white/90' />
       <span>
-        <Dropdown trigger={<Trigger />}>
-          <Login />
-          <Signup />
-        </Dropdown>
+        {userData ? (
+          <div>{userData.email}</div>
+        ) : (
+          <Dropdown trigger={<Trigger />}>
+            <Login />
+            <Signup />
+          </Dropdown>
+        )}
       </span>
 
       <Cart />

@@ -13,7 +13,17 @@ export async function GET(request: Request) {
       )
     }
 
-    const cartItems = await prisma.cart.findUnique({
+    let user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    })
+
+    if (!user) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 })
+    }
+
+    let cartItems = await prisma.cart.findUnique({
       where: {
         userId,
       },
@@ -26,6 +36,23 @@ export async function GET(request: Request) {
         },
       },
     })
+
+    if (!cartItems) {
+      cartItems = await prisma.cart.create({
+        data: {
+          userId,
+        },
+        include: {
+          products: true,
+          _count: {
+            select: {
+              products: true,
+            },
+          },
+        },
+      })
+    }
+
     return NextResponse.json(cartItems)
   } finally {
     await prisma.$disconnect()
@@ -34,7 +61,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const { searchParams } = new URL(request.url)
-  const id = searchParams.get("id")
+  const id = searchParams.get("user")
 
   const cartItems = await prisma.cart.create({
     data: {

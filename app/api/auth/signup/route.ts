@@ -1,22 +1,26 @@
-import prisma from "@/lib/prisma"
-import { z } from "zod"
 import { NextResponse } from "next/server"
-import { NextApiResponse, NextApiRequest } from "next"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { z } from "zod"
+import prisma from "@/lib/prisma"
 
 const registerUserSchema = z.object({
   email: z.string().email("Invalid email"),
   username: z.string().min(4, "Invalid username"),
-  password: z.string().min(6, "Password should be minimum 5 characters"),
+  password: z.string().min(6, "Password should be minimum 6 characters"),
 })
 
 const supabase = createClientComponentClient()
 
+export async function GET() {
+  const users = await prisma.user.findMany()
+  return NextResponse.json(users)
+}
+
 export async function POST(req: Request, res: Response) {
   try {
-    const { email, password, username } = registerUserSchema.parse(
-      await req.json()
-    )
+    const requestData = await req.json()
+    console.log(requestData)
+    const { email, username, password } = registerUserSchema.parse(requestData)
     console.log(email)
     const findUser = await prisma.user.findUnique({
       where: { email },
@@ -51,9 +55,4 @@ export async function POST(req: Request, res: Response) {
   } finally {
     await prisma.$disconnect()
   }
-}
-
-export async function GET() {
-  const users = await prisma.user.findMany()
-  return users
 }

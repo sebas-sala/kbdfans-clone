@@ -10,6 +10,7 @@ const Category = ({ text, img }: CategoryProps) => {
       <Image
         src={img}
         fill
+        priority
         className='rounded-2xl object-cover'
         sizes='50vw'
         alt={text}

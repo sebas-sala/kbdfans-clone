@@ -1,17 +1,23 @@
 import React from "react"
-import { Products } from "@/types/db"
 
-type Props = {
-  handleClick: () => void
-  text: string
-  styles: string
-  product: Products
+type ButtonProps = {
+  handleClick?: () => void
+  children: React.ReactNode
+  type: "button" | "submit" | "reset"
 }
 
-const Button: React.FC<Props> = ({ handleClick, text, styles }) => {
+const Button: React.FC<ButtonProps> = ({
+  children,
+  handleClick,
+  type,
+}: ButtonProps) => {
   return (
-    <button onClick={handleClick} className={styles}>
-      {text}
+    <button
+      type={type}
+      onClick={handleClick}
+      className='w-full rounded-md bg-blue-400 px-4 py-2 text-white hover:bg-blue-500 transition'
+    >
+      {children}
     </button>
   )
 }

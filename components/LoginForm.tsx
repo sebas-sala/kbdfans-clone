@@ -1,14 +1,18 @@
 "use client"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import Link from "next/link"
 import type { User } from "@/types/db"
 import { useRouter } from "next/navigation"
 import { getUser } from "@/services/auth"
+import { AuthContext } from "@/contexts/AuthContext"
+import Button from "./Button"
+import Form from "./Form"
 
 const LoginForm = () => {
   const [show, setShow] = useState(false)
   const router = useRouter()
+  const { setUserData } = useContext(AuthContext)
 
   const handleClick = () => {
     setShow(!show)
@@ -23,10 +27,13 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<User> = async (data) => {
     try {
       const { email, password } = data
+      if (!email || !password) return
       const user = await getUser(email, password)
       if (user === null) {
         throw new Error("Invalid email or password")
       }
+      console.log(user)
+      setUserData(user)
       router.refresh()
     } catch (e) {
       console.error(e)
@@ -34,11 +41,8 @@ const LoginForm = () => {
   }
 
   return (
-    <form
-      className='flex flex-col items-center justify-center'
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className='space-y-5'>
+    <Form handleSubmit={handleSubmit(onSubmit)}>
+      <div className='space-y-5 mb-9'>
         <input
           type='email'
           placeholder='Email'
@@ -53,18 +57,13 @@ const LoginForm = () => {
           className='w-full py-2 pl-4 outline-blue-500 rounded-lg border'
           {...register("password", { required: true })}
         />
-        <button onClick={handleClick} type='button' className='mr-10'>
+        <button onClick={handleClick} type='button'>
           {show ? "Hide" : "Show"}
         </button>
         {errors.password && "Password is required"}
       </div>
 
-      <button
-        className='mt-8 w-full rounded-md bg-blue-400 px-4 py-2 text-white hover:bg-blue-500'
-        type='submit'
-      >
-        Signup
-      </button>
+      <Button type='submit'>Login</Button>
       <div className='mt-6 flex items-center justify-center gap-4'>
         <Link href='/account/register' className='text-gray-500 underline'>
           Create an Account
@@ -73,7 +72,7 @@ const LoginForm = () => {
           Return To Store
         </Link>
       </div>
-    </form>
+    </Form>
   )
 }
 
