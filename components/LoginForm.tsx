@@ -4,13 +4,11 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import Link from "next/link"
 import type { User } from "@/types/db"
 import { useRouter } from "next/navigation"
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { getUser } from "@/services/auth"
 
 const LoginForm = () => {
   const [show, setShow] = useState(false)
   const router = useRouter()
-  const supabase = createClientComponentClient<User>()
 
   const handleClick = () => {
     setShow(!show)
@@ -20,7 +18,6 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<User>()
 
   const onSubmit: SubmitHandler<User> = async (data) => {
@@ -30,12 +27,6 @@ const LoginForm = () => {
       if (user === null) {
         throw new Error("Invalid email or password")
       }
-      const userSupa = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      })
-      console.log(userSupa)
-      console.log(user)
       router.refresh()
     } catch (e) {
       console.error(e)

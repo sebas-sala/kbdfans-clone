@@ -1,32 +1,37 @@
 import prisma from "@/lib/prisma"
-import { z } from "zod"
-import argon2 from "argon2"
 import { NextResponse } from "next/server"
 import { NextApiRequest } from "next"
+import { z } from "zod"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 
 const loginUserSchema = z.object({
   email: z.string().email("Invalid email"),
   password: z.string().min(6, "Password should be minimum 5 characters"),
 })
 
+const supabase = createClientComponentClient()
+
 export async function POST(req: NextApiRequest) {
   const { email, password } = loginUserSchema.parse(req.body)
-  const user = await prisma.user.findUnique({
-    where: { email },
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
   })
-  if (!user) {
-    return NextResponse.json({
-      message: "User not found",
-    })
+
+  if (error) {
+    console.error(error)
+    return NextResponse.json({ error: "User not found" }, { status: 500 })
   }
-  const hashedPassword = await argon2.verify(password, user.password)
-  if (!hashedPassword)
-    return NextResponse.json({
-      message: "Invalid password",
-    })
+
+  const userInfo = await prisma.user.findUnique({
+    where: {
+      id: data.user.id,
+    },
+  })
 
   return NextResponse.json({
-    user,
+    user: userInfo,
     message: "Login Successful",
   })
 }

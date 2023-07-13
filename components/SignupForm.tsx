@@ -4,14 +4,12 @@ import { useState } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import Link from "next/link"
 import type { User } from "@/types/db"
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { useRouter } from "next/navigation"
 import { createUser } from "@/services/auth"
 
 const SignupForm = () => {
   const [show, setShow] = useState(false)
   const router = useRouter()
-  const supabase = createClientComponentClient<User>()
 
   const {
     register,
@@ -26,13 +24,6 @@ const SignupForm = () => {
       if (res === null) {
         throw new Error("Error creating user")
       }
-      await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: `${location.origin}/auth/callback`,
-        },
-      })
       router.refresh()
     } catch (e) {
       console.error(e)
