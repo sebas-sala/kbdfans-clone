@@ -21,8 +21,9 @@ export type Categories = {
 }
 
 export type User = {
-  id: int
+  id: string
   username: string
+  password?: string
   email: string
-  password: string
+  cart: Products[]
 }

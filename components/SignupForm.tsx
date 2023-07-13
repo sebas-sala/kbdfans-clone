@@ -20,6 +20,7 @@ const SignupForm = () => {
   const onSubmit: SubmitHandler<User> = async (data) => {
     try {
       const { username, email, password } = data
+      if (!password || !username || !email) return
       const res = await createUser(username, email, password)
       if (res === null) {
         throw new Error("Error creating user")

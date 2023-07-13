@@ -1,8 +1,8 @@
 import type { User } from "../types/db"
 
 export const createUser = async (
-  password: string,
   email: string,
+  password: string,
   username: string
 ): Promise<User | null> => {
   try {
@@ -12,13 +12,13 @@ export const createUser = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        password,
         email,
+        password,
         username,
       }),
     })
 
-    return res.json()
+    return await res.json()
   } catch (e) {
     console.error(e)
     return null

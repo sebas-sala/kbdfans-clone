@@ -1,26 +1,35 @@
 import { NextResponse } from "next/server"
-import { PrismaClient } from "@prisma/client"
-
-const prisma = new PrismaClient()
+import prisma from "@/lib/prisma"
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
-  const id = searchParams.get("productId")
+  try {
+    const { searchParams } = new URL(request.url)
+    const userId = searchParams.get("userId")
 
-  const cartItems = await prisma.cart.findUnique({
-    where: {
-      userId: id,
-    },
-    include: {
-      products: true,
-      _count: {
-        select: {
-          products: true,
+    if (!userId) {
+      return NextResponse.json(
+        { message: "User ID not provided" },
+        { status: 400 }
+      )
+    }
+
+    const cartItems = await prisma.cart.findUnique({
+      where: {
+        userId,
+      },
+      include: {
+        products: true,
+        _count: {
+          select: {
+            products: true,
+          },
         },
       },
-    },
-  })
-  return NextResponse.json(cartItems)
+    })
+    return NextResponse.json(cartItems)
+  } finally {
+    await prisma.$disconnect()
+  }
 }
 
 export async function POST(request: Request) {

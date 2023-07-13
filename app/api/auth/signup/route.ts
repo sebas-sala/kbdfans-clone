@@ -6,25 +6,28 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 
 const registerUserSchema = z.object({
   email: z.string().email("Invalid email"),
-  username: z.string().regex(/^[a-z0-9_-]{3,15}$/g, "Invalid username"),
+  username: z.string().min(4, "Invalid username"),
   password: z.string().min(6, "Password should be minimum 5 characters"),
 })
 
 const supabase = createClientComponentClient()
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: Request, res: Response) {
   try {
-    const { email, password, username } = registerUserSchema.parse(req.body)
+    const { email, password, username } = registerUserSchema.parse(
+      await req.json()
+    )
+    console.log(email)
     const findUser = await prisma.user.findUnique({
       where: { email },
     })
-    if (findUser) {
-      return res.status(400).json({ message: "User already exists" })
-    }
+
+    console.log(findUser)
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
     })
+    console.log(data)
     if (error) {
       console.error(error)
       return NextResponse.json({ error: "Error signing up" }, { status: 500 })

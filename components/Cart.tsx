@@ -7,12 +7,17 @@ import { AiOutlineShoppingCart } from "react-icons/ai"
 import { CartContext } from "@/contexts/CartContext"
 import Image from "next/image"
 import { fetchCartProducts } from "@/app/api/cart/categories"
+import { AuthContext } from "@/contexts/AuthContext"
 
 const Cart = () => {
   const { addToCart, removeFromCart, cartItems, setCartItems } =
     useContext(CartContext)
+  const { userData } = useContext(AuthContext)
 
-  const { data, error, isLoading } = useSWR("/api/cart", fetchCartProducts)
+  const { data, error, isLoading } = useSWR(
+    userData ? `/api/cart?userId=${userData.id}` : null,
+    fetchCartProducts
+  )
 
   useEffect(() => {
     setCartItems(data)
