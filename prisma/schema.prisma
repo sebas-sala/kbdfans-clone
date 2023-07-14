@@ -15,14 +15,16 @@ model User {
   email    String  @unique
   username String
   isAdmin  Boolean @default(false)
-  cart     Cart?
+  cart     Cart[]
 }
 
 model Cart {
-  id       Int       @id @default(autoincrement())
-  products Product[]
-  userId   String    @unique
-  User     User      @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement())
+  userId    String   @unique
+  User      User     @relation(fields: [userId], references: [id])
+  Product   Product? @relation(fields: [productId], references: [id])
+  quantity  Int
+  productId Int?
 }
 
 model Product {

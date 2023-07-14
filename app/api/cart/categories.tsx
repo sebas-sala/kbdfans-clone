@@ -3,8 +3,7 @@ export const fetchCartProducts = async (userId: string) => {
     const products = await fetch(
       `http://localhost:3000/api/cart?userId=${userId}`
     )
-    const data = await products.json()
-    return data.products
+    return await products.json()
   } catch (e) {
     console.error(e)
     return []

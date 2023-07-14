@@ -1,17 +1,23 @@
 "use client"
 import { create } from "zustand"
-import { addToCart } from "@/lib/cart"
-import { CartType } from "@/types/types"
+import Cookie from "js-cookie"
+import { addToCart as fetchingCart } from "@/lib/cart"
+import type { Cart } from "@/types/types"
+import { User } from "@/types/db"
 
-const useCart = create<CartType>((set) => ({
+const useCart = create<Cart>((set) => ({
   cartItems: [],
   setCartItems: (items) =>
     set((state) => ({
       cartItems: items,
     })),
-  addToCart: async (item, userId) => {
-    set((state) => ({ cartItems: [...state.cartItems, item] }))
-     await addToCart(item.Id)
+  addToCart: async (item) => {
+    const userCookie = Cookie.get("user")
+    if (userCookie) {
+      const { id } = JSON.parse(userCookie) as User
+      set((state) => ({ cartItems: [...state.cartItems, item] }))
+      await fetchingCart(item.id, id)
+    }
   },
   removeFromCart: (itemId) =>
     set((state) => ({

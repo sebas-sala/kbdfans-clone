@@ -1,16 +1,14 @@
 "use client"
-import { useContext } from "react"
+
 import { Products } from "@/types/db"
 import Button from "@/components/Button"
 import useCart from "@/hooks/useCart"
-import { AuthContext } from "@/contexts/AuthContext"
 
 type Props = {
   product: Products
 }
 
 const ProductInfo = ({ product }: Props) => {
-  const { userData } = useContext(AuthContext)
   const { addToCart } = useCart()
 
   const handleClick = () => {

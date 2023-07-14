@@ -19,13 +19,15 @@ const Cart = () => {
   )
 
   useEffect(() => {
-    if (data !== null) {
+    if (data) {
       setCartItems(data)
+      console.log(cartItems)
     }
-  }, [data, setCartItems])
+  }, [data, setCartItems, cartItems])
 
   if (error) return <div>failed to load</div>
-  if (isLoading) return <div className='text-base'>loading...</div>
+
+  if (isLoading) return <p className='text-sm'>Loading...</p>
 
   return (
     <Drawer

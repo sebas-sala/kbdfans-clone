@@ -28,30 +28,10 @@ export async function GET(request: Request) {
       where: {
         userId,
       },
-      include: {
-        products: true,
-        _count: {
-          select: {
-            products: true,
-          },
-        },
-      },
     })
 
     if (!cartItems) {
-      cartItems = await prisma.cart.create({
-        data: {
-          userId,
-        },
-        include: {
-          products: true,
-          _count: {
-            select: {
-              products: true,
-            },
-          },
-        },
-      })
+      return NextResponse.json({ message: "Cart not found" }, { status: 404 })
     }
 
     return NextResponse.json(cartItems)
@@ -88,23 +68,34 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "User not found" }, { status: 404 })
     }
 
-    const cartItems = await prisma.cart.update({
+    const existingCartItem = await prisma.cart.findFirst({
       where: {
         userId,
-      },
-      data: {
-        products: {
-          connect: {
-            id: productToNumber,
-          },
-        },
-      },
-      include: {
-        products: true,
+        productId,
       },
     })
 
-    return NextResponse.json(cartItems)
+    if (existingCartItem) {
+      const updatedCartItem = await prisma.cart.update({
+        where: {
+          id: existingCartItem.id,
+        },
+        data: {
+          quantity: existingCartItem.quantity + 1,
+        },
+      })
+      return NextResponse.json(updatedCartItem)
+    }
+
+    const newCartItem = await prisma.cart.create({
+      data: {
+        userId,
+        productId,
+        quantity: 1,
+      },
+    })
+
+    return NextResponse.json(newCartItem)
   } finally {
     await prisma.$disconnect()
   }
