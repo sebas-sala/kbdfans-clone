@@ -8,6 +8,7 @@ import { getUser } from "@/services/auth"
 import { AuthContext } from "@/contexts/AuthContext"
 import Button from "./Button"
 import Form from "./Form"
+import Cookies from "js-cookie"
 
 const LoginForm = () => {
   const [show, setShow] = useState(false)
@@ -32,7 +33,7 @@ const LoginForm = () => {
       if (user === null) {
         throw new Error("Invalid email or password")
       }
-      console.log(user)
+      Cookies.set("user", JSON.stringify(user), { expires: 1 })
       setUserData(user)
       router.refresh()
     } catch (e) {

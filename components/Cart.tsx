@@ -1,17 +1,16 @@
 "use client"
 import { useContext, useEffect } from "react"
 import useSWR from "swr"
-import CartIcon from "./Icons/CartIcon"
-import Drawer from "./Drawer"
-import { AiOutlineShoppingCart } from "react-icons/ai"
-import { CartContext } from "@/contexts/CartContext"
 import Image from "next/image"
+import { AiOutlineShoppingCart } from "react-icons/ai"
 import { fetchCartProducts } from "@/app/api/cart/categories"
 import { AuthContext } from "@/contexts/AuthContext"
+import useCart from "@/hooks/useCart"
+import Drawer from "./Drawer"
+import CartIcon from "./Icons/CartIcon"
 
 const Cart = () => {
-  const { addToCart, removeFromCart, cartItems, setCartItems } =
-    useContext(CartContext)
+  const { addToCart, removeFromCart, cartItems, setCartItems } = useCart()
   const { userData } = useContext(AuthContext)
 
   const { data, error, isLoading } = useSWR(
@@ -26,7 +25,7 @@ const Cart = () => {
   }, [data, setCartItems])
 
   if (error) return <div>failed to load</div>
-  if (isLoading) return <div>loading...</div>
+  if (isLoading) return <div className='text-base'>loading...</div>
 
   return (
     <Drawer

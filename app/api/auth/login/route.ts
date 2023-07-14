@@ -8,8 +8,6 @@ const loginUserSchema = z.object({
   password: z.string().min(6, "Password should be minimum 5 characters"),
 })
 
-const supabase = createClientComponentClient()
-
 export async function GET() {
   const users = await prisma.user.findMany()
   return NextResponse.json(users)
@@ -17,6 +15,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
+    const supabase = createClientComponentClient()
     const requestData = await req.json()
     console.log(requestData)
     const { email, password } = loginUserSchema.parse(requestData)

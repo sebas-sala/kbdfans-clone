@@ -1,35 +1,41 @@
 "use client"
 import { createContext, useState, useEffect } from "react"
-import { fetchUserData } from "@/lib/auth"
-import { User } from "@/types/db"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import Cookie from "js-cookie"
+import type { User } from "@/types/db"
 
 type AuthContextType = {
-  userData: any
-  setUserData: React.Dispatch<React.SetStateAction<any>>
+  userData: User | null
+  setUserData: React.Dispatch<React.SetStateAction<User | null>>
+  logout: () => void
 }
 
 export const AuthContext = createContext<AuthContextType>({
   userData: null,
   setUserData: () => {},
+  logout: () => {},
 })
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [userData, setUserData] = useState<User | null>(null)
 
+  const logout = async () => {
+    const supabase = createClientComponentClient()
+    await supabase.auth.signOut()
+    Cookie.remove("user")
+    setUserData(null)
+  }
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const user = await fetchUserData()
-        setUserData(user)
-      } catch (error) {
-        console.log("Error al obtener los datos del usuario:", error)
-      }
+    const userCookie = Cookie.get("user")
+    if (userCookie) {
+      const parseUser = JSON.parse(userCookie) as User
+      setUserData(parseUser)
     }
-    fetchData()
   }, [])
 
   return (
-    <AuthContext.Provider value={{ userData, setUserData }}>
+    <AuthContext.Provider value={{ userData, setUserData, logout }}>
       {children}
     </AuthContext.Provider>
   )

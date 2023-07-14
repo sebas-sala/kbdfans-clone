@@ -1,17 +1,15 @@
 "use client"
 
-import { useRef, useContext } from "react"
+import { useRef } from "react"
 import Image from "next/image"
 import { useScrollFixed } from "@/hooks/useScrollFixed"
 import Container from "@/components/Container"
 import IconNav from "./IconNav"
-import { AuthContext } from "@/contexts/AuthContext"
 import StickyNav from "./StickyNav"
 
 export default function Header() {
   const headerRef = useRef<HTMLDivElement>(null)
   const isSticky = useScrollFixed(headerRef)
-  const { userData } = useContext(AuthContext)
   return (
     <>
       <header className='relative bg-black' ref={headerRef}>
@@ -25,11 +23,11 @@ export default function Header() {
               priority
               alt='Logo'
             />
-            {!isSticky && <IconNav userData={userData} />}
+            {!isSticky && <IconNav />}
           </div>
         </Container>
       </header>
-      <StickyNav isSticky={isSticky} userData={userData} />
+      <StickyNav isSticky={isSticky} />
     </>
   )
 }

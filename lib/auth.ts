@@ -1,6 +1,6 @@
 import { User } from "@/types/db"
 
-export const fetchUserData = async (): Promise<User | null> => {
+export const fetchUserData = async (id: string): Promise<User | null> => {
   try {
     const response = await fetch("http://localhost:3000/api/auth/user")
     const user = (await response.json()) as User

@@ -2,31 +2,29 @@
 import { useContext } from "react"
 import { Products } from "@/types/db"
 import Button from "@/components/Button"
-import { CartContext } from "@/contexts/CartContext"
+import useCart from "@/hooks/useCart"
+import { AuthContext } from "@/contexts/AuthContext"
+
 type Props = {
   product: Products
 }
 
 const ProductInfo = ({ product }: Props) => {
-  const { addToCart, removeFromCart, cartItems, setCartItems } =
-    useContext(CartContext)
+  const { userData } = useContext(AuthContext)
+  const { addToCart } = useCart()
 
   const handleClick = () => {
     addToCart(product)
-    setCartItems([...cartItems, product])
   }
 
   return (
-    <section className='space-y-10'>
+    <section className='h-96 sticky top-0'>
       <p>{product.id}</p>
       <p>{product.name}</p>
       <p>{product.stock}</p>
-      <Button
-        styles='px-4 py-2'
-        text='Add to Cart'
-        product={product}
-        handleClick={handleClick}
-      />
+      <Button type='button' handleClick={handleClick}>
+        Add to Cart
+      </Button>
     </section>
   )
 }
