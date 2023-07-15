@@ -2,6 +2,7 @@ import { Suspense } from "react"
 import Container from "@/components/Container"
 import ProductsFetchingSection from "@/components/ProductsFetchingSection"
 import { getProductsByCategoryId } from "../api/products/products"
+import Spinner from "@/components/Spinner"
 
 const Categories = async () => {
   const keyboardsData = getProductsByCategoryId(1, 5)
@@ -11,7 +12,7 @@ const Categories = async () => {
 
   return (
     <Container>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner />}>
         <ProductsFetchingSection
           title='Fully Assembled Keyboard'
           href='collection/keyboard'
@@ -19,7 +20,7 @@ const Categories = async () => {
           promise={keyboardsData}
         />
       </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner />}>
         <ProductsFetchingSection
           title='Keyboard Switches'
           linkText='Shop'
@@ -27,7 +28,7 @@ const Categories = async () => {
           promise={switchesData}
         />
       </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner />}>
         <ProductsFetchingSection
           title='Keyboard Keycaps'
           linkText='See more'
@@ -35,7 +36,7 @@ const Categories = async () => {
           promise={keycapsData}
         />
       </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner />}>
         <ProductsFetchingSection
           title='PCB'
           href='collection/pcb'

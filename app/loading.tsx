@@ -1,7 +1,9 @@
+import Spinner from "@/components/Spinner"
+
 const Loading = () => {
   return (
     <div className='w-full h-screen grid place-content-center'>
-      <p>Loading...</p>
+      <Spinner />
     </div>
   )
 }

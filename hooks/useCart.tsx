@@ -15,8 +15,8 @@ const useCart = create<Cart>((set) => ({
     const userCookie = Cookie.get("user")
     if (userCookie) {
       const { id } = JSON.parse(userCookie) as User
-      set((state) => ({ cartItems: [...state.cartItems, item] }))
-      await fetchingCart(item.id, id)
+      const product = await fetchingCart(item.id, id)
+      set((state) => ({ cartItems: [...state.cartItems, product] }))
     }
   },
   removeFromCart: (itemId) =>

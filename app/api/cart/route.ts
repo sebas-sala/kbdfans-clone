@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
+import { constants } from "fs"
 
 export async function GET(request: Request) {
   try {
@@ -14,7 +15,7 @@ export async function GET(request: Request) {
       )
     }
 
-    let user = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
         id: userId,
       },
@@ -24,9 +25,12 @@ export async function GET(request: Request) {
       return NextResponse.json({ message: "User not found" }, { status: 404 })
     }
 
-    let cartItems = await prisma.cart.findUnique({
+    const cartItems = await prisma.cart.findMany({
       where: {
         userId,
+      },
+      include: {
+        Product: true,
       },
     })
 
@@ -74,6 +78,8 @@ export async function POST(request: Request) {
         productId,
       },
     })
+
+    console.log(existingCartItem)
 
     if (existingCartItem) {
       const updatedCartItem = await prisma.cart.update({

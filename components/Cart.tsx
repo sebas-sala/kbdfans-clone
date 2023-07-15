@@ -1,13 +1,13 @@
 "use client"
 import { useContext, useEffect } from "react"
 import useSWR from "swr"
-import Image from "next/image"
 import { AiOutlineShoppingCart } from "react-icons/ai"
 import { fetchCartProducts } from "@/app/api/cart/categories"
 import { AuthContext } from "@/contexts/AuthContext"
 import useCart from "@/hooks/useCart"
 import Drawer from "./Drawer"
 import CartIcon from "./Icons/CartIcon"
+import CartItem from "./CartItem"
 
 const Cart = () => {
   const { addToCart, removeFromCart, cartItems, setCartItems } = useCart()
@@ -38,12 +38,7 @@ const Cart = () => {
       bodyStyles='flex flex-col gap-4 justify-center items-center'
     >
       {cartItems && cartItems.length > 0 ? (
-        cartItems.map((item) => (
-          <div key={item.id} className='flex flex-col gap-2'>
-            <Image src={item.images[0].url} alt={item.name} />
-            <span>{item.name}</span>
-          </div>
-        ))
+        cartItems.map((item) => <CartItem key={item.id} product={item} />)
       ) : (
         <div className='flex flex-col items-center justify-center gap-4'>
           <CartIcon />

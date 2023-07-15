@@ -39,7 +39,6 @@ export type navDataType = {
 }
 
 export interface Cart {
-  userId: number | string
   cartItems: Products[]
   setCartItems: (items: Products[]) => void
   addToCart: (item: Products) => void
