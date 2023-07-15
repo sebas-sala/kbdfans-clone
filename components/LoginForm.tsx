@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import Link from "next/link"
 import type { User } from "@/types/db"
 import { useRouter } from "next/navigation"
-import { getUser } from "@/lib/auth"
+import { fetchUserByEmailAndPassword } from "@/lib/authFetch"
 import { AuthContext } from "@/contexts/AuthContext"
 import Button from "./Button"
 import Form from "./Form"
@@ -29,7 +29,7 @@ const LoginForm = () => {
     try {
       const { email, password } = data
       if (!email || !password) return
-      const user = await getUser(email, password)
+      const user = await fetchUserByEmailAndPassword(email, password)
       if (user === null) {
         throw new Error("Invalid email or password")
       }

@@ -1,17 +1,17 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import useSWR from "swr"
 import { MenuItem, Checkbox } from "@chakra-ui/react"
 import Container from "@/components/Container"
 import Menu from "@/components/Menu"
-import { getCategories } from "@/app/api/categories/categories"
+import { fetchCategories } from "@/lib/categoriesFetch"
 import { Categories } from "@/types/db"
 
 export default async function FilterSection() {
   const [price, setPrice] = useState(1000)
   const { data, error, isLoading } = useSWR<Categories[]>(
     "categories",
-    getCategories
+    fetchCategories
   )
 
   if (error) return <div>Failed to load</div>

@@ -1,6 +1,7 @@
 import { instaPostsImages } from "@/data"
 import { ReactNode, Dispatch, SetStateAction } from "react"
 import { Products } from "./db"
+import { CartProducts } from "./cart"
 
 export type instaPostsImagesType = {
   src: string
@@ -39,8 +40,8 @@ export type navDataType = {
 }
 
 export interface Cart {
-  cartItems: Products[]
-  setCartItems: (items: Products[]) => void
-  addToCart: (item: Products) => void
-  removeFromCart: (itemId: string | number) => void
+  cartItems: CartProducts[]
+  setCartItems: (items: CartProducts[]) => void
+  addToCart: (item: CartProducts) => void
+  removeFromCart: (item: CartProducts) => void
 }

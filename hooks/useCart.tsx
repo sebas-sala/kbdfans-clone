@@ -1,8 +1,12 @@
 "use client"
 import { create } from "zustand"
 import Cookie from "js-cookie"
-import { addToCart as fetchingCart } from "@/lib/cart"
-import type { Cart } from "@/types/types"
+import {
+  decrementQuantity,
+  addToCart as fetchingCart,
+  removeFromCart as removeItem,
+} from "@/lib/cartFetch"
+import { Cart } from "@/types/types"
 import { User } from "@/types/db"
 
 const useCart = create<Cart>((set) => ({
@@ -19,10 +23,24 @@ const useCart = create<Cart>((set) => ({
       set((state) => ({ cartItems: [...state.cartItems, product] }))
     }
   },
-  removeFromCart: (itemId) =>
-    set((state) => ({
-      cartItems: state.cartItems.filter((item) => item.id !== itemId),
-    })),
+  clearCart: () => set({ cartItems: [] }),
+  removeFromCart: async (item) => {
+    const userCookie = Cookie.get("user")
+    if (userCookie) {
+      const { id } = JSON.parse(userCookie) as User
+      if (item.quantity === 1) {
+        const product = await removeItem(item.productId, id)
+        set((state) => ({
+          cartItems: state.cartItems.filter(
+            (i) => i.productId !== item.productId
+          ),
+        }))
+      } else {
+        const product = await decrementQuantity(item.productId, id)
+        set((state) => ({ cartItems: [...state.cartItems, product] }))
+      }
+    }
+  },
 }))
 
 export default useCart

@@ -2,7 +2,7 @@
 import { useContext, useEffect } from "react"
 import useSWR from "swr"
 import { AiOutlineShoppingCart } from "react-icons/ai"
-import { fetchCartProducts } from "@/app/api/cart/categories"
+import { fetchCartByUserId } from "@/lib/cartFetch"
 import { AuthContext } from "@/contexts/AuthContext"
 import useCart from "@/hooks/useCart"
 import Drawer from "./Drawer"
@@ -10,12 +10,12 @@ import CartIcon from "./Icons/CartIcon"
 import CartItem from "./CartItem"
 
 const Cart = () => {
-  const { addToCart, removeFromCart, cartItems, setCartItems } = useCart()
+  const { cartItems, setCartItems } = useCart()
   const { userData } = useContext(AuthContext)
 
   const { data, error, isLoading } = useSWR(
     userData ? `${userData.id}` : null,
-    fetchCartProducts
+    fetchCartByUserId
   )
 
   useEffect(() => {

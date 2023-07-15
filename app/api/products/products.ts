@@ -1,8 +1,4 @@
-import { Products } from "@/types/db"
-import { PrismaClient } from "@prisma/client"
-
-const prisma = new PrismaClient()
-
+import prisma from "@/lib/prisma"
 export const getProducts = async () => {
   try {
     const products = await prisma.product.findMany({

@@ -12,7 +12,7 @@ export const fetchUserData = async (id: string): Promise<User | null> => {
   }
 }
 
-export const getUser = async (
+export const fetchUserByEmailAndPassword = async (
   email: string,
   password: string
 ): Promise<User | null> => {
