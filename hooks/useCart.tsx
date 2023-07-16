@@ -15,12 +15,12 @@ const useCart = create<Cart>((set) => ({
     set((state) => ({
       cartItems: items,
     })),
-  addToCart: async (item) => {
+  addToCart: async (productId) => {
     const userCookie = Cookie.get("user")
     if (userCookie) {
       const { id } = JSON.parse(userCookie) as User
-      const product = await fetchingCart(item.id, id)
-      set((state) => ({ cartItems: [...state.cartItems, product] }))
+      const product = await fetchingCart(productId, id)
+      set((state) => ({ cartItems: product }))
     }
   },
   clearCart: () => set({ cartItems: [] }),
@@ -30,11 +30,7 @@ const useCart = create<Cart>((set) => ({
       const { id } = JSON.parse(userCookie) as User
       if (item.quantity === 1) {
         const product = await removeItem(item.productId, id)
-        set((state) => ({
-          cartItems: state.cartItems.filter(
-            (i) => i.productId !== item.productId
-          ),
-        }))
+        set((state) => ({ cartItems: product }))
       } else {
         const product = await decrementQuantity(item.productId, id)
         set((state) => ({ cartItems: [...state.cartItems, product] }))

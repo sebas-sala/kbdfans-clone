@@ -2,7 +2,8 @@
 import { createContext, useState, useEffect } from "react"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import Cookie from "js-cookie"
-import type { User } from "@/types/db"
+import useCart from "@/hooks/useCart"
+import { type User } from "@/types/db"
 
 type AuthContextType = {
   userData: User | null
@@ -18,12 +19,14 @@ export const AuthContext = createContext<AuthContextType>({
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [userData, setUserData] = useState<User | null>(null)
+  const { clearCart } = useCart()
 
   const logout = async () => {
     const supabase = createClientComponentClient()
     await supabase.auth.signOut()
     Cookie.remove("user")
     setUserData(null)
+    clearCart()
   }
 
   useEffect(() => {

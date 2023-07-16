@@ -1,6 +1,15 @@
 import { NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
 
+async function findCartByUserIdAndProductId(userId: string, productId: number) {
+  return prisma.cart.findFirst({
+    where: {
+      userId,
+      productId,
+    },
+  })
+}
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
@@ -40,7 +49,7 @@ export async function GET(request: Request) {
       },
     })
 
-    if (!cartItems) {
+    if (!cartItems || cartItems.length === 0) {
       return NextResponse.json({ message: "Cart not found" }, { status: 404 })
     }
 
@@ -78,6 +87,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "User not found" }, { status: 404 })
     }
 
+    let updatedCartItem
+
     const existingCartItem = await prisma.cart.findFirst({
       where: {
         userId,
@@ -86,7 +97,7 @@ export async function POST(request: Request) {
     })
 
     if (existingCartItem) {
-      const updatedCartItem = await prisma.cart.update({
+      updatedCartItem = await prisma.cart.update({
         where: {
           id: existingCartItem.id,
         },
@@ -94,18 +105,17 @@ export async function POST(request: Request) {
           quantity: existingCartItem.quantity + 1,
         },
       })
-      return NextResponse.json(updatedCartItem)
+    } else {
+      updatedCartItem = await prisma.cart.create({
+        data: {
+          userId,
+          productId,
+          quantity: 1,
+        },
+      })
     }
 
-    const newCartItem = await prisma.cart.create({
-      data: {
-        userId: String(userId),
-        productId,
-        quantity: 1,
-      },
-    })
-
-    return NextResponse.json(newCartItem)
+    return NextResponse.json(updatedCartItem)
   } finally {
     await prisma.$disconnect()
   }
@@ -141,12 +151,10 @@ export async function PUT(request: Request) {
       return NextResponse.json({ message: "User not found" }, { status: 404 })
     }
 
-    const findCart = await prisma.cart.findFirst({
-      where: {
-        userId,
-        productId: +productId,
-      },
-    })
+    const findCart = await findCartByUserIdAndProductId(
+      userId,
+      parseInt(productId, 10)
+    )
 
     if (!findCart) {
       return NextResponse.json(
@@ -200,12 +208,10 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ message: "User not found" }, { status: 404 })
     }
 
-    const findCart = await prisma.cart.findFirst({
-      where: {
-        userId,
-        productId: +productId,
-      },
-    })
+    const findCart = await findCartByUserIdAndProductId(
+      userId,
+      parseInt(productId, 10)
+    )
 
     if (!findCart) {
       return NextResponse.json(
@@ -219,6 +225,7 @@ export async function DELETE(request: Request) {
         id: findCart.id,
       },
     })
+
     return NextResponse.json(deletedCartItem)
   } finally {
     await prisma.$disconnect()

@@ -1,5 +1,5 @@
 "use client"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import useSWR from "swr"
 import { AiOutlineShoppingCart } from "react-icons/ai"
 import { fetchCartByUserId } from "@/lib/cartFetch"
@@ -12,6 +12,7 @@ import CartItem from "./CartItem"
 const Cart = () => {
   const { cartItems, setCartItems } = useCart()
   const { userData } = useContext(AuthContext)
+  const [isCartLoaded, setIsCartLoaded] = useState(false)
 
   const { data, error, isLoading } = useSWR(
     userData ? `${userData.id}` : null,
@@ -21,7 +22,7 @@ const Cart = () => {
   useEffect(() => {
     if (data) {
       setCartItems(data)
-      console.log(cartItems)
+      setIsCartLoaded(true)
     }
   }, [data, setCartItems, cartItems])
 

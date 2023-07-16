@@ -5,10 +5,10 @@ import { getProductsByCategoryId } from "../api/products/products"
 import Spinner from "@/components/Spinner"
 
 const Categories = async () => {
-  const keyboardsData = getProductsByCategoryId(1, 5)
-  const switchesData = getProductsByCategoryId(10, 5)
-  const keycapsData = getProductsByCategoryId(9, 5)
-  const PCBData = getProductsByCategoryId(12, 10)
+  const keyboardsData = getProductsByCategoryId(1, 4)
+  const switchesData = getProductsByCategoryId(10, 4)
+  const keycapsData = getProductsByCategoryId(9, 4)
+  const PCBData = getProductsByCategoryId(12, 8)
 
   return (
     <Container>
