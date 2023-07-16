@@ -7,7 +7,7 @@ const Product = ({ id, images, name, price }: Products) => {
 
   return (
     <Link
-      className='flex max-h-[450px] max-w-full rounded-2xl flex-col items-center gap-3 hover:shadow-lg transition'
+      className='flex w-full sm:max-h-[450px] px-10 sm:px-0 sm:max-w-full shrink-0 sm:shrink snap-center rounded-2xl flex-col items-center gap-3 hover:shadow-lg transition'
       href={`collections/all/${id}`}
     >
       <Image

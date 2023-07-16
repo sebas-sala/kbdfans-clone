@@ -27,7 +27,7 @@ const ProductsFetchingSection = async ({
           </Link>
         )}
       </div>
-      <div className='mt-9 pb-7 flex place-content-center place-items-center justify-items-center overflow-x-auto scrollbar-hide sm:grid sm:grid-cols-2 md:grid-cols-2 md:gap-14 md:overflow-x-hidden lg:grid-cols-4'>
+      <div className='flex snap-mandatory snap-x mt-9 pb-7  overflow-x-auto scrollbar-hide sm:grid sm:grid-cols-2 sm:gap-10 md:gap-14 md:overflow-x-hidden lg:grid-cols-4'>
         {products?.map(({ images, id, name, price, stock }) => (
           <Product
             images={images}

@@ -29,13 +29,13 @@ const Feed: React.FC<Props> = ({ src, description }) => {
       fill
       alt={description}
       sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-      className='h-full w-full object-cover'
+      className='h-full w-full object-cover shrink-0'
     />
   )
 
   return (
     <div
-      className='relative h-full w-full cursor-pointer'
+      className='relative h-full w-full cursor-pointer snap-center lg:snap-none shrink-0 lg:shrink'
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onOpen}
