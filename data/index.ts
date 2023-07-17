@@ -41,19 +41,19 @@ export const instaPostsImages: instaPostsImagesType[] = [
 
 export const shopData: navDataType[] = [
   {
-    href: "collection/keyboard",
+    href: "keyboard",
     title: "Keyboard",
   },
   {
-    href: "collection/keycaps",
+    href: "keycaps",
     title: "Keycaps",
   },
   {
-    href: "collection/switches",
+    href: "switches",
     title: "Switches",
   },
   {
-    href: "collection/case",
+    href: "case",
     title: "Case",
   },
   {
@@ -68,31 +68,31 @@ export const shopData: navDataType[] = [
 
 export const rdyToUseData: navDataType[] = [
   {
-    href: "collection/20-keyboard",
+    href: "20%",
     title: "20% Keyboard",
   },
   {
-    href: "collection/60-keyboard",
+    href: "60%",
     title: "60% Keyboard",
   },
   {
-    href: "collection/65-keyboard",
+    href: "65%",
     title: "65% Keyboard",
   },
   {
-    href: "collection/75-keyboard",
+    href: "75%",
     title: "75% Keyboard",
   },
   {
-    href: "collection/80-keyboard",
+    href: "80%",
     title: "80% Keyboard",
   },
   {
-    href: "collection/95-keyboard",
+    href: "95%",
     title: "95% Keyboard",
   },
   {
-    href: "collection/100-keyboard",
+    href: "100%",
     title: "100% Keyboard",
   },
 ]

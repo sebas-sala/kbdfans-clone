@@ -15,7 +15,7 @@ const Categories = async () => {
       <Suspense fallback={<Spinner />}>
         <ProductsFetchingSection
           title='Fully Assembled Keyboard'
-          href='collection/keyboard'
+          href='collections/keyboard'
           linkText='Shop'
           promise={keyboardsData}
         />
@@ -24,7 +24,7 @@ const Categories = async () => {
         <ProductsFetchingSection
           title='Keyboard Switches'
           linkText='Shop'
-          href='collection/switches'
+          href='collections/switches'
           promise={switchesData}
         />
       </Suspense>
@@ -32,14 +32,14 @@ const Categories = async () => {
         <ProductsFetchingSection
           title='Keyboard Keycaps'
           linkText='See more'
-          href='collection/keycaps'
+          href='collections/keycaps'
           promise={keycapsData}
         />
       </Suspense>
       <Suspense fallback={<Spinner />}>
         <ProductsFetchingSection
           title='PCB'
-          href='collection/pcb'
+          href='collections/pcb'
           linkText='Shop'
           promise={PCBData}
         />

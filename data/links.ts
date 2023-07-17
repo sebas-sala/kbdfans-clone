@@ -15,7 +15,7 @@ export const navlinks: navLinksType[] = [
   },
   {
     text: "Ready To Use",
-    href: "/collections/ready-to-use",
+    href: "/collections",
     data: rdyToUseData,
   },
 ]

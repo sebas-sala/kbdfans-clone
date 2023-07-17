@@ -19,7 +19,7 @@ const ProductPage = async ({ params }: Props) => {
   const images = product.images
 
   return (
-    <main className='container mx-auto grid grid-cols-2 min-h-screen overflow-y-auto'>
+    <main className='container mx-auto grid md:grid-cols-2 min-h-screen overflow-y-auto gap-8'>
       <ProductImageSection images={images} alt={product.name} />
       <ProductInfo product={product} />
     </main>
