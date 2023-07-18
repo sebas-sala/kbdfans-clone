@@ -1,4 +1,5 @@
 import { Product } from "@/types/cart"
+import { CartProducts } from "@/types/cart"
 
 export const fetchCartByUserId = async (userId: string) => {
   const res = await fetch(`http://localhost:3000/api/cart?userId=${userId}`)
@@ -16,7 +17,10 @@ export const addToCart = async (product: Product, userId: number | string) => {
       userId,
     }),
   })
-  return await response.json()
+  if (!response.ok) {
+    throw new Error("Error adding to cart")
+  }
+  return response.json()
 }
 
 export const removeFromCart = async (
@@ -32,7 +36,7 @@ export const removeFromCart = async (
   if (!response.ok) {
     throw new Error("Error removing from cart")
   }
-  return await response.json()
+  return response.json()
 }
 
 export const decrementQuantity = async (
@@ -48,5 +52,5 @@ export const decrementQuantity = async (
   if (!response.ok) {
     throw new Error("Error decrementing quantity")
   }
-  return await response.json()
+  return response.json()
 }

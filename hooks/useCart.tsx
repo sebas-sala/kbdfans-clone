@@ -8,6 +8,8 @@ import {
 } from "@/lib/cartFetch"
 import { Cart } from "@/types/types"
 import { User } from "@/types/db"
+import toast from "react-hot-toast"
+import { CartProducts, Product } from "@/types/cart"
 
 const useCart = create<Cart>((set) => ({
   cartItems: [],
@@ -15,15 +17,34 @@ const useCart = create<Cart>((set) => ({
     set((state) => ({
       cartItems: items,
     })),
-  addToCart: async (product) => {
-    const userCookie = Cookie.get("user")
-    if (userCookie) {
-      const { id } = JSON.parse(userCookie) as User
-      const response = await fetchingCart(product, id)
-      if (response.ok) {
-        set((state) => ({ cartItems: product }))
+  addToCart: (product) => {
+    return new Promise<void>((resolve, reject) => {
+      const userCookie = Cookie.get("user")
+      if (!userCookie) {
+        toast.error("Please login to continue shopping", {
+          duration: 1500,
+        })
+        reject(new Error("User not logged in"))
+        return
       }
-    }
+
+      const { id } = JSON.parse(userCookie) as User
+
+      toast
+        .promise(fetchingCart(product, id), {
+          loading: "Adding to cart...",
+          success: "Product added to cart",
+          error: "Something went wrong",
+        })
+        .then((data) => {
+          set((state) => ({ cartItems: data }))
+          resolve()
+        })
+        .catch((error) => {
+          console.error(error)
+          reject(error)
+        })
+    })
   },
   clearCart: () => set({ cartItems: [] }),
   removeFromCart: async (item) => {
@@ -31,11 +52,31 @@ const useCart = create<Cart>((set) => ({
     if (userCookie) {
       const { id } = JSON.parse(userCookie) as User
       if (item.quantity === 1) {
-        const product = await removeItem(item.productId, id)
-        set((state) => ({ cartItems: product }))
+        toast
+          .promise(removeItem(item.productId, id), {
+            loading: "Removing item from cart...",
+            success: "Item removed from cart",
+            error: "Something went wrong",
+          })
+          .then((data) => {
+            set((state) => ({ cartItems: data }))
+          })
+          .catch((error) => {
+            console.error(error)
+          })
       } else {
-        const product = await decrementQuantity(item.productId, id)
-        set((state) => ({ cartItems: [...state.cartItems, product] }))
+        toast
+          .promise(decrementQuantity(item.productId, id), {
+            loading: "Decreasing product quantity",
+            success: "Product quantity decreased",
+            error: "Something went wrong",
+          })
+          .then((data) => {
+            set((state) => ({ cartItems: data }))
+          })
+          .catch((error) => {
+            console.error(error)
+          })
       }
     }
   },

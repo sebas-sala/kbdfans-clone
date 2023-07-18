@@ -11,25 +11,27 @@ type Props = {
 
 const ProductInfo = ({ product }: Props) => {
   const { addToCart } = useCart()
-  const [loading, setLoading] = useState(false)
-  const handleClick = () => {
-    setLoading(true)
-    addToCart(product.id)
-    setLoading(false)
+  const [buttonDisabled, setButtonDisabled] = useState(false)
+  const handleClick = async () => {
+    setButtonDisabled(true)
+    try {
+      await addToCart(product)
+    } catch (error) {
+    } finally {
+      setButtonDisabled(false) // Habilitar el botón nuevamente
+    }
   }
-
-  useEffect(() => {
-    console.log(loading)
-  }, [loading])
 
   return (
     <section className='h-96 sticky top-0'>
       <p>{product.id}</p>
       <p>{product.name}</p>
       <p>{product.stock}</p>
-      <Button type='button' handleClick={handleClick}>
+      <Button type='button' handleClick={handleClick} disabled={buttonDisabled}>
         Add to Cart
-        {loading && <span className='ml-2 animate-spin'>Loading...</span>}
+        {buttonDisabled && (
+          <span className='ml-2 animate-spin'>Loading...</span>
+        )}
       </Button>
     </section>
   )
