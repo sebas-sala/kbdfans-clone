@@ -1,39 +1,18 @@
 "use client"
-import { useContext, useEffect, useState } from "react"
-import useSWR from "swr"
+import { useContext } from "react"
 import { AiOutlineShoppingCart } from "react-icons/ai"
-import { fetchCartByUserId } from "@/lib/cartFetch"
-import { AuthContext } from "@/contexts/AuthContext"
-import useCart from "@/hooks/useCart"
 import Drawer from "./Drawer"
 import CartIcon from "./Icons/CartIcon"
 import CartItem from "./CartItem"
+import { CartContext } from "@/contexts/CartContext"
 
 const Cart = () => {
-  const { cartItems, setCartItems } = useCart()
-  const { userData } = useContext(AuthContext)
-  const [isCartLoaded, setIsCartLoaded] = useState(false)
-
-  const { data, error, isLoading } = useSWR(
-    userData ? `${userData.id}` : null,
-    fetchCartByUserId
-  )
-
-  useEffect(() => {
-    if (data) {
-      setCartItems(data)
-      setIsCartLoaded(true)
-    }
-  }, [data, setCartItems, cartItems])
-
-  if (error) return <div>failed to load</div>
-
-  if (isLoading) return <p className='text-sm'>Loading...</p>
+  const { cartItems } = useContext(CartContext)
 
   return (
     <Drawer
       headerText='Cart'
-      size='full'
+      size='sm'
       placement='right'
       icon={<AiOutlineShoppingCart />}
       bodyStyles='flex flex-col gap-4 justify-center items-center'

@@ -3,6 +3,7 @@ import Providers from "../lib/Providers"
 import Footer from "./components/Footer"
 import Header from "./components/Header"
 import AuthProvider from "@/contexts/AuthContext"
+import CartProvider from "@/contexts/CartContext"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -21,11 +22,13 @@ export default function RootLayout({
     <html lang='en'>
       <body className={` ${inter.className} overflow-y-scroll relative`}>
         <AuthProvider>
-          <Providers>
-            <Header />
-            {children}
-            <Footer />
-          </Providers>
+          <CartProvider>
+            <Providers>
+              <Header />
+              {children}
+              <Footer />
+            </Providers>
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>

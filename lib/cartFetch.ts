@@ -1,3 +1,5 @@
+import { Product } from "@/types/cart"
+
 export const fetchCartByUserId = async (userId: string) => {
   const res = await fetch(`http://localhost:3000/api/cart?userId=${userId}`)
   if (!res.ok) {
@@ -6,12 +8,12 @@ export const fetchCartByUserId = async (userId: string) => {
   return await res.json()
 }
 
-export const addToCart = async (productId: number, userId: number | string) => {
+export const addToCart = async (product: Product, userId: number | string) => {
   const response = await fetch("http://localhost:3000/api/cart", {
     method: "POST",
     body: JSON.stringify({
-      productId,
-      userId: String(userId),
+      productId: product.id,
+      userId,
     }),
   })
   return await response.json()

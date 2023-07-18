@@ -1,15 +1,6 @@
 import { NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
 
-async function findCartByUserIdAndProductId(userId: string, productId: number) {
-  return prisma.cart.findFirst({
-    where: {
-      userId,
-      productId,
-    },
-  })
-}
-
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
@@ -230,4 +221,13 @@ export async function DELETE(request: Request) {
   } finally {
     await prisma.$disconnect()
   }
+}
+
+async function findCartByUserIdAndProductId(userId: string, productId: number) {
+  return prisma.cart.findFirst({
+    where: {
+      userId,
+      productId,
+    },
+  })
 }

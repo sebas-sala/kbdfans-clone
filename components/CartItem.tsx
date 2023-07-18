@@ -18,7 +18,7 @@ const CartItem = ({ product }: CartItemProps) => {
 
   const handleAddToQuantity = async () => {
     setLoading(true)
-    addToCart(product.productId)
+    addToCart(product.Product)
     setLoading(false)
   }
 
