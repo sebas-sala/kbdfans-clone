@@ -1,12 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Products } from "@/types/db"
+import { Product } from "@/types/db"
 import Button from "@/components/Button"
 import useCart from "@/hooks/useCart"
 
 type Props = {
-  product: Products
+  product: Product
 }
 
 const ProductInfo = ({ product }: Props) => {

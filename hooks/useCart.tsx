@@ -1,17 +1,16 @@
 "use client"
 import { create } from "zustand"
 import Cookie from "js-cookie"
+import toast from "react-hot-toast"
 import {
   decrementQuantity,
   addToCart as fetchingCart,
   removeFromCart as removeItem,
 } from "@/lib/cartFetch"
-import { Cart } from "@/types/types"
-import { User } from "@/types/db"
-import toast from "react-hot-toast"
-import { CartProducts, Product } from "@/types/cart"
+import { type CartHook } from "@/types/types"
+import { type User } from "@/types/db"
 
-const useCart = create<Cart>((set) => ({
+const useCart = create<CartHook>((set) => ({
   cartItems: [],
   setCartItems: (items) =>
     set((state) => ({

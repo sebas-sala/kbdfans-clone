@@ -1,25 +1,3 @@
-export type ProductImages = {
-  id: number
-  productId: number | string
-  url: string
-}
-
-export type Products = {
-  id: number
-  name: string
-  price: number
-  stock: number
-  quantity: number
-  images: ProductImages[]
-}
-
-export type Product = {
-  id: number
-  userId: striing
-  productId: number
-  quantity: number
-}
-
 export type Categories = {
   id: number
   name: string
@@ -33,5 +11,36 @@ export type User = {
   username: string
   password?: string
   email: string
-  cart: Products[]
+  cart: Cart[]
+}
+
+export type Cart = {
+  id: number
+  userId: string
+  User?: User
+  Product?: Product
+  quantity: number
+  productId: number
+}
+
+export type Product = {
+  id: number
+  name: string
+  price: number
+  stock: number
+  images: ProductImages[]
+}
+
+export type Category = {
+  id: number
+  name: string
+  _count?: {
+    products: number
+  }
+}
+export type ProductImages = {
+  id: number
+  url: string
+  product?: Product
+  productId: number
 }

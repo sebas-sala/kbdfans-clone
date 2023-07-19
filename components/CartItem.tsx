@@ -1,11 +1,11 @@
 import Image from "next/image"
-import { CartProducts } from "@/types/cart"
+import { type Cart } from "@/types/db"
 import Button from "./Button"
 import useCart from "@/hooks/useCart"
 import { useState } from "react"
 
 type CartItemProps = {
-  product: CartProducts
+  product: Cart
 }
 
 const CartItem = ({ product }: CartItemProps) => {
@@ -18,7 +18,7 @@ const CartItem = ({ product }: CartItemProps) => {
 
   const handleAddToQuantity = async () => {
     setLoading(true)
-    addToCart(product.Product)
+    addToCart(product)
     setLoading(false)
   }
 

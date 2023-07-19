@@ -3,11 +3,11 @@
 import { useState } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import Link from "next/link"
-import type { User } from "@/types/db"
 import { useRouter } from "next/navigation"
 import { createUser } from "@/lib/authFetch"
 import Button from "./Button"
 import Form from "./Form"
+import { type User } from "@/types/db"
 
 const SignupForm = () => {
   const [show, setShow] = useState(false)

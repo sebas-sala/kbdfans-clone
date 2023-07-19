@@ -1,4 +1,4 @@
-import { navDataType, instaPostsImagesType } from "@/types/types"
+import { type navDataType, type instaPostsImagesType } from "@/types/types"
 
 export const instaPostsImages: instaPostsImagesType[] = [
   {

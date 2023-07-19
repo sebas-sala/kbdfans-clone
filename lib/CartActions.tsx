@@ -1,5 +1,5 @@
 import prisma from "./prisma"
-import { Product } from "@/types/db"
+import { type Cart } from "@/types/db"
 
 export const findUserById = async (userId: string) => {
   return await prisma.user.findUnique({
@@ -41,7 +41,7 @@ export const getCartItems = async (userId: string) => {
 }
 
 export const updateItemQuantity = async (
-  cartItem: Product,
+  cartItem: Cart,
   decreased: boolean
 ) => {
   const action = decreased ? cartItem.quantity - 1 : cartItem.quantity + 1

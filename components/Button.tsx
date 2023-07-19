@@ -1,5 +1,3 @@
-import React from "react"
-
 type ButtonProps = {
   handleClick?: () => void
   children: React.ReactNode

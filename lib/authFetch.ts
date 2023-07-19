@@ -1,4 +1,4 @@
-import { User } from "@/types/db"
+import { type User } from "@/types/db"
 
 export const fetchUserData = async (id: string): Promise<User | null> => {
   try {

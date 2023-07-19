@@ -1,5 +1,4 @@
-import { Product } from "@/types/cart"
-import { CartProducts } from "@/types/cart"
+import { type Product } from "@/types/db"
 
 export const fetchCartByUserId = async (userId: string) => {
   const res = await fetch(`http://localhost:3000/api/cart?userId=${userId}`)

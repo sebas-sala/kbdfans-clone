@@ -1,5 +1,5 @@
 import { shopData, rdyToUseData } from "."
-import { navDataType } from "@/types/types"
+import { type navDataType } from "@/types/types"
 
 type navLinksType = {
   text: string
