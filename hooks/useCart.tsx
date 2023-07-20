@@ -20,6 +20,7 @@ const useCart = create<CartHook>((set) => ({
     return new Promise<void>((resolve, reject) => {
       const userCookie = Cookie.get("user")
       if (!userCookie) {
+        console.log(userCookie)
         toast.error("Please login to continue shopping", {
           duration: 1500,
         })

@@ -12,7 +12,7 @@ export default function Header() {
   const isSticky = useScrollFixed(headerRef)
   return (
     <>
-      <header className='relative bg-black' ref={headerRef}>
+      <header className='inset-0 relative bg-black w-full' ref={headerRef}>
         <Container>
           <div className='flex items-center justify-between py-6'>
             <Image

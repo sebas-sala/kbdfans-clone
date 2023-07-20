@@ -1,14 +1,20 @@
+"use client"
 import Image from "next/image"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { type Product } from "@/types/db"
 
 const Product = ({ id, images, name, price }: Product) => {
+  const router = useRouter()
   const firstImage = images[0].url
 
+  const handleClick = () => {
+    router.push(`/collections/all/${id}`)
+  }
+
   return (
-    <Link
-      className='flex w-full sm:max-h-[450px] px-10 sm:px-0 sm:max-w-full shrink-0 sm:shrink snap-center rounded-2xl flex-col items-center gap-3 hover:shadow-lg transition'
-      href={`collections/all/${id}`}
+    <div
+      className='cursor-pointer flex w-full max-w-max  px-10 sm:px-0 shrink-0 sm:shrink snap-center rounded-2xl flex-col items-center gap-3 hover:shadow-lg transition'
+      onClick={() => handleClick()}
     >
       <Image
         src={firstImage}
@@ -21,7 +27,7 @@ const Product = ({ id, images, name, price }: Product) => {
         <p className='max-w-full truncate'>{name}</p>
         <p className='text-center'>${price}</p>
       </div>
-    </Link>
+    </div>
   )
 }
 

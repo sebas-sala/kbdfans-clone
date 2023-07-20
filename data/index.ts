@@ -68,31 +68,31 @@ export const shopData: navDataType[] = [
 
 export const rdyToUseData: navDataType[] = [
   {
-    href: "20%",
+    href: "20-keyboards",
     title: "20% Keyboard",
   },
   {
-    href: "60%",
+    href: "60-keyboards",
     title: "60% Keyboard",
   },
   {
-    href: "65%",
+    href: "65-keyboards",
     title: "65% Keyboard",
   },
   {
-    href: "75%",
+    href: "75-keyboards",
     title: "75% Keyboard",
   },
   {
-    href: "80%",
+    href: "80-keyboards",
     title: "80% Keyboard",
   },
   {
-    href: "95%",
+    href: "95-keyboards",
     title: "95% Keyboard",
   },
   {
-    href: "100%",
+    href: "100-keyboards",
     title: "100% Keyboard",
   },
 ]

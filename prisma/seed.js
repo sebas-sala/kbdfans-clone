@@ -567,6 +567,9 @@ const images = [
 
 const createData = async () => {
   try {
+    const createCategories = await prisma.category.createMany({
+      data: categories,
+    })
     // Create PCB
     const createdPCB = await Promise.all(
       pcb.map((elem) => prisma.product.create({ data: elem }))

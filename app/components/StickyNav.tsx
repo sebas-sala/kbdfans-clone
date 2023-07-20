@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { navlinks } from "@/data/links"
-import IconNav from "./IconNav"
 import Dropdown from "@/components/Dropdown"
+import IconNav from "./IconNav"
+import LinkRouter from "./LinkRouter"
 
 type StickyNavProps = {
   isSticky: boolean
@@ -31,13 +32,7 @@ const StickyNav = ({ isSticky }: StickyNavProps) => {
             return (
               <Dropdown trigger={trigger} key={index}>
                 {data?.map((link, index) => (
-                  <Link
-                    href={link.href}
-                    key={index}
-                    className='truncate py-1 text-gray-300 text-xs transition hover:text-white sm:text-sm md:text-base'
-                  >
-                    {link.title}
-                  </Link>
+                  <LinkRouter key={index} href={link.href} title={link.title} />
                 ))}
               </Dropdown>
             )

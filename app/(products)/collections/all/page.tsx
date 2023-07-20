@@ -1,17 +1,16 @@
 import { getProductsByCategoriesId } from "@/app/api/products/products"
-import { getCategories } from "@/lib/categoriesFetch"
+import { getCategories } from "@/lib/productActions"
 import FilteredProducts from "@/components/FilteredProducts"
 import Filters from "@/components/Filters"
 
 type AllProps = {
-  searchParams: {
-    categories: number[]
-  }
+  searchParams: Record<string, string | string[]>
 }
 
 export default async function AllPage({ searchParams }: AllProps) {
+  console.log(searchParams)
   const [products, categories] = await Promise.all([
-    getProductsByCategoriesId(searchParams.categories),
+    getProductsByCategoriesId(searchParams),
     getCategories(),
   ])
   return (

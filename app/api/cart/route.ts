@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
+import { findUserById } from "@/lib/actions"
 import {
   addItemToCart,
   deleteItemFromCart,
   findCartItemByUserIdAndProductId,
-  findUserById,
   getCartItems,
   updateItemQuantity,
 } from "@/lib/CartActions"

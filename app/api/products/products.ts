@@ -10,7 +10,7 @@ export const getProducts = async () => {
     return products
   } catch (error) {
     console.error(error)
-    return []
+    throw new Error("Error getting products")
   } finally {
     await prisma.$disconnect()
   }
@@ -38,25 +38,38 @@ export const getProductsByCategory = async (category: string, take: number) => {
     return products
   } catch (error) {
     console.error(error)
-    return []
+    throw new Error("Error getting products")
   } finally {
     await prisma.$disconnect()
   }
 }
 
-export const getProductsByCategoriesId = async (categoriesIds: number[]) => {
+export const getProductsByCategoriesId = async (
+  categoriesIds: Record<string, string | string[]>
+) => {
   try {
-    return await prisma.product.findMany({
-      where: {
+    if (!categoriesIds || Object.keys(categoriesIds).length === 0) {
+      return await getProducts()
+    }
+
+    const conditions = Object.values(categoriesIds).map((categoryId) => {
+      const categoryIdsArray = Array.isArray(categoryId)
+        ? categoryId.map(Number)
+        : [Number(categoryId)]
+      return {
         categories: {
           some: {
-            category: {
-              id: {
-                in: categoriesIds,
-              },
+            categoryId: {
+              in: categoryIdsArray,
             },
           },
         },
+      }
+    })
+
+    return await prisma.product.findMany({
+      where: {
+        OR: conditions,
       },
       include: {
         categories: true,
@@ -66,7 +79,7 @@ export const getProductsByCategoriesId = async (categoriesIds: number[]) => {
     })
   } catch (error) {
     console.error(error)
-    return []
+    throw new Error("Error getting products")
   } finally {
     await prisma.$disconnect()
   }
@@ -95,7 +108,7 @@ export const getProductsByCategoryId = async (
     return products
   } catch (error) {
     console.error(error)
-    return []
+    throw new Error("Error getting products")
   } finally {
     await prisma.$disconnect()
   }
@@ -115,7 +128,7 @@ export const getProductById = async (productId: number | string) => {
     return product
   } catch (e) {
     console.error(e)
-    return null
+    throw new Error("Error getting products")
   } finally {
     await prisma.$disconnect()
   }
