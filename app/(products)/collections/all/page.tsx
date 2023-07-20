@@ -1,21 +1,28 @@
-import { Suspense } from "react"
-import Container from "@/components/Container"
-import { getProducts } from "@/app/api/products/products"
-import FilterSection from "./components/FilterSection"
-import ProductsFetchingSection from "@/components/ProductsFetchingSection"
+import { getProductsByCategoriesId } from "@/app/api/products/products"
+import { getCategories } from "@/lib/categoriesFetch"
+import FilteredProducts from "@/components/FilteredProducts"
+import Filters from "@/components/Filters"
 
-export default function AllPage() {
-  const products = getProducts()
+type AllProps = {
+  searchParams: {
+    categories: number[]
+  }
+}
 
+export default async function AllPage({ searchParams }: AllProps) {
+  const [products, categories] = await Promise.all([
+    getProductsByCategoriesId(searchParams.categories),
+    getCategories(),
+  ])
   return (
     <>
       <h2 className='mb-20 text-center text-6xl font-bold'>Products</h2>
-      <FilterSection />
-      <Container>
-        <Suspense fallback={<div>Loading...</div>}>
-          <ProductsFetchingSection promise={products} />
-        </Suspense>
-      </Container>
+      <section className='mx-auto container'>
+        <Filters categories={categories} />
+        <div className='flex w-full justify-between gap-20'>
+          <FilteredProducts products={products} />
+        </div>
+      </section>
     </>
   )
 }

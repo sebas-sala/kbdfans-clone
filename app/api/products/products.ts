@@ -44,6 +44,34 @@ export const getProductsByCategory = async (category: string, take: number) => {
   }
 }
 
+export const getProductsByCategoriesId = async (categoriesIds: number[]) => {
+  try {
+    return await prisma.product.findMany({
+      where: {
+        categories: {
+          some: {
+            category: {
+              id: {
+                in: categoriesIds,
+              },
+            },
+          },
+        },
+      },
+      include: {
+        categories: true,
+        images: true,
+      },
+      take: 10,
+    })
+  } catch (error) {
+    console.error(error)
+    return []
+  } finally {
+    await prisma.$disconnect()
+  }
+}
+
 export const getProductsByCategoryId = async (
   categoryId: number,
   take: number

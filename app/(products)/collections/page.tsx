@@ -13,7 +13,7 @@ const Collections = async () => {
             key={category.id}
             className='w-full md:w-1/2 lg:w-3/12 p-2 shadow-md'
           >
-            <Link href={`/collections/${category.name}`}>
+            <Link href={`collections/${category.name}`}>
               {category.productImage && (
                 <Image
                   src={category.productImage}
