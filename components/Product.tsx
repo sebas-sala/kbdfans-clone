@@ -1,8 +1,8 @@
 import Image from "next/image"
-import { Products } from "@/types/db"
 import Link from "next/link"
+import { type Product } from "@/types/db"
 
-const Product = ({ id, images, name, price }: Products) => {
+const Product = ({ id, images, name, price }: Product) => {
   const firstImage = images[0].url
 
   return (

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { z } from "zod"
 import prisma from "@/lib/prisma"
+import { createUser, findUserByEmail } from "@/lib/actions"
 
 const registerUserSchema = z.object({
   email: z.string().email("Invalid email"),
@@ -11,39 +12,28 @@ const registerUserSchema = z.object({
 
 const supabase = createClientComponentClient()
 
-export async function GET() {
-  const users = await prisma.user.findMany()
-  return NextResponse.json(users)
-}
-
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   try {
     const requestData = await req.json()
-    console.log(requestData)
     const { email, username, password } = registerUserSchema.parse(requestData)
-    console.log(email)
-    const findUser = await prisma.user.findUnique({
-      where: { email },
-    })
-
-    console.log(findUser)
+    const findUser = await findUserByEmail(email)
+    if (findUser) {
+      return NextResponse.json(
+        { error: "User already exists" },
+        { status: 400 }
+      )
+    }
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
     })
-    console.log(data)
-    if (error) {
+
+    if (error || !data.user) {
       console.error(error)
       return NextResponse.json({ error: "Error signing up" }, { status: 500 })
     }
 
-    const newUser = await prisma.user.create({
-      data: {
-        id: data.user?.id,
-        email,
-        username: username,
-      },
-    })
+    const newUser = await createUser(data.user.id, email, username)
 
     return NextResponse.json({
       user: newUser,

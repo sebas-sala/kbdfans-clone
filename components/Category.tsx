@@ -1,6 +1,6 @@
-import { CategoryProps } from "@/types/types"
 import Image from "next/image"
 import PrimaryLink from "./PrimaryLink"
+import { type CategoryProps } from "@/types/types"
 
 const Category = ({ text, img }: CategoryProps) => {
   return (

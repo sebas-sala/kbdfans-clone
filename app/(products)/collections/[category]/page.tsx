@@ -1,7 +1,7 @@
+import { Suspense } from "react"
+import { getProductsByCategory } from "@/app/api/products/products"
 import ProductsFetchingSection from "@/components/ProductsFetchingSection"
 import Container from "@/components/Container"
-import React, { Suspense } from "react"
-import { getProductsByCategory } from "@/app/api/products/products"
 
 type Props = {
   params: {

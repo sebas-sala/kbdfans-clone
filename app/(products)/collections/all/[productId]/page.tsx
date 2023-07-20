@@ -1,7 +1,7 @@
-import { Products } from "@/types/db"
+import { getProductById } from "@/app/api/products/products"
 import ProductImageSection from "./components/ProductImageSection"
 import ProductInfo from "./components/ProductInfo"
-import { getProductById } from "@/app/api/products/products"
+import { Product } from "@/types/db"
 
 type Props = {
   params: {
@@ -10,7 +10,7 @@ type Props = {
 }
 
 const ProductPage = async ({ params }: Props) => {
-  const product: Products | null = await getProductById(params.productId)
+  const product: Product | null = await getProductById(params.productId)
 
   if (!product) {
     return <div>Product not found...</div>

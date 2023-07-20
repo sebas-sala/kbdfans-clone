@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
-import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
+import { AnimatePresence, motion } from "framer-motion"
 import { ProductImages } from "@/types/db"
 
 type Props = {

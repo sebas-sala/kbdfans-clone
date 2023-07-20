@@ -17,10 +17,13 @@ export type User = {
 export type Cart = {
   id: number
   userId: string
-  User?: User
-  Product?: Product
   quantity: number
   productId: number
+}
+
+export type CartWithProducts = Cart & {
+  User: User
+  Product: Product
 }
 
 export type Product = {

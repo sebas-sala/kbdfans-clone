@@ -1,7 +1,7 @@
 import { Suspense } from "react"
+import { getProductsByCategoryId } from "../api/products/products"
 import Container from "@/components/Container"
 import ProductsFetchingSection from "@/components/ProductsFetchingSection"
-import { getProductsByCategoryId } from "../api/products/products"
 import Spinner from "@/components/Spinner"
 
 const Categories = async () => {

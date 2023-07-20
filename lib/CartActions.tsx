@@ -1,14 +1,6 @@
 import prisma from "./prisma"
 import { type Cart } from "@/types/db"
 
-export const findUserById = async (userId: string) => {
-  return await prisma.user.findUnique({
-    where: {
-      id: userId,
-    },
-  })
-}
-
 export const findCartItemByUserIdAndProductId = async (
   userId: string,
   productId: number

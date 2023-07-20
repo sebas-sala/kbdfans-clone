@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { navlinks } from "@/data/links"
 import IconNav from "./IconNav"
-import Container from "@/components/Container"
 import Dropdown from "@/components/Dropdown"
 
 type StickyNavProps = {

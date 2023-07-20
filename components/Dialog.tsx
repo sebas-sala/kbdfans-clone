@@ -13,7 +13,7 @@ type Props = {
   trigger: React.ReactNode
 }
 
-export const Dialog: React.FC<Props> = ({ children, title, trigger }) => {
+const Dialog: React.FC<Props> = ({ children, title, trigger }) => {
   const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
@@ -31,3 +31,5 @@ export const Dialog: React.FC<Props> = ({ children, title, trigger }) => {
     </>
   )
 }
+
+export default Dialog

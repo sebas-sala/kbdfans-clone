@@ -1,6 +1,6 @@
 import { instaPostsImages } from "@/data"
 import { type Products } from "./db"
-import { type Cart } from "./db"
+import { type CartWithProducts } from "./db"
 
 export type instaPostsImagesType = {
   src: string
@@ -35,7 +35,7 @@ export type navDataType = {
 }
 
 export interface CartHook {
-  cartItems: Cart[]
+  cartItems: CartWithProducts[]
   setCartItems: (items: Cart[]) => void
   addToCart: (product: Product) => void
   removeFromCart: (item: Product) => void

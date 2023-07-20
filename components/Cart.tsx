@@ -7,7 +7,8 @@ import CartItem from "./CartItem"
 import { CartContext } from "@/contexts/CartContext"
 
 const Cart = () => {
-  const { cartItems } = useContext(CartContext)
+  const cartContext = useContext(CartContext)
+  const cartItems = cartContext ? cartContext.cartItems : []
 
   return (
     <Drawer

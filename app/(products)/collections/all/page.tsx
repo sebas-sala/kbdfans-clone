@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 import Container from "@/components/Container"
-import FilterSection from "./components/FilterSection"
 import { getProducts } from "@/app/api/products/products"
+import FilterSection from "./components/FilterSection"
 import ProductsFetchingSection from "@/components/ProductsFetchingSection"
 
 export default function AllPage() {

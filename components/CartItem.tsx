@@ -1,11 +1,10 @@
-import Image from "next/image"
-import { type Cart } from "@/types/db"
-import Button from "./Button"
-import useCart from "@/hooks/useCart"
 import { useState } from "react"
+import Image from "next/image"
+import useCart from "@/hooks/useCart"
+import { type CartWithProducts } from "@/types/db"
 
 type CartItemProps = {
-  product: Cart
+  product: CartWithProducts
 }
 
 const CartItem = ({ product }: CartItemProps) => {

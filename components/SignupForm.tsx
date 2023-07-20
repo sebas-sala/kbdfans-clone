@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { useForm, SubmitHandler } from "react-hook-form"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
+import { useForm, SubmitHandler } from "react-hook-form"
 import { createUser } from "@/lib/authFetch"
 import Button from "./Button"
 import Form from "./Form"

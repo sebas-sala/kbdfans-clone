@@ -1,5 +1,3 @@
-import React from "react"
-
 type FormProps = {
   children: React.ReactNode
   handleSubmit: (e: React.BaseSyntheticEvent<object, any, any>) => Promise<void>

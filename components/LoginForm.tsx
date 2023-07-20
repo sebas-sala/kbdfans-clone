@@ -1,14 +1,14 @@
 "use client"
 import { useState, useContext } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
-import Link from "next/link"
-import type { User } from "@/types/db"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
+import Cookies from "js-cookie"
 import { fetchUserByEmailAndPassword } from "@/lib/authFetch"
 import { AuthContext } from "@/contexts/AuthContext"
 import Button from "./Button"
 import Form from "./Form"
-import Cookies from "js-cookie"
+import { type User } from "@/types/db"
 
 const LoginForm = () => {
   const [show, setShow] = useState(false)

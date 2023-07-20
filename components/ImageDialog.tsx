@@ -6,7 +6,7 @@ import {
   ModalHeader,
   ModalBody,
 } from "@chakra-ui/react"
-import { Sizes } from "@/types/sizes"
+import { type Sizes } from "@/types/sizes"
 
 type Props = {
   children: React.ReactNode

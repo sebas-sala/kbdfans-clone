@@ -1,5 +1,5 @@
-import { navDataType } from "@/types/types"
 import Link from "next/link"
+import { type navDataType } from "@/types/types"
 
 const PrimaryLink = ({ title, href }: navDataType) => {
   return (

@@ -2,9 +2,9 @@
 import { useState } from "react"
 import useSWR from "swr"
 import { MenuItem, Checkbox } from "@chakra-ui/react"
+import { fetchCategories } from "@/lib/categoriesFetch"
 import Container from "@/components/Container"
 import Menu from "@/components/Menu"
-import { fetchCategories } from "@/lib/categoriesFetch"
 import { Categories } from "@/types/db"
 
 export default async function FilterSection() {

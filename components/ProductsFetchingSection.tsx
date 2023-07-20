@@ -1,12 +1,12 @@
 import Link from "next/link"
 import Product from "./Product"
-import { Products } from "@/types/db"
+import { type Product as ProductType } from "@/types/db"
 
 type Props = {
   title?: string
   linkText?: string
   href?: string
-  promise: Promise<Products[]>
+  promise: Promise<ProductType[]>
 }
 
 const ProductsFetchingSection = async ({

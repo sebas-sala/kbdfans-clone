@@ -1,7 +1,7 @@
 import React from "react"
-import { getAllCategoriesWithProductImage } from "@/app/api/products/products"
-import Image from "next/image"
 import Link from "next/link"
+import Image from "next/image"
+import { getAllCategoriesWithProductImage } from "@/app/api/products/products"
 
 const Collections = async () => {
   const categories = await getAllCategoriesWithProductImage()
