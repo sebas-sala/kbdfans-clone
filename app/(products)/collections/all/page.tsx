@@ -1,4 +1,4 @@
-import { getProductsByCategoriesId } from "@/app/api/products/products"
+import { getProductsByCategoriesId } from "@/lib/productActions"
 import { getCategories } from "@/lib/productActions"
 import FilteredProducts from "@/components/FilteredProducts"
 import Filters from "@/components/Filters"

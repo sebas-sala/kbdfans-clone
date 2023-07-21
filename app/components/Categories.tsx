@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { getProductsByCategoryId } from "../api/products/products"
+import { getProductsByCategoryId } from "@/lib/productActions"
 import Container from "@/components/Container"
 import ProductsFetchingSection from "@/components/ProductsFetchingSection"
 import Spinner from "@/components/Spinner"

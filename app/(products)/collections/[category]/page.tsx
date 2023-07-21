@@ -1,4 +1,4 @@
-import { getProductsByCategory } from "@/app/api/products/products"
+import { getProductsByCategory } from "@/lib/productActions"
 import Product from "@/components/Product"
 
 type Props = {
