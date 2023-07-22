@@ -37,6 +37,7 @@ const useCart = create<CartHook>((set) => ({
           error: "Something went wrong",
         })
         .then((data) => {
+          console.log(data)
           set((state) => ({ cartItems: data }))
           resolve()
         })
@@ -51,7 +52,7 @@ const useCart = create<CartHook>((set) => ({
     const userCookie = Cookie.get("user")
     if (userCookie) {
       const { id } = JSON.parse(userCookie) as User
-      if (item.quantity === 1) {
+      if (item.quantity <= 1) {
         toast
           .promise(removeItem(item.productId, id), {
             loading: "Removing item from cart...",
@@ -72,6 +73,7 @@ const useCart = create<CartHook>((set) => ({
             error: "Something went wrong",
           })
           .then((data) => {
+            console.log(data)
             set((state) => ({ cartItems: data }))
           })
           .catch((error) => {

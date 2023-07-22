@@ -108,7 +108,7 @@ export async function PUT(request: Request) {
     }
 
     const findCart = await findCartItemByUserIdAndProductId(userId, +productId)
-
+    console.log(findCart)
     if (!findCart) {
       return NextResponse.json(
         { message: "Cart item not found" },
@@ -118,8 +118,8 @@ export async function PUT(request: Request) {
 
     await updateItemQuantity(findCart, true)
 
-    const cartItems = getCartItems(userId)
-
+    const cartItems = await getCartItems(userId)
+    console.log(cartItems)
     return NextResponse.json(cartItems)
   } finally {
     await prisma.$disconnect()
@@ -162,7 +162,7 @@ export async function DELETE(request: Request) {
 
     await deleteItemFromCart(cartItem.id)
 
-    const cartItems = getCartItems(userId)
+    const cartItems = await getCartItems(userId)
 
     return NextResponse.json(cartItems)
   } finally {
