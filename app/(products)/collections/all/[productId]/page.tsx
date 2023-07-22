@@ -1,4 +1,4 @@
-import { getProductById } from "@/app/api/products/products"
+import { getProductById } from "@/lib/productActions"
 import ProductImageSection from "./components/ProductImageSection"
 import ProductInfo from "./components/ProductInfo"
 import { Product } from "@/types/db"
