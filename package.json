@@ -41,6 +41,7 @@
     "zustand": "^4.3.9"
   },
   "devDependencies": {
+    "encoding": "^0.1.13",
     "eslint-config-prettier": "^8.8.0",
     "prisma": "^4.16.2"
   }
