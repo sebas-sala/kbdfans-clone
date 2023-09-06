@@ -16,6 +16,9 @@ export async function POST(req: Request) {
   try {
     const requestData = await req.json()
     const { email, username, password } = registerUserSchema.parse(requestData)
+
+    console.log({ email, username, password })
+
     const findUser = await findUserByEmail(email)
     if (findUser) {
       return NextResponse.json(

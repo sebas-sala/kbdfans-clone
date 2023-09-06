@@ -1,13 +1,13 @@
-import Link from "next/link"
-import Product from "./Product"
-import { type Product as ProductType } from "@/types/db"
+import Link from "next/link";
+import Product from "./Product";
+import { type Product as ProductType } from "@/types/db";
 
 type Props = {
-  title?: string
-  linkText?: string
-  href?: string
-  promise: Promise<ProductType[]>
-}
+  title?: string;
+  linkText?: string;
+  href?: string;
+  promise: Promise<ProductType[]>;
+};
 
 const ProductsFetchingSection = async ({
   title,
@@ -15,19 +15,19 @@ const ProductsFetchingSection = async ({
   href,
   promise,
 }: Props) => {
-  const products = await promise
+  const products = await promise;
 
   return (
     <section>
-      <div className='text-center'>
-        {title && <h3 className='text-4xl font-semibold'>{title}</h3>}
+      <div className="text-center">
+        {title && <h3 className="text-4xl font-semibold">{title}</h3>}
         {href && linkText && (
-          <Link href={href} className='underline text-gray-400'>
+          <Link href={href} className="underline text-gray-400">
             {linkText}
           </Link>
         )}
       </div>
-      <div className='flex snap-mandatory snap-x mt-9 pb-7  overflow-x-auto scrollbar-hide sm:grid sm:grid-cols-2 sm:gap-10 md:gap-14 md:overflow-x-hidden lg:grid-cols-4'>
+      <div className="flex snap-mandatory snap-x mt-9 pb-7  overflow-x-auto scrollbar-hide sm:grid sm:grid-cols-2 sm:gap-10 md:gap-14 md:overflow-x-hidden lg:grid-cols-4">
         {products?.map(({ images, id, name, price, stock }) => (
           <Product
             images={images}
@@ -40,7 +40,7 @@ const ProductsFetchingSection = async ({
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ProductsFetchingSection
+export default ProductsFetchingSection;

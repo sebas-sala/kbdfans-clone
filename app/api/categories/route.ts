@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client"
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient()
+import prisma from "@/lib/prisma";
 
 export const GET = async () => {
   try {
@@ -13,12 +12,12 @@ export const GET = async () => {
           },
         },
       },
-    })
-    return NextResponse.json(categories)
+    });
+    return NextResponse.json(categories);
   } catch (e) {
-    console.error(e)
-    return NextResponse.error()
+    console.error(e);
+    return NextResponse.error();
   } finally {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   }
-}
+};

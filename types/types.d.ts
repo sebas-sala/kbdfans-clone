@@ -9,10 +9,6 @@ export type instaPostsImagesType = {
   route: string
 }
 
-export type CategoryProps = {
-  text: string
-  img: string
-}
 
 export type ButtonProps = {
   text: string

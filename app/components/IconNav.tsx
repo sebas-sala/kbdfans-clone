@@ -1,28 +1,29 @@
-import { useContext } from "react"
-import { BsSearch } from "react-icons/bs"
-import { CgProfile } from "react-icons/cg"
-import { AuthContext } from "@/contexts/AuthContext"
-import Login from "@/components/Login"
-import Signup from "@/components/Signup"
-import Cart from "@/components/Cart"
-import Dropdown from "@/components/Dropdown"
+import { CgProfile } from "react-icons/cg";
+
+import Login from "@/components/Login";
+import Signup from "@/components/Signup";
+import Cart from "@/components/Cart";
+import Dropdown from "@/components/Dropdown";
+import SearchInput from "@/components/search-input";
+
+import { useAuth } from "@/contexts/auth-context";
 
 const IconNav = () => {
-  const { logout, userData } = useContext(AuthContext)
+  const { logout, userData } = useAuth();
 
   const Trigger = () => {
     return (
-      <CgProfile className='cursor-pointer transition duration-200 hover:text-white/90' />
-    )
-  }
+      <CgProfile className="cursor-pointer transition duration-200 hover:text-white/90" />
+    );
+  };
 
   return (
-    <div className='flex gap-5 p-2 text-3xl text-white items-center'>
-      <BsSearch className='cursor-pointer transition duration-200 hover:text-white/90' />
+    <div className="flex gap-5 p-2 text-3xl text-white items-center">
+      <SearchInput />
       <Dropdown trigger={<Trigger />}>
         {userData ? (
           <button
-            className='cursor-pointer transition duration-300 hover:text-gray-400'
+            className="cursor-pointer transition duration-300 hover:text-gray-400"
             onClick={logout}
           >
             Logout
@@ -36,7 +37,7 @@ const IconNav = () => {
       </Dropdown>
       <Cart />
     </div>
-  )
-}
+  );
+};
 
-export default IconNav
+export default IconNav;
