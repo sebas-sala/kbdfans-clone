@@ -9,4 +9,4 @@ export type Sizes =
   | "4xl"
   | "5xl"
   | "6xl"
-  | "full"
+  | "full";

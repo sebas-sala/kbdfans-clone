@@ -1,11 +1,12 @@
-import { shopData, rdyToUseData } from "."
-import { type navDataType } from "@/types/types"
+import { shopData, rdyToUseData } from ".";
+
+import { type navDataType } from "@/types/types";
 
 type navLinksType = {
-  text: string
-  href: string
-  data?: navDataType[]
-}
+  text: string;
+  href: string;
+  data?: navDataType[];
+};
 
 export const navlinks: navLinksType[] = [
   {
@@ -18,4 +19,4 @@ export const navlinks: navLinksType[] = [
     href: "/collections",
     data: rdyToUseData,
   },
-]
+];

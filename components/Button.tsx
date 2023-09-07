@@ -1,9 +1,9 @@
 type ButtonProps = {
-  handleClick?: () => void
-  children: React.ReactNode
-  type: "button" | "submit" | "reset"
-  disabled?: boolean
-}
+  handleClick?: () => void;
+  children: React.ReactNode;
+  type: "button" | "submit" | "reset";
+  disabled?: boolean;
+};
 
 const Button: React.FC<ButtonProps> = ({
   children,
@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
     >
       {children}
     </button>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

@@ -1,14 +1,14 @@
 import { CgProfile } from "react-icons/cg";
 
-import Login from "@/components/Login";
-import Signup from "@/components/Signup";
-import Cart from "@/components/Cart";
+import Login from "@/components/login-dialog";
+import Signup from "@/components/signup-dialog";
+import Cart from "@/components/cart-drawer";
 import Dropdown from "@/components/Dropdown";
-import SearchInput from "@/components/search-input";
+import SearchInput from "@/components/search-dialog";
 
 import { useAuth } from "@/contexts/auth-context";
 
-const IconNav = () => {
+export default function NavigationIcons() {
   const { logout, userData } = useAuth();
 
   const Trigger = () => {
@@ -38,6 +38,4 @@ const IconNav = () => {
       <Cart />
     </div>
   );
-};
-
-export default IconNav;
+}

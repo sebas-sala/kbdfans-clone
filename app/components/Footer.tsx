@@ -1,24 +1,26 @@
-import Link from "next/link"
-import Background from "@/components/Background"
-import Container from "@/components/Container"
-import { footerLinks } from "@/data"
+import Link from "next/link";
 
-const Footer = () => {
+import Background from "@/components/Background";
+import Container from "@/components/Container";
+
+import { footerLinks } from "@/data";
+
+export default function Footer() {
   return (
-    <Background styles='bg-black'>
+    <Background styles="bg-black">
       <Container>
-        <div className='h-40 border-b border-[#262626] py-10'>
+        <div className="h-40 border-b border-[#262626] py-10">
           <h4>Subscribe</h4>
           <form></form>
         </div>
-        <div className='flex h-40 items-end pb-8'>
-          <footer className='flex'>
-            <div className='flex flex-wrap gap-y-6 truncate text-xs text-white'>
+        <div className="flex h-40 items-end pb-8">
+          <footer className="flex">
+            <div className="flex flex-wrap gap-y-6 truncate text-xs text-white">
               {footerLinks.map((link, index) => (
                 <Link
                   href={link.href}
                   key={index}
-                  className='border-l-2 border-[#262626] px-2'
+                  className="border-l-2 border-[#262626] px-2"
                 >
                   {link.name}
                 </Link>
@@ -28,7 +30,5 @@ const Footer = () => {
         </div>
       </Container>
     </Background>
-  )
+  );
 }
-
-export default Footer

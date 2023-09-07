@@ -1,5 +1,5 @@
 import { getProductsByCategory } from "@/actions/product-actions";
-import Product from "@/components/Product";
+import Product from "@/components/product-card";
 
 type Props = {
   params: {

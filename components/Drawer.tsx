@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Drawer as DrawerContainer,
@@ -7,17 +7,17 @@ import {
   DrawerOverlay,
   DrawerContent,
   useDisclosure,
-} from "@chakra-ui/react"
-import { AiFillCloseCircle } from "react-icons/ai"
+} from "@chakra-ui/react";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 type Props = {
-  children: React.ReactNode
-  placement: any
-  size: string
-  icon: React.ReactNode
-  headerText: string
-  bodyStyles: string
-}
+  children: React.ReactNode;
+  placement: any;
+  size: string;
+  icon: React.ReactNode;
+  headerText: string;
+  bodyStyles: string;
+};
 
 const Drawer: React.FC<Props> = ({
   children,
@@ -27,7 +27,7 @@ const Drawer: React.FC<Props> = ({
   headerText,
   bodyStyles,
 }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -40,10 +40,10 @@ const Drawer: React.FC<Props> = ({
       >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader className='flex items-center justify-between'>
+          <DrawerHeader className="flex items-center justify-between">
             <span>{headerText}</span>
             <AiFillCloseCircle
-              className='cursor-pointer rounded-full text-3xl text-gray-200 outline-2 outline-black hover:text-gray-400 hover:outline'
+              className="cursor-pointer rounded-full text-3xl text-gray-200 outline-2 outline-black hover:text-gray-400 hover:outline"
               onClick={onClose}
             />
           </DrawerHeader>
@@ -51,7 +51,7 @@ const Drawer: React.FC<Props> = ({
         </DrawerContent>
       </DrawerContainer>
     </>
-  )
-}
+  );
+};
 
-export default Drawer
+export default Drawer;

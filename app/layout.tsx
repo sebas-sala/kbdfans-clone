@@ -1,10 +1,14 @@
+import { Toaster } from "react-hot-toast";
 import { Inter } from "next/font/google";
+
 import Provider from "./provider";
+
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+
 import AuthProvider from "@/contexts/auth-context";
 import CartProvider from "@/contexts/cart-context";
-import { Toaster } from "react-hot-toast";
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });

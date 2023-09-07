@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { Menu as MenuContainer, MenuButton, MenuList } from "@chakra-ui/react"
+import { Menu as MenuContainer, MenuButton, MenuList } from "@chakra-ui/react";
 
 type Props = {
-  children: React.ReactNode
-  buttonText: string
-  buttonStyles?: string
-  maxHeight?: number
-}
+  children: React.ReactNode;
+  buttonText: string;
+  buttonStyles?: string;
+  maxHeight?: number;
+};
 
 const Menu: React.FC<Props> = ({
   children,
@@ -22,7 +22,7 @@ const Menu: React.FC<Props> = ({
         {children}
       </MenuList>
     </MenuContainer>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;

@@ -1,8 +1,11 @@
 "use client";
+
 import { createContext, useState, useEffect, useContext } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Cookie from "js-cookie";
-import useCart from "@/hooks/useCart";
+
+import useCart from "@/hooks/use-cart";
+
 import { type User } from "@/types/db";
 
 type AuthContextType = {

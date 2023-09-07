@@ -1,16 +1,16 @@
-import PathNav from "@/components/PathNav"
+import NavigationPath from "@/components/navigation-path";
 
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 const layout: React.FC<Props> = ({ children }) => {
   return (
     <>
-      <PathNav />
+      <NavigationPath />
       {children}
     </>
-  )
-}
+  );
+};
 
-export default layout
+export default layout;

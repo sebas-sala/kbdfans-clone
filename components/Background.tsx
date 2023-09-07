@@ -1,12 +1,12 @@
-import { FC, ReactNode } from "react"
+import { FC, ReactNode } from "react";
 
 type Props = {
-  styles: string
-  children: ReactNode
-}
+  styles: string;
+  children: ReactNode;
+};
 
 const Background: FC<Props> = ({ children, styles }) => {
-  return <div className={styles}>{children}</div>
-}
+  return <div className={styles}>{children}</div>;
+};
 
-export default Background
+export default Background;

@@ -1,5 +1,13 @@
 import prisma from "@/lib/prisma";
 
+export const getProductsWithoutImages = async () => {
+  return await prisma.product.findMany({
+    include: {
+      categories: true,
+    },
+  });
+};
+
 export const getCategories = async () => {
   try {
     return await prisma.category.findMany({

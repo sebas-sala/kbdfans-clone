@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
-import { findUserById } from "@/lib/actions";
+
+import { findUserById } from "@/actions/user-actions";
 
 import {
   addItemToCart,
@@ -8,7 +8,7 @@ import {
   findCartItemByUserIdAndProductId,
   getCartItems,
   updateItemQuantity,
-} from "@/lib/CartActions";
+} from "@/actions/cart-actions";
 
 export async function GET(request: Request) {
   try {
@@ -35,8 +35,9 @@ export async function GET(request: Request) {
     }
 
     return NextResponse.json(cartItems);
-  } finally {
-    await prisma.$disconnect();
+  } catch (e) {
+    console.error(e);
+    return NextResponse.error();
   }
 }
 
@@ -77,8 +78,9 @@ export async function POST(request: Request) {
 
     const updatedCartItems = await getCartItems(userId);
     return NextResponse.json(updatedCartItems);
-  } finally {
-    await prisma.$disconnect();
+  } catch (e) {
+    console.error(e);
+    return NextResponse.error();
   }
 }
 
@@ -122,8 +124,9 @@ export async function PUT(request: Request) {
     const cartItems = await getCartItems(userId);
     console.log(cartItems);
     return NextResponse.json(cartItems);
-  } finally {
-    await prisma.$disconnect();
+  } catch (e) {
+    console.error(e);
+    return NextResponse.error();
   }
 }
 
@@ -166,7 +169,8 @@ export async function DELETE(request: Request) {
     const cartItems = await getCartItems(userId);
 
     return NextResponse.json(cartItems);
-  } finally {
-    await prisma.$disconnect();
+  } catch (e) {
+    console.error(e);
+    return NextResponse.error();
   }
 }

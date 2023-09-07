@@ -1,11 +1,11 @@
 import Category from "@/components/Category";
 import Categories from "./components/Categories";
-import InstagramPostsSection from "./components/InstagramPostsSection";
+import InstagramPostsSection from "./components/instagram-post-section";
 import Container from "@/components/Container";
 
 export default function Home() {
   return (
-    <div className="pb-48 overflow-y-auto">
+    <main className="pb-48 overflow-y-auto">
       <Container styles="container mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10 h-96 pb-10">
         <Category
           text="Keycaps"
@@ -20,6 +20,6 @@ export default function Home() {
       </Container>
       <Categories />
       <InstagramPostsSection />
-    </div>
+    </main>
   );
 }

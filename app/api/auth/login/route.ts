@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { z } from "zod";
 
-import { findUserById } from "@/lib/actions";
+import { findUserById } from "@/actions/user-actions";
 
 const loginUserSchema = z.object({
   email: z.string().email("Invalid email"),
@@ -11,7 +12,7 @@ const loginUserSchema = z.object({
 
 export async function GET(req: Request) {
   try {
-    const supabase = createClientComponentClient();
+    const supabase = createServerComponentClient({ cookies });
 
     const { searchParams } = new URL(req.url);
 

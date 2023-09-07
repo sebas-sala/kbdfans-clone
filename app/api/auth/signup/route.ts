@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { z } from "zod";
-import prisma from "@/lib/prisma";
-import { createUser, findUserByEmail } from "@/lib/actions";
+
+import { createUser, findUserByEmail } from "@/actions/user-actions";
 
 const registerUserSchema = z.object({
   email: z.string().email("Invalid email"),
@@ -10,10 +11,9 @@ const registerUserSchema = z.object({
   password: z.string().min(6, "Password should be minimum 6 characters"),
 });
 
-const supabase = createClientComponentClient();
-
 export async function POST(req: Request) {
   try {
+    const supabase = createServerComponentClient({ cookies });
     const requestData = await req.json();
     const { email, username, password } = registerUserSchema.parse(requestData);
 
@@ -44,7 +44,5 @@ export async function POST(req: Request) {
   } catch (e) {
     console.error(e);
     return NextResponse.json({ error: "Error signing up" }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();
   }
 }

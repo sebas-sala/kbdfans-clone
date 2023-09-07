@@ -1,9 +1,12 @@
 "use client";
-import { useEffect, createContext } from "react";
+
+import { useEffect, createContext, useContext } from "react";
 import useSWR from "swr";
-import useCart from "@/hooks/useCart";
-import { fetchCartByUserId } from "@/lib/cartFetch";
+import useCart from "@/hooks/use-cart";
+
+import { fetchCartByUserId } from "@/services/cart-services";
 import { useAuth } from "@/contexts/auth-context";
+
 import { type CartHook } from "@/types/types";
 
 export const CartContext = createContext<CartHook | undefined>(undefined);
