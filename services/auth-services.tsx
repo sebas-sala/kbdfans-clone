@@ -1,11 +1,14 @@
 import { type User } from "@/types/db";
 
-export const fetchUserData = async (id: string): Promise<User | null> => {
+export const fetchUserData = async (): Promise<User | null> => {
   try {
-    const response = await fetch("http://localhost:3000/api/auth/user");
-    const user = (await response.json()) as User;
-    console.log(user);
-    return user;
+    const res = await fetch("http://localhost:3000/api/auth/user");
+
+    if (!res.ok) {
+      throw new Error("Error al obtener los datos del usuario");
+    }
+
+    return await res.json();
   } catch (e) {
     console.log("Error al obtener los datos del usuario session:", e);
     return null;
@@ -43,9 +46,6 @@ export const createUser = async (
   try {
     const res = await fetch("http://localhost:3000/api/auth/signup", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({
         email,
         password,

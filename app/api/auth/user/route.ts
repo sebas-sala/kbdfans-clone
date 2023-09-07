@@ -9,13 +9,14 @@ export async function GET() {
     const supabase = createServerComponentClient({ cookies });
 
     const { data, error } = await supabase.auth.getSession();
+
     if (error) {
       throw new Error("Error to get session");
     }
     if (!data.session) {
-      console.log("prueba");
       throw new Error("No session");
     }
+
     const user = await findUserById(data.session.user.id);
     return NextResponse.json(user);
   } catch (e) {

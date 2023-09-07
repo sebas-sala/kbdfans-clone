@@ -1,4 +1,4 @@
-import CartIcon from "./Icons/CartIcon";
+import CartIcon from "../Icons/CartIcon";
 import CartItem from "./cart-item";
 
 import type { CartWithProducts } from "@/types/db";

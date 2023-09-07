@@ -1,4 +1,4 @@
-import Product from "./product-card";
+import Product from "../product/product-card";
 
 import type { ProductType } from "@/types/db";
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import NavigationIcons from "./navigation-icons";
-import LinkRouter from "./link-router";
+import LinkRouter from "../link-router";
 import Dropdown from "@/components/Dropdown";
 
 import { navlinks } from "@/data/links";

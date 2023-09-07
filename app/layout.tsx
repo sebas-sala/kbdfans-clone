@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 
 import Provider from "./provider";
 
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import Footer from "@/components/Footer";
+import Header from "../components/header/header";
 
 import AuthProvider from "@/contexts/auth-context";
 import CartProvider from "@/contexts/cart-context";

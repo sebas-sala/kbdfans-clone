@@ -1,6 +1,6 @@
 import Category from "@/components/Category";
-import Categories from "./components/Categories";
-import InstagramPostsSection from "./components/instagram-post-section";
+import Categories from "../components/Categories";
+import InstagramPostSection from "@/components/instagram-post-section";
 import Container from "@/components/Container";
 
 export default function Home() {
@@ -19,7 +19,7 @@ export default function Home() {
         />
       </Container>
       <Categories />
-      <InstagramPostsSection />
+      <InstagramPostSection />
     </main>
   );
 }

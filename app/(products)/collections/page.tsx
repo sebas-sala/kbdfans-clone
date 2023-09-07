@@ -1,4 +1,4 @@
-import CollectionList from "@/components/collections-list";
+import CollectionList from "@/components/collections/collections-list";
 
 import { getAllCategoriesWithProductImage } from "@/actions/product-actions";
 

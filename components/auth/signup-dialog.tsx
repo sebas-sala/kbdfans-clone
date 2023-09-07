@@ -6,9 +6,9 @@ import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
-import Button from "./Button";
-import Form from "./Form";
-import Dialog from "./Dialog";
+import Button from "../Button";
+import Form from "../Form";
+import Dialog from "../Dialog";
 
 import { createUser } from "@/services/auth-services";
 

@@ -1,5 +1,5 @@
-import FilteredProducts from "@/components/filtered-products-section";
-import ProductFilters from "@/components/product-filters";
+import FilteredProducts from "@/components/filtered-products/filtered-products-list";
+import ProductFilters from "@/components/product/product-filters";
 
 import { getProductsByCategoriesId } from "@/actions/product-actions";
 import { getCategories } from "@/actions/product-actions";

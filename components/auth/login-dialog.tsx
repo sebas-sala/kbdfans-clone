@@ -7,14 +7,15 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { toast } from "react-hot-toast";
 
-import Dialog from "./Dialog";
-import Button from "./Button";
-import Form from "./Form";
+import Dialog from "../Dialog";
+import Button from "../Button";
+import Form from "../Form";
 
 import { fetchUserByEmailAndPassword } from "@/services/auth-services";
 import { useAuth } from "@/contexts/auth-context";
 
 import type { User } from "@/types/db";
+import { loginWithEmailAndPassword } from "@/lib/auth";
 
 export default function LoginDialog() {
   const [show, setShow] = useState(false);
@@ -36,11 +37,19 @@ export default function LoginDialog() {
       const { email, password } = data;
       if (!email || !password) return;
 
-      toast.promise(fetchUserByEmailAndPassword(email, password), {
-        loading: "login...",
-        success: "login success",
-        error: "login failed",
-      });
+      toast
+        .promise(loginWithEmailAndPassword(email, password), {
+          loading: "login...",
+          success: "login success",
+          error: "login failed",
+        })
+        .then((res) => {
+          if (res) {
+            Cookies.set("user", res.toString(), { expires: 1 });
+            setUserData(res);
+            router.push("/account/dashboard");
+          }
+        });
     } catch (e) {
       console.error(e);
     }

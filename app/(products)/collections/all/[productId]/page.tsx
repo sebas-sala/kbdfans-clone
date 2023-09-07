@@ -1,6 +1,6 @@
 import { getProductById } from "@/actions/product-actions";
-import ProductImageSection from "./components/product-image-section";
-import ProductInfo from "./components/product-info";
+import ProductImageSection from "../../../../../components/product/product-image-section";
+import ProductInfo from "@/components/product/product-info";
 import { ProductType } from "@/types/db";
 
 type Props = {

@@ -2,7 +2,7 @@
 
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-import Drawer from "./Drawer";
+import Drawer from "../Drawer";
 import CartList from "./cart-list";
 
 import useCartContext from "@/hooks/use-cart-context";

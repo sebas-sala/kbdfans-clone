@@ -26,16 +26,22 @@ export async function POST(req: Request) {
       );
     }
 
+    console.log(email, username, password);
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
     });
+
+    console.log(data);
 
     if (error || !data.user) {
       return NextResponse.json({ error: "Error signing up" }, { status: 500 });
     }
 
     const newUser = await createUser(data.user.id, email, username);
+
+    console.log(newUser);
 
     return NextResponse.json({
       user: newUser,
