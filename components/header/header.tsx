@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import Container from "@/components/Container";
 import IconNav from "./navigation-icons";
-import StickyNav from "./navigation-sticky";
+import NavigationSticky from "./navigation-sticky";
 
 import { useScrollFixed } from "@/hooks/use-scroll-fixed";
 
@@ -29,7 +29,7 @@ export default function Header() {
           </div>
         </Container>
       </header>
-      <StickyNav isSticky={isSticky} />
+      <NavigationSticky isSticky={isSticky} />
     </>
   );
 }

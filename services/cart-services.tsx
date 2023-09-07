@@ -2,21 +2,18 @@ import { type ProductType } from "@/types/db";
 
 export const fetchCartByUserId = async (userId: string) => {
   const res = await fetch(`http://localhost:3000/api/cart?userId=${userId}`);
+  console.log(res);
   if (!res.ok) {
     throw new Error("Error fetching cart");
   }
   return await res.json();
 };
 
-export const addToCart = async (
-  product: ProductType,
-  userId: number | string
-) => {
+export const addToCart = async (product: ProductType) => {
   const response = await fetch("http://localhost:3000/api/cart", {
     method: "POST",
     body: JSON.stringify({
       productId: product.id,
-      userId,
     }),
   });
   if (!response.ok) {

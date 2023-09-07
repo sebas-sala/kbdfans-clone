@@ -10,47 +10,35 @@ import {
   removeFromCart as removeItem,
 } from "@/services/cart-services";
 
-import { type CartHook } from "@/types/types";
+import { type CartStore } from "@/types/types";
 import { type User } from "@/types/db";
 
-const useCart = create<CartHook>((set) => ({
+const useCart = create<CartStore>((set) => ({
   cartItems: [],
+
   setCartItems: (items) =>
-    set((state) => ({
+    set(() => ({
       cartItems: items,
     })),
-  addToCart: (product) => {
-    return new Promise<void>((resolve, reject) => {
-      const userCookie = Cookie.get("user");
-      if (!userCookie) {
-        console.log(userCookie);
-        toast.error("Please login to continue shopping", {
-          duration: 1500,
-        });
-        reject(new Error("User not logged in"));
-        return;
-      }
 
-      const { id } = JSON.parse(userCookie) as User;
-
-      toast
-        .promise(fetchingCart(product, id), {
-          loading: "Adding to cart...",
-          success: "Product added to cart",
-          error: "Something went wrong",
-        })
-        .then((data) => {
-          console.log(data);
-          set((state) => ({ cartItems: data }));
-          resolve();
-        })
-        .catch((error) => {
-          console.error(error);
-          reject(error);
-        });
-    });
+  addToCart: async (product) => {
+    toast
+      .promise(fetchingCart(product), {
+        loading: "Adding to cart...",
+        success: "Product added to cart",
+        error: "Something went wrong",
+      })
+      .then((data) => {
+        set(() => ({ cartItems: data }));
+        return data;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   },
+
   clearCart: () => set({ cartItems: [] }),
+
   removeFromCart: async (item) => {
     const userCookie = Cookie.get("user");
     if (userCookie) {
@@ -63,7 +51,7 @@ const useCart = create<CartHook>((set) => ({
             error: "Something went wrong",
           })
           .then((data) => {
-            set((state) => ({ cartItems: data }));
+            set(() => ({ cartItems: data }));
           })
           .catch((error) => {
             console.error(error);
@@ -77,7 +65,7 @@ const useCart = create<CartHook>((set) => ({
           })
           .then((data) => {
             console.log(data);
-            set((state) => ({ cartItems: data }));
+            set(() => ({ cartItems: data }));
           })
           .catch((error) => {
             console.error(error);

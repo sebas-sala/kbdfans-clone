@@ -1,4 +1,4 @@
-import { type Products } from "./db";
+import { User, type Products } from "./db";
 import { type CartWithProducts } from "./db";
 
 export type instaPostsImagesType = {
@@ -28,7 +28,7 @@ export type navDataType = {
   icon?: any;
 };
 
-export interface CartHook {
+export interface CartStore {
   cartItems: CartWithProducts[];
   setCartItems: (items: Cart[]) => void;
   addToCart: (product: Product) => void;

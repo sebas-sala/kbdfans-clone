@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 import Button from "@/components/Button";
 
 import useCart from "@/hooks/use-cart";
+import useAuthContext from "@/hooks/use-auth-context";
 
 import { ProductType } from "@/types/db";
 
@@ -12,20 +14,25 @@ type Props = {
   product: ProductType;
 };
 
-const ProductInfo = ({ product }: Props) => {
+const ProductInfo = async ({ product }: Props) => {
   const { id, name, stock } = product;
-
+  const { session } = useAuthContext();
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const { addToCart } = useCart();
 
-  const handleClick = async () => {
-    setButtonDisabled(true);
-    try {
-      await addToCart(product);
-    } catch (error) {
-    } finally {
-      setButtonDisabled(false);
+  const handleAddItem = () => {
+    if (!session) {
+      toast.error("Please login to continue shopping", {
+        duration: 1500,
+      });
+      return;
     }
+    setButtonDisabled(true);
+
+    addToCart(product);
+    setTimeout(() => {
+      setButtonDisabled(false);
+    }, 1500);
   };
 
   return (
@@ -33,7 +40,11 @@ const ProductInfo = ({ product }: Props) => {
       <p>{id}</p>
       <p>{name}</p>
       <p>{stock}</p>
-      <Button type="button" handleClick={handleClick} disabled={buttonDisabled}>
+      <Button
+        type="button"
+        handleClick={handleAddItem}
+        disabled={buttonDisabled}
+      >
         Add to Cart
         {buttonDisabled && (
           <span className="ml-2 animate-spin">Loading...</span>

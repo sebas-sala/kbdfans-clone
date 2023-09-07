@@ -6,10 +6,10 @@ import Cart from "@/components/cart/cart-drawer";
 import Dropdown from "@/components/Dropdown";
 import SearchDialog from "@/components/search/search-dialog";
 
-import { useAuth } from "@/contexts/auth-context";
+import useAuthContext from "@/hooks/use-auth-context";
 
 export default function NavigationIcons() {
-  const { logout, userData } = useAuth();
+  const { userData, logout, session } = useAuthContext();
 
   const Trigger = () => {
     return (

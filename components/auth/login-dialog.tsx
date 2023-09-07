@@ -4,15 +4,11 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Cookies from "js-cookie";
 import { toast } from "react-hot-toast";
 
 import Dialog from "../Dialog";
 import Button from "../Button";
 import Form from "../Form";
-
-import { fetchUserByEmailAndPassword } from "@/services/auth-services";
-import { useAuth } from "@/contexts/auth-context";
 
 import type { User } from "@/types/db";
 import { loginWithEmailAndPassword } from "@/lib/auth";
@@ -20,7 +16,6 @@ import { loginWithEmailAndPassword } from "@/lib/auth";
 export default function LoginDialog() {
   const [show, setShow] = useState(false);
   const router = useRouter();
-  const { setUserData } = useAuth();
 
   const handleClick = () => {
     setShow(!show);
@@ -45,9 +40,7 @@ export default function LoginDialog() {
         })
         .then((res) => {
           if (res) {
-            Cookies.set("user", res.toString(), { expires: 1 });
-            setUserData(res);
-            router.push("/account/dashboard");
+            router.refresh();
           }
         });
     } catch (e) {
@@ -82,7 +75,7 @@ export default function LoginDialog() {
             {...register("password", { required: true })}
           />
           <button onClick={handleClick} type="button">
-            {show ? "Hide" : "Show"}
+            {show ? "Hide" : "Show "}
           </button>
           {errors.password && "Password is required"}
         </div>

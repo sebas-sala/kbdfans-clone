@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 import { findUserById } from "@/actions/user-actions";
-
 import {
   addItemToCart,
   deleteItemFromCart,
@@ -43,14 +44,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const { productId, userId } = await request.json();
-
-    if (!userId) {
-      return NextResponse.json(
-        { message: "User ID not provided" },
-        { status: 400 }
-      );
-    }
+    const { productId } = await request.json();
 
     if (!productId) {
       return NextResponse.json(
@@ -59,11 +53,20 @@ export async function POST(request: Request) {
       );
     }
 
-    const user = findUserById(userId);
+    const supabase = createServerComponentClient({ cookies });
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
     if (!user) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
+      return NextResponse.json(
+        { message: "No user provided" },
+        { status: 400 }
+      );
     }
+
+    const userId = user.id;
 
     const existingCartItem = await findCartItemByUserIdAndProductId(
       userId,
@@ -73,6 +76,7 @@ export async function POST(request: Request) {
     if (existingCartItem) {
       await updateItemQuantity(existingCartItem, false);
     } else {
+      console.log(userId, productId);
       await addItemToCart(userId, productId);
     }
 

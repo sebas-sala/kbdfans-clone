@@ -1,13 +1,12 @@
 import { Toaster } from "react-hot-toast";
 import { Inter } from "next/font/google";
 
-import Provider from "./provider";
-
 import Footer from "@/components/Footer";
 import Header from "../components/header/header";
 
-import AuthProvider from "@/contexts/auth-context";
+import Providers from "./providers";
 import CartProvider from "@/contexts/cart-context";
+import AuthProvider from "@/contexts/auth-context";
 
 import "./globals.css";
 
@@ -26,16 +25,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={` ${inter.className} overflow-y-scroll relative`}>
-        <AuthProvider>
-          <CartProvider>
-            <Provider>
+        <Providers>
+          <AuthProvider>
+            <CartProvider>
               <Toaster />
               <Header />
               {children}
               <Footer />
-            </Provider>
-          </CartProvider>
-        </AuthProvider>
+            </CartProvider>
+          </AuthProvider>
+        </Providers>
       </body>
     </html>
   );

@@ -10,7 +10,7 @@ type StickyNavProps = {
   isSticky: boolean;
 };
 
-export default function StickyNav({ isSticky }: StickyNavProps) {
+export default function NavigationSticky({ isSticky }: StickyNavProps) {
   return (
     <div className="sticky top-0 z-50 w-full bg-black">
       <section className="sm:container mx-auto flex justify-between items-center">
