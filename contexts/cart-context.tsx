@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, createContext, useContext } from "react";
+import { useEffect, createContext } from "react";
 import useSWR from "swr";
 import useCart from "@/hooks/useCart";
 import { fetchCartByUserId } from "@/lib/cartFetch";
-import { AuthContext } from "@/contexts/auth-context";
+import { useAuth } from "@/contexts/auth-context";
 import { type CartHook } from "@/types/types";
 
 export const CartContext = createContext<CartHook | undefined>(undefined);
@@ -11,7 +11,7 @@ export const CartContext = createContext<CartHook | undefined>(undefined);
 const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const { cartItems, removeFromCart, clearCart, setCartItems, addToCart } =
     useCart();
-  const { userData } = useContext(AuthContext);
+  const { userData } = useAuth();
 
   const { data } = useSWR(
     userData ? `${userData.id}` : null,
