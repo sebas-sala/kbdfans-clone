@@ -8,6 +8,7 @@ import { createUser } from "@/lib/authFetch";
 import Button from "./Button";
 import Form from "./Form";
 import { type User } from "@/types/db";
+import { toast } from "react-hot-toast";
 
 const SignupForm = () => {
   const [show, setShow] = useState(false);
@@ -23,11 +24,13 @@ const SignupForm = () => {
     try {
       const { email, username, password } = data;
       if (!email || !username || !password) return;
-      console.log(email, username, password);
-      const res = await createUser(email, username, password);
-      if (res === null) {
-        throw new Error("Error creating user");
-      }
+
+      toast.promise(createUser(email, username, password), {
+        loading: "Creating user...",
+        success: "Please check your email to verify your account",
+        error: "Error creating user",
+      });
+
       router.refresh();
     } catch (e) {
       console.error(e);

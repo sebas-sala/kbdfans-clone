@@ -28,7 +28,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const userCookie = Cookie.get("user");
 
-    if (userCookie) {
+    if (userCookie && userCookie !== "undefined") {
       try {
         const parseUser = JSON.parse(userCookie) as User;
         setUserData(parseUser);

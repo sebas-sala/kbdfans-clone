@@ -5,15 +5,16 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { fetchUserByEmailAndPassword } from "@/lib/authFetch";
-import { AuthContext } from "@/contexts/auth-context";
+import { useAuth } from "@/contexts/auth-context";
 import Button from "./Button";
 import Form from "./Form";
 import { type User } from "@/types/db";
+import { toast } from "react-hot-toast";
 
 const LoginForm = () => {
   const [show, setShow] = useState(false);
   const router = useRouter();
-  const { setUserData } = useContext(AuthContext);
+  const { setUserData } = useAuth();
 
   const handleClick = () => {
     setShow(!show);
@@ -29,13 +30,12 @@ const LoginForm = () => {
     try {
       const { email, password } = data;
       if (!email || !password) return;
-      const user = await fetchUserByEmailAndPassword(email, password);
-      if (user === null) {
-        throw new Error("Invalid email or password");
-      }
-      Cookies.set("user", JSON.stringify(user), { expires: 1 });
-      setUserData(user);
-      router.refresh();
+
+      toast.promise(fetchUserByEmailAndPassword(email, password), {
+        loading: "login...",
+        success: "login success",
+        error: "login failed",
+      });
     } catch (e) {
       console.error(e);
     }
