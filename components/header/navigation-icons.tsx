@@ -13,7 +13,13 @@ export default function NavigationIcons() {
 
   const Trigger = () => {
     return (
-      <CgProfile className="cursor-pointer transition duration-200 hover:text-white/90" />
+      <button
+        type="button"
+        aria-label="Open dropdown"
+        className="flex items-center"
+      >
+        <CgProfile className="cursor-pointer transition duration-200 hover:text-white/90" />
+      </button>
     );
   };
 

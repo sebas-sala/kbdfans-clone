@@ -98,7 +98,7 @@ export const rdyToUseData: navDataType[] = [
 ];
 
 export const footerLinks = [
-  { name: "--->", href: "" },
+  { name: "--->", href: "/" },
   { name: "AliExpress", href: "https://www.aliexpress.com/" },
   { name: "Shopee Philippines", href: "https://shopee.ph/" },
   { name: "Shopee Singapore", href: "https://shopee.sg/" },

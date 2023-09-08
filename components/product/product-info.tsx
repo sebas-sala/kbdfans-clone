@@ -14,25 +14,28 @@ type Props = {
   product: ProductType;
 };
 
-const ProductInfo = async ({ product }: Props) => {
+export default function ProductInfo({ product }: Props) {
   const { id, name, stock } = product;
-  const { session } = useAuthContext();
+  const { userData } = useAuthContext();
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const { addToCart } = useCart();
 
-  const handleAddItem = () => {
-    if (!session) {
+  const handleAddItem = async () => {
+    if (!userData) {
       toast.error("Please login to continue shopping", {
         duration: 1500,
       });
       return;
     }
-    setButtonDisabled(true);
 
-    addToCart(product);
-    setTimeout(() => {
+    try {
+      setButtonDisabled(true);
+      await addToCart(product);
+    } catch (error) {
+      console.error(error);
+    } finally {
       setButtonDisabled(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -52,6 +55,4 @@ const ProductInfo = async ({ product }: Props) => {
       </Button>
     </section>
   );
-};
-
-export default ProductInfo;
+}

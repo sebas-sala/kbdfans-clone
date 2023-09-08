@@ -1,4 +1,3 @@
-import { Divider } from "@chakra-ui/react";
 import CartIcon from "../Icons/CartIcon";
 import CartItem from "./cart-item";
 
@@ -18,10 +17,7 @@ export default function CartList({ cartItems }: CartListProps) {
       {cartItems && cartItems.length > 0 ? (
         <ul className="overflow-y-auto">
           {sortedCartItems.map((item) => (
-            <>
-              <CartItem key={item.id} product={item} />
-              <Divider />
-            </>
+            <CartItem key={item.id} product={item} />
           ))}
         </ul>
       ) : (

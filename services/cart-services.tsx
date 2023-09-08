@@ -18,7 +18,7 @@ export const addToCart = async (product: ProductType) => {
   if (!response.ok) {
     throw new Error("Error adding to cart");
   }
-  return response.json();
+  return await response.json();
 };
 
 export const removeFromCart = async (productId: number) => {

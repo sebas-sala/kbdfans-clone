@@ -36,16 +36,32 @@ export default function CartProvider({ children }: CartProviderProps) {
 
   const setCartItems = useCart((state) => state.setCartItems);
 
-  useEffect(() => {
-    getInitialCart()
-      .then((res) => {
-        if (!res) return;
+  console.log("prueba");
 
-        setCartItems(res);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+  useEffect(() => {
+    async function getInitialCart() {
+      try {
+        const supabase = createClientComponentClient();
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+
+        if (!session) return;
+
+        const { user } = session;
+        const res = await fetchCartByUserId(user.id);
+
+        if (res) {
+          setCartItems(res);
+        }
+      } catch (error) {
+        console.error("Error fetching initial cart:", error);
+      }
+    }
+
+    if (userData) {
+      getInitialCart();
+    }
   }, [setCartItems, userData]);
 
   return (

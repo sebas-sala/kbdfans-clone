@@ -15,19 +15,19 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 
 import CartList from "./cart-list";
 
-import useCartContext from "@/hooks/use-cart-context";
 import { getSubtotal } from "@/lib/cart-utils";
+import useCart from "@/hooks/use-cart";
 
 export default function Cart() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { cartItems } = useCartContext();
+  const { cartItems } = useCart();
 
   const subTotal = getSubtotal(cartItems);
 
   return (
     <>
-      <button onClick={onOpen}>
+      <button type="button" onClick={onOpen} aria-label="Open cart drawer">
         <AiOutlineShoppingCart />
       </button>
       <DrawerContainer

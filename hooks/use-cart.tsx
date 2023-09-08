@@ -1,7 +1,7 @@
 "use client";
 
 import { create } from "zustand";
-import Cookie from "js-cookie";
+
 import toast from "react-hot-toast";
 
 import {
@@ -11,7 +11,6 @@ import {
 } from "@/services/cart-services";
 
 import { type CartStore } from "@/types/types";
-import { type User } from "@/types/db";
 
 const useCart = create<CartStore>((set) => ({
   cartItems: [],
@@ -22,7 +21,7 @@ const useCart = create<CartStore>((set) => ({
     })),
 
   addToCart: async (product) => {
-    toast
+    await toast
       .promise(fetchingCart(product), {
         loading: "Adding to cart...",
         success: "Product added to cart",
@@ -41,7 +40,7 @@ const useCart = create<CartStore>((set) => ({
 
   removeFromCart: async (item) => {
     if (item.quantity <= 1) {
-      toast
+      await toast
         .promise(removeItem(item.productId), {
           loading: "Removing item from cart...",
           success: "Item removed from cart",
@@ -54,7 +53,7 @@ const useCart = create<CartStore>((set) => ({
           console.error(error);
         });
     } else {
-      toast
+      await toast
         .promise(decrementQuantity(item.productId), {
           loading: "Decreasing product quantity",
           success: "Product quantity decreased",

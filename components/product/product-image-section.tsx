@@ -37,6 +37,7 @@ export default function ProductImageSection({ images, alt }: Props) {
             src={images[selectedImageIndex].url}
             className="object-cover w-full h-full rounded-md"
             alt={alt}
+            priority
           />
         </motion.div>
       </AnimatePresence>

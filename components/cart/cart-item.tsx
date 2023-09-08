@@ -4,7 +4,7 @@ import Image from "next/image";
 import useCart from "@/hooks/use-cart";
 
 import type { CartWithProducts } from "@/types/db";
-import { Button, ButtonGroup, IconButton } from "@chakra-ui/react";
+import { Button, ButtonGroup, Divider, IconButton } from "@chakra-ui/react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 type CartItemProps = {
@@ -15,20 +15,36 @@ export default function CartItem({ product }: CartItemProps) {
   const { addToCart, removeFromCart } = useCart();
 
   const { quantity, Product } = product;
-  const { images, name, price, stock } = Product;
+  const { images, name, price } = Product;
   const image = images[0].url;
   const newPrice = price * quantity;
 
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+
   const handleAddToQuantity = async () => {
-    addToCart(Product);
+    setButtonDisabled(true);
+    try {
+      await addToCart(Product);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setButtonDisabled(false);
+    }
   };
 
-  const handleRemoveFromQuantity = () => {
-    removeFromCart(product);
+  const handleRemoveFromQuantity = async () => {
+    setButtonDisabled(true);
+    try {
+      await removeFromCart(product);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setButtonDisabled(false);
+    }
   };
 
   return (
-    <div className="w-full p-4">
+    <li className="w-full p-4 space-y-4">
       <div className="flex">
         <Image src={image} width={100} height={100} alt="product" />
         <div className="text-center">
@@ -41,6 +57,7 @@ export default function CartItem({ product }: CartItemProps) {
         <IconButton
           aria-label="decrement-quantity"
           onClick={handleRemoveFromQuantity}
+          isDisabled={buttonDisabled}
         >
           <AiOutlineMinus />
         </IconButton>
@@ -50,10 +67,12 @@ export default function CartItem({ product }: CartItemProps) {
         <IconButton
           aria-label="increase-quantity"
           onClick={handleAddToQuantity}
+          isDisabled={buttonDisabled}
         >
           <AiOutlinePlus />
         </IconButton>
       </ButtonGroup>
-    </div>
+      <Divider />
+    </li>
   );
 }
