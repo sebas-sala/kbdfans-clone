@@ -12,10 +12,13 @@ export default function useProductSearch(search: string) {
 
   useEffect(() => {
     if (search) {
-      const filteredProducts = data?.filter((product) =>
-        product.name.toLowerCase().includes(search.toLowerCase())
-      );
-      console.log(filteredProducts);
+      const searchLetters = search.replace(/ +/g, "").toLowerCase().split("");
+
+      const filteredProducts = data?.filter((product) => {
+        const productName = product.name.toLowerCase();
+        return searchLetters.every((letter) => productName.includes(letter));
+      });
+
       if (filteredProducts) setFilteredProducts(filteredProducts);
     }
   }, [search, data]);

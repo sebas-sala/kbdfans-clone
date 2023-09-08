@@ -7,6 +7,7 @@ import useCart from "@/hooks/use-cart";
 import { fetchCartByUserId } from "@/services/cart-services";
 
 import { type CartStore } from "@/types/types";
+import useAuthContext from "@/hooks/use-auth-context";
 
 type CartProviderProps = {
   children: React.ReactNode;
@@ -31,12 +32,13 @@ export const getInitialCart = async () => {
 export default function CartProvider({ children }: CartProviderProps) {
   const cartInstance = useCart();
 
+  const { userData } = useAuthContext();
+
   const setCartItems = useCart((state) => state.setCartItems);
 
   useEffect(() => {
     getInitialCart()
       .then((res) => {
-        console.log(res);
         if (!res) return;
 
         setCartItems(res);
@@ -44,7 +46,7 @@ export default function CartProvider({ children }: CartProviderProps) {
       .catch((e) => {
         console.error(e);
       });
-  }, [setCartItems]);
+  }, [setCartItems, userData]);
 
   return (
     <CartContext.Provider value={cartInstance}>{children}</CartContext.Provider>

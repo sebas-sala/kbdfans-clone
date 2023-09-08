@@ -4,6 +4,8 @@ import Image from "next/image";
 import useCart from "@/hooks/use-cart";
 
 import type { CartWithProducts } from "@/types/db";
+import { Button, ButtonGroup, IconButton } from "@chakra-ui/react";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 type CartItemProps = {
   product: CartWithProducts;
@@ -11,16 +13,14 @@ type CartItemProps = {
 
 export default function CartItem({ product }: CartItemProps) {
   const { addToCart, removeFromCart } = useCart();
-  const [loading, setLoading] = useState(false);
+
   const { quantity, Product } = product;
   const { images, name, price, stock } = Product;
   const image = images[0].url;
   const newPrice = price * quantity;
 
   const handleAddToQuantity = async () => {
-    setLoading(true);
     addToCart(Product);
-    setLoading(false);
   };
 
   const handleRemoveFromQuantity = () => {
@@ -36,18 +36,24 @@ export default function CartItem({ product }: CartItemProps) {
           <p>${newPrice}</p>
         </div>
       </div>
-      <div className="flex">
-        <button type="button" onClick={handleRemoveFromQuantity}>
-          <span className="">-</span>
-          {loading && <span>Loading...</span>}
-        </button>
-        <p className="px-8">
-          Quantity: <span className="text-center">{quantity}</span>
-        </p>
-        <button type="button" onClick={handleAddToQuantity}>
-          +
-        </button>
-      </div>
+
+      <ButtonGroup isAttached variant="outline" marginTop="4">
+        <IconButton
+          aria-label="decrement-quantity"
+          onClick={handleRemoveFromQuantity}
+        >
+          <AiOutlineMinus />
+        </IconButton>
+        <Button className="px-8" isDisabled>
+          Quantity:<span className="text-center ml-2"> {quantity}</span>
+        </Button>
+        <IconButton
+          aria-label="increase-quantity"
+          onClick={handleAddToQuantity}
+        >
+          <AiOutlinePlus />
+        </IconButton>
+      </ButtonGroup>
     </div>
   );
 }

@@ -31,7 +31,7 @@ export type ProductType = {
   name: string;
   price: number;
   stock: number;
-  images: ProductImages[];
+  images?: ProductImages[];
 };
 
 export type Category = {

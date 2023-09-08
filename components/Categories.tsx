@@ -5,6 +5,7 @@ import ProductsFetchingSection from "@/components/product/product-section";
 import Spinner from "@/components/Spinner";
 
 import { getProductsByCategoryId } from "@/actions/product-actions";
+import ProductLoader from "./Loaders/product-loader";
 
 export default async function Categories() {
   const keyboardsData = getProductsByCategoryId(1, 4);
@@ -14,7 +15,7 @@ export default async function Categories() {
 
   return (
     <Container>
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<ProductLoader />}>
         <ProductsFetchingSection
           title="Fully Assembled Keyboard"
           href="collections/keyboard"
@@ -22,7 +23,7 @@ export default async function Categories() {
           promise={keyboardsData}
         />
       </Suspense>
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<ProductLoader />}>
         <ProductsFetchingSection
           title="Keyboard Switches"
           linkText="Shop"
@@ -30,7 +31,7 @@ export default async function Categories() {
           promise={switchesData}
         />
       </Suspense>
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<ProductLoader />}>
         <ProductsFetchingSection
           title="Keyboard Keycaps"
           linkText="See more"
@@ -38,7 +39,7 @@ export default async function Categories() {
           promise={keycapsData}
         />
       </Suspense>
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<ProductLoader />}>
         <ProductsFetchingSection
           title="PCB"
           href="collections/pcb"

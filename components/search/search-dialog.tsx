@@ -37,7 +37,7 @@ export default function SearchDialog() {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalBody className="p-0 bg-black">
+          <ModalBody className="bg-black">
             <InputGroup>
               <InputLeftElement pointerEvents="auto">
                 <BsSearch className="text-white text-xl cursor-pointerhover:text-gray-300" />
@@ -48,8 +48,8 @@ export default function SearchDialog() {
                 placeholder="Search a product..."
                 className="w-full text-white"
               />
-              <SearchResultList filteredProducts={filteredProducts} />
             </InputGroup>
+            <SearchResultList filteredProducts={filteredProducts} />
           </ModalBody>
         </ModalContent>
       </Modal>

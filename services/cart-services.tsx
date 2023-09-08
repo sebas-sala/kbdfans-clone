@@ -2,7 +2,6 @@ import { type ProductType } from "@/types/db";
 
 export const fetchCartByUserId = async (userId: string) => {
   const res = await fetch(`http://localhost:3000/api/cart?userId=${userId}`);
-  console.log(res);
   if (!res.ok) {
     throw new Error("Error fetching cart");
   }
@@ -22,12 +21,9 @@ export const addToCart = async (product: ProductType) => {
   return response.json();
 };
 
-export const removeFromCart = async (
-  productId: number,
-  userId: number | string
-) => {
+export const removeFromCart = async (productId: number) => {
   const response = await fetch(
-    `http://localhost:3000/api/cart?productId=${productId}&userId=${userId}`,
+    `http://localhost:3000/api/cart?productId=${productId}`,
     {
       method: "DELETE",
     }
@@ -38,12 +34,9 @@ export const removeFromCart = async (
   return response.json();
 };
 
-export const decrementQuantity = async (
-  productId: number,
-  userId: number | string
-) => {
+export const decrementQuantity = async (productId: number) => {
   const response = await fetch(
-    `http://localhost:3000/api/cart?productId=${productId}&userId=${userId}`,
+    `http://localhost:3000/api/cart?productId=${productId}`,
     {
       method: "PUT",
     }

@@ -90,16 +90,24 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const userId = searchParams.get("userId");
-    const productId = searchParams.get("productId");
+    const supabase = createServerComponentClient({ cookies });
 
-    if (!userId) {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
       return NextResponse.json(
-        { message: "User ID not provided" },
+        { message: "No user provided" },
         { status: 400 }
       );
     }
+
+    const userId = user.id;
+
+    const { searchParams } = new URL(request.url);
+
+    const productId = searchParams.get("productId");
 
     if (!productId) {
       return NextResponse.json(
@@ -108,14 +116,8 @@ export async function PUT(request: Request) {
       );
     }
 
-    const user = await findUserById(userId);
-
-    if (!user) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
-    }
-
     const findCart = await findCartItemByUserIdAndProductId(userId, +productId);
-    console.log(findCart);
+
     if (!findCart) {
       return NextResponse.json(
         { message: "Cart item not found" },
@@ -136,27 +138,30 @@ export async function PUT(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const userId = searchParams.get("userId");
-    const productId = searchParams.get("productId");
+    const supabase = createServerComponentClient({ cookies });
 
-    if (!userId) {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
       return NextResponse.json(
-        { message: "User ID not provided" },
+        { message: "No user provided" },
         { status: 400 }
       );
     }
+
+    const userId = user.id;
+
+    const { searchParams } = new URL(request.url);
+
+    const productId = searchParams.get("productId");
 
     if (!productId) {
       return NextResponse.json(
         { message: "Product ID not provided" },
         { status: 400 }
       );
-    }
-
-    const user = findUserById(userId);
-    if (!user) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
     const cartItem = await findCartItemByUserIdAndProductId(userId, +productId);

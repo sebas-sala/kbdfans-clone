@@ -40,37 +40,33 @@ const useCart = create<CartStore>((set) => ({
   clearCart: () => set({ cartItems: [] }),
 
   removeFromCart: async (item) => {
-    const userCookie = Cookie.get("user");
-    if (userCookie) {
-      const { id } = JSON.parse(userCookie) as User;
-      if (item.quantity <= 1) {
-        toast
-          .promise(removeItem(item.productId, id), {
-            loading: "Removing item from cart...",
-            success: "Item removed from cart",
-            error: "Something went wrong",
-          })
-          .then((data) => {
-            set(() => ({ cartItems: data }));
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      } else {
-        toast
-          .promise(decrementQuantity(item.productId, id), {
-            loading: "Decreasing product quantity",
-            success: "Product quantity decreased",
-            error: "Something went wrong",
-          })
-          .then((data) => {
-            console.log(data);
-            set(() => ({ cartItems: data }));
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
+    if (item.quantity <= 1) {
+      toast
+        .promise(removeItem(item.productId), {
+          loading: "Removing item from cart...",
+          success: "Item removed from cart",
+          error: "Something went wrong",
+        })
+        .then((data) => {
+          set(() => ({ cartItems: data }));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      toast
+        .promise(decrementQuantity(item.productId), {
+          loading: "Decreasing product quantity",
+          success: "Product quantity decreased",
+          error: "Something went wrong",
+        })
+        .then((data) => {
+          console.log(data);
+          set(() => ({ cartItems: data }));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   },
 }));

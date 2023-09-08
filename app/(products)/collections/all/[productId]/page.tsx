@@ -16,7 +16,7 @@ const ProductPage = async ({ params }: Props) => {
     return <div>Product not found...</div>;
   }
 
-  const images = product.images;
+  const images = product.images ? product.images : [];
 
   return (
     <main className="container mx-auto grid md:grid-cols-2 min-h-screen overflow-y-auto gap-8">

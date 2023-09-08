@@ -30,7 +30,7 @@ export const fetchUserByEmailAndPassword = async (
     if (!res.ok) throw new Error("Error al iniciar sesión");
 
     const data = await res.json();
-    console.log(data);
+
     return data.user;
   } catch (e) {
     console.error(e);

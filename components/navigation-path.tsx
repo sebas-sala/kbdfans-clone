@@ -1,6 +1,7 @@
 "use client";
 
-import Link from "next/link";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
+
 import { useSelectedLayoutSegments, useRouter } from "next/navigation";
 
 export default function NavigationPath() {
@@ -16,19 +17,21 @@ export default function NavigationPath() {
   };
 
   return (
-    <nav className="container mx-auto mt-3">
-      <ul className="flex gap-x-6">
-        <Link href="/">Home</Link>
+    <nav className="container mx-auto my-3">
+      <Breadcrumb className="flex gap-x-6">
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        </BreadcrumbItem>
         {segments.map((segment, index) => (
-          <span
+          <BreadcrumbItem
             className="cursor-pointer"
             onClick={() => handleClick(segment)}
             key={index}
           >
-            {segment}
-          </span>
+            <BreadcrumbLink>{segment}</BreadcrumbLink>
+          </BreadcrumbItem>
         ))}
-      </ul>
+      </Breadcrumb>
     </nav>
   );
 }

@@ -7,7 +7,8 @@ import type { ProductType } from "@/types/db";
 
 export default function ProductCard({ id, images, name, price }: ProductType) {
   const router = useRouter();
-  const firstImage = images[0].url;
+
+  const firstImage = images ? images[0].url : "";
 
   const handleClick = () => {
     router.push(`/collections/all/${id}`);
