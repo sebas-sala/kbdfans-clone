@@ -2,7 +2,6 @@ import { Suspense } from "react";
 
 import Container from "@/components/Container";
 import ProductsFetchingSection from "@/components/product/product-section";
-import Spinner from "@/components/Spinner";
 
 import { getProductsByCategoryId } from "@/actions/product-actions";
 import ProductLoader from "./Loaders/product-loader";

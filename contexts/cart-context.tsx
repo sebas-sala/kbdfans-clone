@@ -36,8 +36,6 @@ export default function CartProvider({ children }: CartProviderProps) {
 
   const setCartItems = useCart((state) => state.setCartItems);
 
-  console.log("prueba");
-
   useEffect(() => {
     async function getInitialCart() {
       try {

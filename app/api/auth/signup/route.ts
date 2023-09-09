@@ -11,6 +11,8 @@ const registerUserSchema = z.object({
   password: z.string().min(6, "Password should be minimum 6 characters"),
 });
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: Request) {
   try {
     const supabase = createServerComponentClient({ cookies });

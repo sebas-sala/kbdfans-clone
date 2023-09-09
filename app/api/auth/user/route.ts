@@ -4,6 +4,8 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import { findUserById } from "@/actions/user-actions";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const supabase = createServerComponentClient({ cookies });

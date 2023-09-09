@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 
 import { getCategories } from "@/actions/product-actions";
 
+export const dynamic = "force-dynamic";
+
 export const GET = async () => {
   try {
     const categories = await getCategories();
