@@ -2,8 +2,6 @@
 
 import { Skeleton, SkeletonText } from "@chakra-ui/react";
 
-import ProductCard from "@/components/product/product-card";
-
 export default function Loading() {
   return (
     <main className="container mx-auto grid md:grid-cols-2 min-h-screen overflow-y-auto gap-8">

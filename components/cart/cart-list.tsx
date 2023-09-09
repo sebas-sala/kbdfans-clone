@@ -1,6 +1,8 @@
 import CartIcon from "../Icons/CartIcon";
 import CartItem from "./cart-item";
 
+import { sortItems } from "@/lib/cart-utils";
+
 import type { CartWithProducts } from "@/types/db";
 
 type CartListProps = {
@@ -8,10 +10,7 @@ type CartListProps = {
 };
 
 export default function CartList({ cartItems }: CartListProps) {
-  const sortedCartItems = cartItems.sort((a, b) => {
-    return a.quantity > b.quantity ? -1 : 1;
-  });
-
+  const sortedCartItems = sortItems(cartItems);
   return (
     <>
       {cartItems && cartItems.length > 0 ? (

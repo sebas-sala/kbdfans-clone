@@ -3,11 +3,10 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 import Link from "next/link";
 
-import { useSelectedLayoutSegments, useRouter } from "next/navigation";
+import { useSelectedLayoutSegments } from "next/navigation";
 
 export default function NavigationPath() {
   const segments = useSelectedLayoutSegments();
-  const router = useRouter();
 
   const handleClick = (segment: string) => {
     if (segment === segments.at(-1)) {

@@ -9,7 +9,7 @@ import SearchDialog from "@/components/search/search-dialog";
 import useAuthContext from "@/hooks/use-auth-context";
 
 export default function NavigationIcons() {
-  const { userData, logout, session } = useAuthContext();
+  const { userData, logout } = useAuthContext();
 
   const Trigger = () => {
     return (

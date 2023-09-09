@@ -7,7 +7,10 @@ type Props = {
   };
 };
 
-const page = async ({ params }: Props) => {
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+export default async function CategoryPage({ params }: Props) {
   const products = await getProductsByCategory(params.category, 16);
 
   return (
@@ -27,6 +30,4 @@ const page = async ({ params }: Props) => {
       </section>
     </main>
   );
-};
-
-export default page;
+}

@@ -11,6 +11,9 @@ type Props = {
   };
 };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function ProductPage({ params }: Props) {
   const product: ProductType | null = await getProductById(params.productId);
 
