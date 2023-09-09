@@ -78,7 +78,6 @@ export async function POST(request: Request) {
     if (existingCartItem) {
       await updateItemQuantity(existingCartItem, false);
     } else {
-      console.log(userId, productId);
       await addItemToCart(userId, productId);
     }
 
@@ -130,7 +129,7 @@ export async function PUT(request: Request) {
     await updateItemQuantity(findCart, true);
 
     const cartItems = await getCartItems(userId);
-    console.log(cartItems);
+
     return NextResponse.json(cartItems);
   } catch (e) {
     console.error(e);

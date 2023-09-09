@@ -10,7 +10,7 @@ export const fetchUserData = async (): Promise<User | null> => {
 
     return await res.json();
   } catch (e) {
-    console.log("Error al obtener los datos del usuario session:", e);
+    console.error("Error al obtener los datos del usuario session:", e);
     return null;
   }
 };

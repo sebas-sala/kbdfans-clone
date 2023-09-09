@@ -22,7 +22,7 @@ export async function GET() {
     const user = await findUserById(data.session.user.id);
     return NextResponse.json(user);
   } catch (e) {
-    console.log("Error al obtener los datos del usuario:", e);
+    console.error("Error al obtener los datos del usuario:", e);
     return NextResponse.error();
   }
 }

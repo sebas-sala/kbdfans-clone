@@ -60,7 +60,6 @@ const useCart = create<CartStore>((set) => ({
           error: "Something went wrong",
         })
         .then((data) => {
-          console.log(data);
           set(() => ({ cartItems: data }));
         })
         .catch((error) => {

@@ -595,7 +595,7 @@ const createData = async () => {
       images.map((elem) => prisma.productImages.create({ data: elem }))
     )
 
-    console.log("Datos creados y almacenados en Supabase.")
+
   } catch (error) {
     console.error("Ocurrió un error al crear los datos:", error)
   } finally {
