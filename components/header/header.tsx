@@ -18,7 +18,7 @@ export default function Header() {
         <Container>
           <div className="flex items-center justify-between py-6 h-full">
             <Image
-              src="/logo.avif"
+              src="/logo.webp"
               width={1000}
               height={1000}
               className="h-full w-40 object-cover"
