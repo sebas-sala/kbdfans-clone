@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <Background styles="bg-black">
       <Container>
-        <div className="flex h-40 items-end pb-8">
+        <div className="flex py-8 items-end ">
           <footer className="flex">
             <div className="flex flex-wrap gap-y-6 truncate text-xs text-white">
               {footerLinks.map((link, index) => (

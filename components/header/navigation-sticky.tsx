@@ -17,7 +17,7 @@ export default function NavigationSticky({ isSticky }: StickyNavProps) {
         <nav className="z-50 flex w-full items-center gap-4 text-white">
           <Link
             href="/"
-            className="p-4 font-bold tracking-wider text-xs sm:text-sm md:text-base"
+            className="p-2 font-bold tracking-wider text-xs sm:text-sm md:text-base"
           >
             Home
           </Link>
@@ -26,7 +26,7 @@ export default function NavigationSticky({ isSticky }: StickyNavProps) {
             const trigger = (
               <Link
                 href={href}
-                className={`p-0 sm::p-4 font-bold tracking-wider text-xs sm:text-sm md:text-base`}
+                className={`p-2 font-bold tracking-wider text-xs sm:text-sm md:text-base`}
               >
                 {text}
               </Link>

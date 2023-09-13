@@ -9,7 +9,7 @@ type Props = {
 
 export default function CollectionItem({ id, name, productImage }: Props) {
   return (
-    <li key={id} className="w-full md:w-1/2 lg:w-3/12 p-2 shadow-md">
+    <li key={id} className="w-full p-2 shadow-md">
       <Link href={`collections/${name}`}>
         {productImage && (
           <Image

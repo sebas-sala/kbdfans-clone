@@ -1,8 +1,8 @@
 "use client";
 
-import { MenuItem, Checkbox } from "@chakra-ui/react";
+import { MenuItem, Checkbox, Button } from "@chakra-ui/react";
 
-import Menu from "@/components/Menu";
+import { Menu, MenuButton, MenuList } from "@chakra-ui/react";
 
 import useFilter from "@/hooks/use-filters";
 
@@ -18,24 +18,24 @@ export default function ProductFilters({ categories }: FiltersProps) {
   return (
     <section className="flex w-full gap-20">
       <div className="flex gap-4">
-        <Menu buttonText="Categories">
-          {categories.map(({ id, name, _count }) => (
-            <MenuItem key={id} className="flex justify-between">
-              <div className="flex items-center gap-4">
-                <Checkbox
-                  onChange={() => handleClick(name, id)}
-                  isChecked={selectedCategories.includes(id)}
-                />
-                <p>{name}</p>
-              </div>
-              <p>{_count.products}</p>
-            </MenuItem>
-          ))}
-        </Menu>
-        <Menu buttonText="Price">
-          <MenuItem>
-            <p>precio</p>
-          </MenuItem>
+        <Menu>
+          <MenuButton as={Button} borderWidth="1px">
+            Filter By
+          </MenuButton>
+          <MenuList overflowY={"auto"}>
+            {categories.map(({ id, name, _count }) => (
+              <MenuItem key={id} className="flex justify-between ">
+                <div className="flex items-center gap-4">
+                  <Checkbox
+                    onChange={() => handleClick(name, id)}
+                    isChecked={selectedCategories.includes(id)}
+                  />
+                  <p>{name}</p>
+                </div>
+                <p>{_count.products}</p>
+              </MenuItem>
+            ))}
+          </MenuList>
         </Menu>
       </div>
     </section>

@@ -10,7 +10,7 @@ type Props = {
 
 export default function CollectionList({ categories }: Props) {
   return (
-    <ul className="flex flex-wrap md:gap-4 md:gap-y-14 justify-center">
+    <ul className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-4 md:gap-y-14 ">
       {categories?.map((category) => (
         <CollectionItem {...category} key={category.id} />
       ))}

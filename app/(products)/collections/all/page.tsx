@@ -15,14 +15,14 @@ export default async function AllPage({ searchParams }: AllProps) {
   ]);
 
   return (
-    <>
+    <main className="px-8">
       <h2 className="mb-20 text-center text-6xl font-bold">Products</h2>
       <section className="mx-auto container">
         <ProductFilters categories={categories} />
-        <div className="flex w-full justify-between gap-20">
+        <div className="flex w-full justify-between gap-20 flex-wrap">
           <FilteredProducts products={products} />
         </div>
       </section>
-    </>
+    </main>
   );
 }

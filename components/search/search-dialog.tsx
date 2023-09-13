@@ -31,7 +31,7 @@ export default function SearchDialog() {
   return (
     <>
       <BsSearch
-        className="cursor-pointer transition duration-200 hover:text-white/90"
+        className="cursor-pointer transition duration-200 hover:text-white/90 h-6 md:h-8"
         onClick={onOpen}
       />
       <Modal isOpen={isOpen} onClose={onClose}>

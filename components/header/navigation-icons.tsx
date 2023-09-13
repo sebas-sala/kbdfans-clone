@@ -18,7 +18,7 @@ export default function NavigationIcons() {
         aria-label="Open dropdown"
         className="flex items-center"
       >
-        <CgProfile className="cursor-pointer transition duration-200 hover:text-white/90" />
+        <CgProfile className="cursor-pointer transition duration-200 hover:text-white/90 h-6 md:h-8" />
       </button>
     );
   };

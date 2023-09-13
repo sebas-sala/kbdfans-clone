@@ -16,15 +16,16 @@ export default function Header() {
     <>
       <header className="inset-0 relative bg-black w-full" ref={headerRef}>
         <Container>
-          <div className="flex items-center justify-between py-6">
+          <div className="flex items-center justify-between py-6 h-full">
             <Image
-              src="/../public/images/logo.avif"
-              width={150}
-              height={150}
-              className="h-auto w-auto object-contain"
+              src="/logo.avif"
+              width={1000}
+              height={1000}
+              className="h-full w-40 object-cover"
               priority
               alt="Logo"
             />
+
             {!isSticky && <IconNav />}
           </div>
         </Container>

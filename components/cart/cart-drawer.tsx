@@ -28,7 +28,7 @@ export default function Cart() {
   return (
     <>
       <button type="button" onClick={onOpen} aria-label="Open cart drawer">
-        <AiOutlineShoppingCart />
+        <AiOutlineShoppingCart className="h-6 md:h-8" />
       </button>
       <DrawerContainer
         isOpen={isOpen}
