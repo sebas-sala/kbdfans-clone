@@ -2,37 +2,37 @@ import type { navDataType, instaPostsImagesType } from "@/types/types";
 
 export const instaPostsImages: instaPostsImagesType[] = [
   {
-    src: "/../public/images/feed1.jpg",
+    src: "/feed1.jpg",
     alt: "",
     description: "insta feed 1",
     route: "",
   },
   {
-    src: "/../public/images/feed2.jpg",
+    src: "/feed2.jpg",
     alt: "",
     description: "insta feed 2",
     route: "",
   },
   {
-    src: "/../public/images/feed3.jpg",
+    src: "/feed3.jpg",
     alt: "",
     description: "insta feed 3",
     route: "",
   },
   {
-    src: "/../public/images/feed4.jpg",
+    src: "/feed4.jpg",
     alt: "",
     description: "insta feed 4",
     route: "",
   },
   {
-    src: "/../public/images/feed5.jpg",
+    src: "/feed5.jpg",
     alt: "",
     description: "insta feed 5",
     route: "",
   },
   {
-    src: "/../public/images/feed6.jpg",
+    src: "/feed6.jpg",
     alt: "insta feed 6",
     description: "",
     route: "",

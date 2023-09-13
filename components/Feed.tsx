@@ -3,10 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useDisclosure } from "@chakra-ui/react";
-import { AiOutlineInstagram } from "react-icons/ai";
 
-import ImageDialog from "./image-dialog";
+import { AiOutlineInstagram } from "react-icons/ai";
 
 type FeedProps = {
   src: string;
@@ -14,7 +12,6 @@ type FeedProps = {
 };
 
 export default function Feed({ src, description }: FeedProps) {
-  const { isOpen, onClose, onOpen } = useDisclosure();
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -39,7 +36,6 @@ export default function Feed({ src, description }: FeedProps) {
       className="relative h-full w-full cursor-pointer snap-center lg:snap-none shrink-0 lg:shrink"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={onOpen}
     >
       {NewImage}
       {hovered && (
@@ -54,20 +50,6 @@ export default function Feed({ src, description }: FeedProps) {
           <AiOutlineInstagram className="text-4xl text-white" />
         </motion.div>
       )}
-
-      <ImageDialog
-        title={description}
-        isOpen={isOpen}
-        onClose={onClose}
-        setHovered={setHovered}
-        size="6xl"
-        image={NewImage}
-      >
-        <div className="space-y-4 p-8">
-          <p>{description}</p>
-          <p>{src}</p>
-        </div>
-      </ImageDialog>
     </div>
   );
 }
