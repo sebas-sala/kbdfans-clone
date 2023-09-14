@@ -9,6 +9,7 @@ import Form from "../Form";
 import useAuthContext from "@/hooks/use-auth-context";
 
 import { User } from "@/types/db";
+import toast from "react-hot-toast";
 
 type SignupFormProps = {
   onClose: () => void;
@@ -33,9 +34,16 @@ export default function SignupForm({ onClose }: SignupFormProps) {
   const onSubmit: SubmitHandler<User> = async (data) => {
     const { email, password } = data;
     if (!email || !password) return;
-    handleSignup({ email, password });
-    onClose();
-    router.refresh();
+    toast
+      .promise(handleSignup({ email, password }), {
+        loading: "Signing up...",
+        success: "Signup successful",
+        error: "Something went wrong",
+      })
+      .then(() => {
+        onClose();
+        router.refresh();
+      });
   };
 
   return (

@@ -1,7 +1,6 @@
 "use client";
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 
 import { fetchUserData } from "@/services/user-services";
@@ -10,9 +9,9 @@ import { type User } from "@/types/db";
 
 type AuthContextType = {
   userData: User | null;
-  handleLogout: () => void;
-  handleLogin: ({ email, password }: LoginData) => void;
-  handleSignup: ({ email, password }: SignupData) => void;
+  handleLogout: () => Promise<void>;
+  handleLogin: ({ email, password }: LoginData) => Promise<void>;
+  handleSignup: ({ email, password }: SignupData) => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -34,50 +33,77 @@ type SignupData = {
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [userData, setUserData] = useState<User | null>(null);
 
-  const router = useRouter();
-
   const supabase = createClientComponentClient();
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.refresh();
+    try {
+      await supabase.auth.signOut();
+      setUserData(null);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleLogin = async ({ email, password }: LoginData) => {
-    const supabase = createClientComponentClient();
-    const user = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const res = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (!user) return;
+      const {
+        data: { user },
+      } = res;
+
+      if (!user) return;
+
+      const userData = await fetchUserData(user.id);
+      setUserData(userData);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleSignup = async ({ email, password }: SignupData) => {
-    await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${location.origin}/auth/callback`,
-      },
-    });
-    router.refresh();
+    try {
+      const res = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${location.origin}/auth/callback`,
+        },
+      });
+
+      const {
+        data: { user },
+      } = res;
+
+      if (!user) return;
+
+      const userData = await fetchUserData(user.id);
+      setUserData(userData);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   useEffect(() => {
-    const supabase = createClientComponentClient();
-    supabase.auth.getSession().then((res) => {
+    const initSession = async () => {
+      const res = await supabase.auth.getSession();
+
       const {
         data: { session },
       } = res;
 
       if (!session) return;
 
-      fetchUserData(session.user.id).then((res) => {
-        setUserData(res);
-      });
-    });
-  }, []);
+      const userData = await fetchUserData(session.user.id);
+
+      setUserData(userData);
+    };
+
+    initSession();
+  }, [supabase.auth]);
 
   return (
     <AuthContext.Provider

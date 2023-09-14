@@ -10,8 +10,6 @@ export default function useFilter() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  console.log(selectedCategories);
-
   useEffect(() => {
     const current = qs.parse(searchParams.toString());
     const selected = Object.keys(current).map((value) => value);

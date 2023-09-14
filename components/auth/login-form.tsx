@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -9,6 +11,7 @@ import Form from "../Form";
 import useAuthContext from "@/hooks/use-auth-context";
 
 import type { User } from "@/types/db";
+import toast from "react-hot-toast";
 
 type LoginFormProps = {
   onClose: () => void;
@@ -17,6 +20,7 @@ type LoginFormProps = {
 export default function LoginForm({ onClose }: LoginFormProps) {
   const [showForm, setShowForm] = useState(false);
   const { handleLogin } = useAuthContext();
+
   const router = useRouter();
 
   const {
@@ -32,9 +36,16 @@ export default function LoginForm({ onClose }: LoginFormProps) {
   const onSubmit: SubmitHandler<User> = (data) => {
     const { email, password } = data;
     if (!email || !password) return;
-    handleLogin({ email, password });
-    onClose();
-    router.refresh();
+    toast
+      .promise(handleLogin({ email, password }), {
+        loading: "Logging in...",
+        success: "Login successful",
+        error: "Something went wrong",
+      })
+      .then(() => {
+        onClose();
+        router.refresh();
+      });
   };
 
   return (

@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 
-import { findUserById } from "@/actions/user-actions";
 import {
   addItemToCart,
   deleteItemFromCart,
@@ -8,6 +7,7 @@ import {
   getCartItems,
   updateItemQuantity,
 } from "@/actions/cart-actions";
+import { findUserById } from "@/actions/user-actions";
 
 export const dynamic = "force-dynamic";
 
@@ -124,14 +124,7 @@ export async function PUT(
 
     const cartItems = await getCartItems(userId);
 
-    return new Response(JSON.stringify(cartItems), {
-      status: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      },
-    });
+    return NextResponse.json(cartItems);
   } catch (e) {
     console.error(e);
     return NextResponse.error();
