@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
+import { useRef } from "react";
 
 import Container from "@/components/Container";
 import IconNav from "./navigation-icons";

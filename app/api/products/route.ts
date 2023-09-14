@@ -1,11 +1,16 @@
 import { getProductsWithoutImages } from "@/actions/product-actions";
 
-import { NextResponse } from "next/server";
-
 export const dynamic = "force-dynamic";
 
 export async function GET() {
   const products = await getProductsWithoutImages();
 
-  return NextResponse.json(products);
+  return new Response(JSON.stringify(products), {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
 }

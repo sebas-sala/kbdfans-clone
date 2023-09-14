@@ -1,12 +1,12 @@
-import { Toaster } from "react-hot-toast";
 import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 import Footer from "@/components/Footer";
 import Header from "../components/header/header";
 
-import Providers from "./providers";
-import CartProvider from "@/contexts/cart-context";
 import AuthProvider from "@/contexts/auth-context";
+import CartProvider from "@/contexts/cart-context";
+import Providers from "./providers";
 
 import "./globals.css";
 

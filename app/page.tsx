@@ -1,7 +1,7 @@
 import Category from "@/components/Category";
-import Categories from "../components/Categories";
-import InstagramPostSection from "@/components/instagram-post-section";
 import Container from "@/components/Container";
+import InstagramPostSection from "@/components/instagram-post-section";
+import Categories from "../components/Categories";
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
           link="/collections/keycaps"
         />
         <Category
-          text="Keyboard DIY kit"
+          text="Keyboards DIY kit"
           img="https://cdn.shopify.com/s/files/1/1473/3902/files/odin_75_720x.jpg?v=1680585767"
           link="/collections/keyboard"
         />

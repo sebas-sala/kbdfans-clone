@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 
 import { findUserById } from "@/actions/user-actions";
 import {
@@ -13,10 +11,12 @@ import {
 
 export const dynamic = "force-dynamic";
 
-export async function GET(request: Request) {
+export async function GET(
+  request: Request,
+  { params }: { params: { userId: string } }
+) {
   try {
-    const { searchParams } = new URL(request.url);
-    const userId = searchParams.get("userId");
+    const { userId } = params;
 
     if (!userId) {
       return NextResponse.json(
@@ -44,7 +44,10 @@ export async function GET(request: Request) {
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(
+  request: Request,
+  { params }: { params: { userId: string } }
+) {
   try {
     const { productId } = await request.json();
 
@@ -55,20 +58,14 @@ export async function POST(request: Request) {
       );
     }
 
-    const supabase = createServerComponentClient({ cookies });
+    const { userId } = params;
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
+    if (!userId) {
       return NextResponse.json(
         { message: "No user provided" },
         { status: 400 }
       );
     }
-
-    const userId = user.id;
 
     const existingCartItem = await findCartItemByUserIdAndProductId(
       userId,
@@ -89,26 +86,23 @@ export async function POST(request: Request) {
   }
 }
 
-export async function PUT(request: Request) {
+export async function PUT(
+  req: Request,
+  { params }: { params: { userId: string } }
+) {
   try {
-    const supabase = createServerComponentClient({ cookies });
+    const { userId } = params;
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
+    if (!userId) {
       return NextResponse.json(
         { message: "No user provided" },
         { status: 400 }
       );
     }
 
-    const userId = user.id;
+    const res = await await req.json();
 
-    const { searchParams } = new URL(request.url);
-
-    const productId = searchParams.get("productId");
+    const { productId } = res;
 
     if (!productId) {
       return NextResponse.json(
@@ -130,29 +124,33 @@ export async function PUT(request: Request) {
 
     const cartItems = await getCartItems(userId);
 
-    return NextResponse.json(cartItems);
+    return new Response(JSON.stringify(cartItems), {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    });
   } catch (e) {
     console.error(e);
     return NextResponse.error();
   }
 }
 
-export async function DELETE(request: Request) {
+export async function DELETE(
+  request: Request,
+  { params }: { params: { userId: string } }
+) {
   try {
-    const supabase = createServerComponentClient({ cookies });
+    const { userId } = params;
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
+    if (!userId) {
       return NextResponse.json(
         { message: "No user provided" },
         { status: 400 }
       );
     }
-
-    const userId = user.id;
 
     const { searchParams } = new URL(request.url);
 

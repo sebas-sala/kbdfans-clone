@@ -1,8 +1,8 @@
 "use client";
 
-import { create } from "zustand";
-
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import toast from "react-hot-toast";
+import { create } from "zustand";
 
 import {
   decrementQuantity,
@@ -21,8 +21,21 @@ const useCart = create<CartStore>((set) => ({
     })),
 
   addToCart: async (product) => {
+    const supabase = createClientComponentClient();
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session) {
+      toast.error("Please login to add to cart");
+      return;
+    }
+
+    const { id } = session.user;
+
     await toast
-      .promise(fetchingCart(product), {
+      .promise(fetchingCart(product, id), {
         loading: "Adding to cart...",
         success: "Product added to cart",
         error: "Something went wrong",
@@ -39,9 +52,22 @@ const useCart = create<CartStore>((set) => ({
   clearCart: () => set({ cartItems: [] }),
 
   removeFromCart: async (item) => {
+    const supabase = createClientComponentClient();
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session) {
+      toast.error("Please login to add to cart");
+      return;
+    }
+
+    const { id } = session.user;
+
     if (item.quantity <= 1) {
       await toast
-        .promise(removeItem(item.productId), {
+        .promise(removeItem(item.productId, id), {
           loading: "Removing item from cart...",
           success: "Item removed from cart",
           error: "Something went wrong",
@@ -54,7 +80,7 @@ const useCart = create<CartStore>((set) => ({
         });
     } else {
       await toast
-        .promise(decrementQuantity(item.productId), {
+        .promise(decrementQuantity(item.productId, id), {
           loading: "Decreasing product quantity",
           success: "Product quantity decreased",
           error: "Something went wrong",

@@ -9,7 +9,7 @@ import SearchDialog from "@/components/search/search-dialog";
 import useAuthContext from "@/hooks/use-auth-context";
 
 export default function NavigationIcons() {
-  const { userData, logout } = useAuthContext();
+  const { userData, handleLogout } = useAuthContext();
 
   const Trigger = () => {
     return (
@@ -30,7 +30,7 @@ export default function NavigationIcons() {
         {userData ? (
           <button
             className="cursor-pointer transition duration-300 hover:text-gray-400"
-            onClick={logout}
+            onClick={handleLogout}
           >
             Logout
           </button>

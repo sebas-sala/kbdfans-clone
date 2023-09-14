@@ -1,15 +1,15 @@
 import { type ProductType } from "@/types/db";
 
 export const fetchCartByUserId = async (userId: string) => {
-  const res = await fetch(`http://localhost:3000/api/cart?userId=${userId}`);
+  const res = await fetch(`http://localhost:3000/api/carts/${userId}`);
   if (!res.ok) {
     throw new Error("Error fetching cart");
   }
   return await res.json();
 };
 
-export const addToCart = async (product: ProductType) => {
-  const response = await fetch("http://localhost:3000/api/cart", {
+export const addToCart = async (product: ProductType, userId: string) => {
+  const response = await fetch(`http://localhost:3000/api/carts/${userId}`, {
     method: "POST",
     body: JSON.stringify({
       productId: product.id,
@@ -21,9 +21,9 @@ export const addToCart = async (product: ProductType) => {
   return await response.json();
 };
 
-export const removeFromCart = async (productId: number) => {
+export const removeFromCart = async (productId: number, userId: string) => {
   const response = await fetch(
-    `http://localhost:3000/api/cart?productId=${productId}`,
+    `http://localhost:3000/api/carts/${userId}?productId=${productId}`,
     {
       method: "DELETE",
     }
@@ -34,13 +34,11 @@ export const removeFromCart = async (productId: number) => {
   return response.json();
 };
 
-export const decrementQuantity = async (productId: number) => {
-  const response = await fetch(
-    `http://localhost:3000/api/cart?productId=${productId}`,
-    {
-      method: "PUT",
-    }
-  );
+export const decrementQuantity = async (productId: number, userId: string) => {
+  const response = await fetch(`http://localhost:3000/api/carts/${userId}`, {
+    method: "PUT",
+    body: JSON.stringify({ productId }),
+  });
   if (!response.ok) {
     throw new Error("Error decrementing quantity");
   }

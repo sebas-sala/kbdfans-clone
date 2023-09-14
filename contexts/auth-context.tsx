@@ -1,22 +1,16 @@
 "use client";
 
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import {
-  type Session,
-  createClientComponentClient,
-} from "@supabase/auth-helpers-nextjs";
 
-import useCart from "@/hooks/use-cart";
-import { createUser, fetchUserData } from "@/services/auth-services";
-import { loginWithEmailAndPassword } from "@/lib/auth";
+import { fetchUserData } from "@/services/user-services";
 
 import { type User } from "@/types/db";
 
 type AuthContextType = {
   userData: User | null;
-  session: Session | null;
-  logout: () => void;
+  handleLogout: () => void;
   handleLogin: ({ email, password }: LoginData) => void;
   handleSignup: ({ email, username, password }: SignupData) => void;
 };
@@ -39,53 +33,36 @@ type SignupData = {
 };
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [session, setSession] = useState<Session | null>(null);
   const [userData, setUserData] = useState<User | null>(null);
-  const { clearCart } = useCart();
 
-  const logout = async () => {
-    const supabase = createClientComponentClient();
+  const router = useRouter();
+
+  const supabase = createClientComponentClient();
+
+  const handleLogout = async () => {
     await supabase.auth.signOut();
-    setUserData(null);
-    clearCart();
+    router.refresh();
   };
 
-  const handleLogin = ({ email, password }: LoginData) => {
-    toast
-      .promise(loginWithEmailAndPassword(email, password), {
-        loading: "login...",
-        success: "login success",
-        error: "login failed",
-      })
-      .then(() => {
-        fetchUserData()
-          .then((res) => {
-            setUserData(res);
-          })
-          .catch((e) => {
-            console.error(e);
-          });
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+  const handleLogin = async ({ email, password }: LoginData) => {
+    const supabase = createClientComponentClient();
+    const user = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (!user) return;
   };
 
-  const handleSignup = ({ email, username, password }: SignupData) => {
-    toast
-      .promise(createUser(email, username, password), {
-        loading: "Creating user...",
-        success: "Please check your email to verify your account",
-        error: "Error creating user",
-      })
-      .then((res) => {
-        if (res) {
-          setUserData(res);
-        }
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+  const handleSignup = async ({ email, password }: SignupData) => {
+    await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: `${location.origin}/auth/callback`,
+      },
+    });
+    router.refresh();
   };
 
   useEffect(() => {
@@ -95,11 +72,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         data: { session },
       } = res;
 
-      setSession(session);
-
       if (!session) return;
 
-      fetchUserData().then((res) => {
+      fetchUserData(session.user.id).then((res) => {
         setUserData(res);
       });
     });
@@ -107,7 +82,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   return (
     <AuthContext.Provider
-      value={{ userData, logout, session, handleLogin, handleSignup }}
+      value={{ userData, handleLogout, handleLogin, handleSignup }}
     >
       {children}
     </AuthContext.Provider>

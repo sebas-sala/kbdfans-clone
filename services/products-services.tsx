@@ -4,5 +4,6 @@ export const fetchProducts = async () => {
   if (!res.ok) {
     throw new Error("Something went wrong!");
   }
-  return res.json();
+
+  return await res.json();
 };

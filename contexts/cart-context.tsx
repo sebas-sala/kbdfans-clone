@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, createContext, useContext } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createContext, useContext, useEffect } from "react";
 
 import useCart from "@/hooks/use-cart";
 import { fetchCartByUserId } from "@/services/cart-services";
 
-import { type CartStore } from "@/types/types";
 import useAuthContext from "@/hooks/use-auth-context";
+import { type CartStore } from "@/types/types";
 
 type CartProviderProps = {
   children: React.ReactNode;

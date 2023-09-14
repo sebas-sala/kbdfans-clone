@@ -1,8 +1,7 @@
-import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { SubmitHandler } from "react-hook-form";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 import Button from "../Button";
 import Form from "../Form";
@@ -30,7 +29,7 @@ export default function LoginForm({ onClose }: LoginFormProps) {
     setShowForm(!showForm);
   };
 
-  const onSubmit: SubmitHandler<User> = async (data) => {
+  const onSubmit: SubmitHandler<User> = (data) => {
     const { email, password } = data;
     if (!email || !password) return;
     handleLogin({ email, password });
