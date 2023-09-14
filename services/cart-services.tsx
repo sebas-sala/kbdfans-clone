@@ -1,7 +1,7 @@
 import { type ProductType } from "@/types/db";
 
 export const fetchCartByUserId = async (userId: string) => {
-  const res = await fetch(`http://localhost:3000/api/carts/${userId}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/carts/${userId}`);
   if (!res.ok) {
     throw new Error("Error fetching cart");
   }
@@ -9,12 +9,15 @@ export const fetchCartByUserId = async (userId: string) => {
 };
 
 export const addToCart = async (product: ProductType, userId: string) => {
-  const response = await fetch(`http://localhost:3000/api/carts/${userId}`, {
-    method: "POST",
-    body: JSON.stringify({
-      productId: product.id,
-    }),
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/carts/${userId}`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        productId: product.id,
+      }),
+    }
+  );
   if (!response.ok) {
     throw new Error("Error adding to cart");
   }
@@ -23,7 +26,7 @@ export const addToCart = async (product: ProductType, userId: string) => {
 
 export const removeFromCart = async (productId: number, userId: string) => {
   const response = await fetch(
-    `http://localhost:3000/api/carts/${userId}?productId=${productId}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/carts/${userId}?productId=${productId}`,
     {
       method: "DELETE",
     }
@@ -35,10 +38,13 @@ export const removeFromCart = async (productId: number, userId: string) => {
 };
 
 export const decrementQuantity = async (productId: number, userId: string) => {
-  const response = await fetch(`http://localhost:3000/api/carts/${userId}`, {
-    method: "PUT",
-    body: JSON.stringify({ productId }),
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/carts/${userId}`,
+    {
+      method: "PUT",
+      body: JSON.stringify({ productId }),
+    }
+  );
   if (!response.ok) {
     throw new Error("Error decrementing quantity");
   }
