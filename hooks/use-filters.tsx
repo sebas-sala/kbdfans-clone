@@ -6,13 +6,15 @@ import { useRouter } from "next/navigation";
 import qs from "query-string";
 
 export default function useFilter() {
-  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  console.log(selectedCategories);
+
   useEffect(() => {
     const current = qs.parse(searchParams.toString());
-    const selected = Object.values(current).map((value) => Number(value));
+    const selected = Object.keys(current).map((value) => value);
     setSelectedCategories(selected);
   }, [searchParams]);
 
@@ -27,7 +29,7 @@ export default function useFilter() {
     if (current[categoryName] === categoryIdToString) {
       query[categoryName] = null;
       const newSelectedCategories = selectedCategories.filter(
-        (id) => id !== categoryId
+        (id) => id !== categoryName
       );
       setSelectedCategories(newSelectedCategories);
     }

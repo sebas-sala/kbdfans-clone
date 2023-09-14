@@ -6,56 +6,55 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
-model User {
-  id       String  @id @default(cuid())
-  email    String  @unique
-  username String
-  isAdmin  Boolean @default(false)
-  cart     Cart[]
+model Users {
+  id    String  @id @default(cuid())
+  email String  @unique
+  cart  Carts[]
+
+  @@map("users")
 }
 
-model Cart {
-  id        Int     @id @default(autoincrement())
+model Carts {
+  id        Int      @id @default(autoincrement())
   userId    String
-  User      User    @relation(fields: [userId], references: [id])
-  Product   Product @relation(fields: [productId], references: [id])
+  User      Users    @relation(fields: [userId], references: [id])
+  Product   Products @relation(fields: [productId], references: [id])
   quantity  Int
   productId Int
+
+  @@map("carts")
 }
 
-model Product {
-  id         Int                    @id @default(autoincrement())
+model Products {
+  id         Int             @id @default(autoincrement())
   name       String
   price      Float
   stock      Int
   images     ProductImages[]
-  cart       Cart[]
-  categories CategoriesOnProducts[]
+  cart       Carts[]
+  categories Category[]
+
+  @@map("products")
 }
 
 model Category {
-  id       Int                    @id @default(autoincrement())
+  id       Int        @id @default(autoincrement())
   name     String
-  products CategoriesOnProducts[]
-}
+  products Products[]
 
-model CategoriesOnProducts {
-  product    Product  @relation(fields: [productId], references: [id])
-  productId  Int
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId Int
-  createdAt  DateTime @default(now())
-
-  @@id([categoryId, productId])
+  @@map("category")
 }
 
 model ProductImages {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   url       String
-  product   Product @relation(fields: [productId], references: [id])
+  product   Products @relation(fields: [productId], references: [id])
   productId Int
+
+  @@map("product_images")
 }

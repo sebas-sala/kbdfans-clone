@@ -1,10 +1,10 @@
-import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-import Form from "../Form";
 import Button from "../Button";
+import Form from "../Form";
 
 import useAuthContext from "@/hooks/use-auth-context";
 
@@ -31,9 +31,9 @@ export default function SignupForm({ onClose }: SignupFormProps) {
   } = useForm<User>();
 
   const onSubmit: SubmitHandler<User> = async (data) => {
-    const { email, password, username } = data;
-    if (!email || !password || !username) return;
-    handleSignup({ email, password, username });
+    const { email, password } = data;
+    if (!email || !password) return;
+    handleSignup({ email, password });
     onClose();
     router.refresh();
   };
@@ -48,14 +48,6 @@ export default function SignupForm({ onClose }: SignupFormProps) {
           className="w-full py-2 pl-4 outline-blue-500 rounded-lg border"
         />
         {errors.email && "Email is required"}
-
-        <input
-          type="text"
-          placeholder="Username"
-          className="w-full py-2 pl-4 outline-blue-500 rounded-lg border"
-          {...register("username", { required: true, maxLength: 20 })}
-        />
-        {errors.username && "Username is required"}
 
         <input
           type={showPassword ? "text" : "password"}

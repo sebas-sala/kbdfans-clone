@@ -6,7 +6,7 @@ export const findCartItemByUserIdAndProductId = async (
   userId: string,
   productId: number
 ) => {
-  return await prisma.cart.findFirst({
+  return await prisma.carts.findFirst({
     where: {
       userId,
       productId,
@@ -15,7 +15,7 @@ export const findCartItemByUserIdAndProductId = async (
 };
 
 export const getCartItems = async (userId: string) => {
-  return await prisma.cart.findMany({
+  return await prisma.carts.findMany({
     where: {
       userId,
     },
@@ -38,7 +38,7 @@ export const updateItemQuantity = async (
   decreased: boolean
 ) => {
   const action = decreased ? cartItem.quantity - 1 : cartItem.quantity + 1;
-  return await prisma.cart.update({
+  return await prisma.carts.update({
     where: {
       id: cartItem.id,
     },
@@ -49,7 +49,7 @@ export const updateItemQuantity = async (
 };
 
 export const addItemToCart = async (userId: string, productId: number) => {
-  return await prisma.cart.create({
+  return await prisma.carts.create({
     data: {
       userId,
       productId,
@@ -59,7 +59,7 @@ export const addItemToCart = async (userId: string, productId: number) => {
 };
 
 export const deleteItemFromCart = async (cartId: number) => {
-  return await prisma.cart.delete({
+  return await prisma.carts.delete({
     where: {
       id: cartId,
     },

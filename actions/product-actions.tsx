@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 
 export const getProductsWithoutImages = async () => {
-  return await prisma.product.findMany({
+  return await prisma.products.findMany({
     include: {
       categories: true,
     },
@@ -27,7 +27,7 @@ export const getCategories = async () => {
 
 export const getProducts = async () => {
   try {
-    const products = await prisma.product.findMany({
+    const products = await prisma.products.findMany({
       include: {
         categories: true,
         images: true,
@@ -42,13 +42,11 @@ export const getProducts = async () => {
 
 export const getProductsByCategory = async (category: string, take: number) => {
   try {
-    const products = await prisma.product.findMany({
+    const products = await prisma.products.findMany({
       where: {
         categories: {
           some: {
-            category: {
-              name: category,
-            },
+            name: category,
           },
         },
       },
@@ -81,7 +79,7 @@ export const getProductsByCategoriesId = async (
       return {
         categories: {
           some: {
-            categoryId: {
+            id: {
               in: categoryIdsArray,
             },
           },
@@ -89,7 +87,7 @@ export const getProductsByCategoriesId = async (
       };
     });
 
-    return await prisma.product.findMany({
+    return await prisma.products.findMany({
       where: {
         OR: conditions,
       },
@@ -110,11 +108,11 @@ export const getProductsByCategoryId = async (
   take: number
 ) => {
   try {
-    const products = await prisma.product.findMany({
+    const products = await prisma.products.findMany({
       where: {
         categories: {
           some: {
-            categoryId,
+            id: categoryId,
           },
         },
       },
@@ -134,7 +132,7 @@ export const getProductsByCategoryId = async (
 
 export const getProductById = async (productId: number | string) => {
   try {
-    const product = await prisma.product.findUnique({
+    const product = await prisma.products.findUnique({
       where: {
         id: Number(productId),
       },
@@ -156,11 +154,11 @@ export const getAllCategoriesWithProductImage = async () => {
 
     const categoriesWithProductImage = await Promise.all(
       categories.map(async (category) => {
-        const product = await prisma.product.findFirst({
+        const product = await prisma.products.findFirst({
           where: {
             categories: {
               some: {
-                categoryId: category.id,
+                id: category.id,
               },
             },
           },

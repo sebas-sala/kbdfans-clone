@@ -12,7 +12,7 @@ type AuthContextType = {
   userData: User | null;
   handleLogout: () => void;
   handleLogin: ({ email, password }: LoginData) => void;
-  handleSignup: ({ email, username, password }: SignupData) => void;
+  handleSignup: ({ email, password }: SignupData) => void;
 };
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -28,7 +28,6 @@ type LoginData = {
 
 type SignupData = {
   email: string;
-  username: string;
   password: string;
 };
 

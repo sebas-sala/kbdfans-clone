@@ -8,7 +8,6 @@ export type Categories = {
 
 export type User = {
   id: string;
-  username: string;
   password?: string;
   email: string;
   cart: Cart[];

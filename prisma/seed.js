@@ -1,30 +1,6 @@
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
-
-const users = [
-  {
-    id: 1,
-    email: "sebastian@gmail.com",
-    username: "sebastiannss",
-    isAdmin: false,
-    password: "contrasena",
-    cartId: 1,
-  },
-  {
-    id: 2,
-    email: "admin@gmail.com",
-    username: "admin",
-    isAdmin: true,
-    password: "admin123",
-    cartId: 2,
-  },
-]
-
-const carts = [
-  { id: 1, userId: 1 },
-  { id: 2, userId: 2 },
-]
+const prisma = new PrismaClient();
 
 const pcb = [
   {
@@ -33,16 +9,9 @@ const pcb = [
     price: 38,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 12,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 12,
+      },
     },
   },
   {
@@ -51,16 +20,9 @@ const pcb = [
     price: 58,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 12,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 12,
+      },
     },
   },
   {
@@ -69,16 +31,9 @@ const pcb = [
     price: 119,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 12,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 12,
+      },
     },
   },
   {
@@ -87,16 +42,9 @@ const pcb = [
     price: 55,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 12,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 12,
+      },
     },
   },
   {
@@ -105,16 +53,9 @@ const pcb = [
     price: 40,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 12,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 12,
+      },
     },
   },
   {
@@ -123,16 +64,9 @@ const pcb = [
     price: 55,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 12,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 12,
+      },
     },
   },
   {
@@ -141,16 +75,9 @@ const pcb = [
     price: 59,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 12,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 12,
+      },
     },
   },
   {
@@ -159,19 +86,12 @@ const pcb = [
     price: 99,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 12,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 12,
+      },
     },
   },
-]
+];
 
 const categories = [
   { id: 1, name: "keyboard" },
@@ -187,7 +107,7 @@ const categories = [
   { id: 11, name: "case" },
   { id: 12, name: "pcb" },
   { id: 13, name: "plate" },
-]
+];
 
 const keyboards = [
   {
@@ -196,24 +116,7 @@ const keyboards = [
     price: 97.0,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 1,
-            },
-          },
-        },
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 2,
-            },
-          },
-        },
-      ],
+      connect: [{ id: 1 }, { id: 2 }],
     },
   },
   {
@@ -222,24 +125,7 @@ const keyboards = [
     price: 97.0,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 1,
-            },
-          },
-        },
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 2,
-            },
-          },
-        },
-      ],
+      connect: [{ id: 1 }, { id: 2 }],
     },
   },
   {
@@ -248,24 +134,7 @@ const keyboards = [
     price: 237.0,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 1,
-            },
-          },
-        },
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 3,
-            },
-          },
-        },
-      ],
+      connect: [{ id: 1 }, { id: 2 }],
     },
   },
   {
@@ -274,24 +143,7 @@ const keyboards = [
     price: 197.0,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 1,
-            },
-          },
-        },
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 5,
-            },
-          },
-        },
-      ],
+      connect: [{ id: 5 }, { id: 1 }],
     },
   },
   {
@@ -300,24 +152,7 @@ const keyboards = [
     price: 242.0,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 1,
-            },
-          },
-        },
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 4,
-            },
-          },
-        },
-      ],
+      connect: [{ id: 1 }, { id: 4 }],
     },
   },
   {
@@ -326,27 +161,10 @@ const keyboards = [
     price: 152.0,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 1,
-            },
-          },
-        },
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 8,
-            },
-          },
-        },
-      ],
+      connect: [{ id: 1 }, { id: 8 }],
     },
   },
-]
+];
 
 const switches = [
   {
@@ -355,16 +173,9 @@ const switches = [
     price: 11,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 10,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 10,
+      },
     },
   },
   {
@@ -373,16 +184,9 @@ const switches = [
     price: 10.15,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 10,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 10,
+      },
     },
   },
   {
@@ -391,19 +195,12 @@ const switches = [
     price: 10.15,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 10,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 10,
+      },
     },
   },
-]
+];
 
 const keycaps = [
   {
@@ -412,16 +209,9 @@ const keycaps = [
     price: 119,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 9,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 9,
+      },
     },
   },
   {
@@ -430,16 +220,9 @@ const keycaps = [
     price: 15,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 9,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 9,
+      },
     },
   },
   {
@@ -448,19 +231,12 @@ const keycaps = [
     price: 19,
     stock: 10,
     categories: {
-      create: [
-        {
-          createdAt: new Date(),
-          category: {
-            connect: {
-              id: 9,
-            },
-          },
-        },
-      ],
+      connect: {
+        id: 9,
+      },
     },
   },
-]
+];
 
 const images = [
   {
@@ -563,45 +339,39 @@ const images = [
     url: "https://kbdfans.com/cdn/shop/files/1_f41863e7-585b-4431-9be0-3f658d91ee09_460x.jpg?v=1687228057",
     productId: 23,
   },
-]
+];
 
 const createData = async () => {
   try {
-    const createCategories = await prisma.category.createMany({
-      data: categories,
-    })
-    // Create PCB
-    const createdPCB = await Promise.all(
-      pcb.map((elem) => prisma.product.create({ data: elem }))
-    )
+    categories.map(async (category) => {
+      await prisma.category.create({
+        data: category,
+      });
+    });
 
-    // Create Switches
-    const createdSwitches = await Promise.all(
-      switches.map((elem) => prisma.product.create({ data: elem }))
-    )
-
-    // Create Keycaps
-    const createdKeycaps = await Promise.all(
-      keycaps.map((elem) => prisma.product.create({ data: elem }))
-    )
-
-    // Create Keyboards
-    const createdKeyboards = await Promise.all(
-      keyboards.map((elem) => prisma.product.create({ data: elem }))
-    )
-
-    // Create Images
-    const createdImages = await Promise.all(
+    await Promise.all(
       images.map((elem) => prisma.productImages.create({ data: elem }))
-    )
+    );
 
+    await Promise.all(
+      pcb.map((elem) => prisma.products.create({ data: elem }))
+    );
 
+    await Promise.all(
+      switches.map((elem) => prisma.products.create({ data: elem }))
+    );
+
+    await Promise.all(
+      keycaps.map((elem) => prisma.products.create({ data: elem }))
+    );
+
+    await Promise.all(
+      keyboards.map((elem) => prisma.products.create({ data: elem }))
+    );
   } catch (error) {
-    console.error("Ocurrió un error al crear los datos:", error)
-  } finally {
-    await prisma.$disconnect()
+    console.error("Ocurrió un error al crear los datos:", error);
   }
-}
+};
 
 // Llama a la función para crear los datos
-createData()
+createData();
