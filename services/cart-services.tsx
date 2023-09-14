@@ -1,4 +1,4 @@
-import { type ProductType } from "@/types/db";
+import type { ProductType } from "@/types/db";
 
 export const fetchCartByUserId = async (userId: string) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/carts/${userId}`);
