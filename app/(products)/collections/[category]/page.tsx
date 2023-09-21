@@ -8,7 +8,9 @@ type Props = {
 };
 
 export default async function CategoryPage({ params }: Props) {
-  const products = await getProductsByCategory(params.category, 16);
+  const converToPorcentage = params.category.split("-");
+
+  const products = await getProductsByCategory(converToPorcentage[0] + "%", 16);
 
   return (
     <main className="mx-auto container">
