@@ -1,16 +1,16 @@
-import { getProductsByCategory } from "@/actions/product-actions";
-import Product from "@/components/product/product-card";
+import { getProductsByCategory } from '@/actions/product-actions'
+import Product from '@/components/product/product-card'
 
 type Props = {
   params: {
-    category: string;
-  };
-};
+    category: string
+  }
+}
 
 export default async function CategoryPage({ params }: Props) {
-  const converToPorcentage = params.category.split("-");
+  const { category } = params
 
-  const products = await getProductsByCategory(converToPorcentage[0] + "%", 16);
+  const products = await getProductsByCategory(category, 16)
 
   return (
     <main className="mx-auto container">
@@ -28,5 +28,5 @@ export default async function CategoryPage({ params }: Props) {
         ))}
       </section>
     </main>
-  );
+  )
 }

@@ -1,12 +1,12 @@
-import prisma from "@/lib/prisma";
+import prisma from '@/lib/prisma'
 
 export const getProductsWithoutImages = async () => {
   return await prisma.products.findMany({
     include: {
       categories: true,
     },
-  });
-};
+  })
+}
 
 export const getCategories = async () => {
   try {
@@ -18,12 +18,12 @@ export const getCategories = async () => {
           },
         },
       },
-    });
+    })
   } catch (e) {
-    console.error(e);
-    return [];
+    console.error(e)
+    return []
   }
-};
+}
 
 export const getProducts = async () => {
   try {
@@ -32,13 +32,13 @@ export const getProducts = async () => {
         categories: true,
         images: true,
       },
-    });
-    return products;
+    })
+    return products
   } catch (error) {
-    console.error(error);
-    throw new Error("Error getting products");
+    console.error(error)
+    throw new Error('Error getting products')
   }
-};
+}
 
 export const getProductsByCategory = async (category: string, take: number) => {
   try {
@@ -55,27 +55,27 @@ export const getProductsByCategory = async (category: string, take: number) => {
         images: true,
       },
       take,
-    });
+    })
 
-    return products;
+    return products
   } catch (error) {
-    console.error(error);
-    throw new Error("Error getting products");
+    console.error(error)
+    throw new Error('Error getting products')
   }
-};
+}
 
 export const getProductsByCategoriesId = async (
   categoriesIds: Record<string, string | string[]>
 ) => {
   try {
     if (!categoriesIds || Object.keys(categoriesIds).length === 0) {
-      return await getProducts();
+      return await getProducts()
     }
 
     const conditions = Object.values(categoriesIds).map((categoryId) => {
       const categoryIdsArray = Array.isArray(categoryId)
         ? categoryId.map(Number)
-        : Number(categoryId);
+        : Number(categoryId)
       return {
         categories: {
           some: {
@@ -84,8 +84,8 @@ export const getProductsByCategoriesId = async (
             },
           },
         },
-      };
-    });
+      }
+    })
 
     return await prisma.products.findMany({
       where: {
@@ -96,12 +96,12 @@ export const getProductsByCategoriesId = async (
         images: true,
       },
       take: 10,
-    });
+    })
   } catch (error) {
-    console.error(error);
-    throw new Error("Error getting products by categoryId");
+    console.error(error)
+    throw new Error('Error getting products by categoryId')
   }
-};
+}
 
 export const getProductsByCategoryId = async (
   categoryId: number,
@@ -121,14 +121,14 @@ export const getProductsByCategoryId = async (
         images: true,
       },
       take,
-    });
+    })
 
-    return products;
+    return products
   } catch (error) {
-    console.error(error);
-    throw new Error("Error getting products");
+    console.error(error)
+    throw new Error('Error getting products')
   }
-};
+}
 
 export const getProductById = async (productId: number | string) => {
   try {
@@ -140,17 +140,17 @@ export const getProductById = async (productId: number | string) => {
         categories: true,
         images: true,
       },
-    });
-    return product;
+    })
+    return product
   } catch (e) {
-    console.error(e);
-    throw new Error("Error getting products");
+    console.error(e)
+    throw new Error('Error getting products')
   }
-};
+}
 
 export const getAllCategoriesWithProductImage = async () => {
   try {
-    const categories = await prisma.category.findMany();
+    const categories = await prisma.category.findMany()
 
     const categoriesWithProductImage = await Promise.all(
       categories.map(async (category) => {
@@ -169,25 +169,25 @@ export const getAllCategoriesWithProductImage = async () => {
               },
             },
           },
-        });
+        })
 
         const categoryWithProductImage = {
           ...category,
           productImage: product?.images[0]?.url || null,
-        };
+        }
 
-        return categoryWithProductImage;
+        return categoryWithProductImage
       })
-    );
+    )
 
     const categoriesFilteredWithProductImage =
       categoriesWithProductImage.filter((category) => {
-        return category.productImage !== null;
-      });
+        return category.productImage !== null
+      })
 
-    return categoriesFilteredWithProductImage;
+    return categoriesFilteredWithProductImage
   } catch (error) {
-    console.error(error);
-    throw new Error("Error retrieving categories with product images");
+    console.error(error)
+    throw new Error('Error retrieving categories with product images')
   }
-};
+}

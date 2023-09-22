@@ -1,20 +1,22 @@
-"use client";
+'use client'
 
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
-import Link from "next/link";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
+import Link from 'next/link'
 
-import { useSelectedLayoutSegments } from "next/navigation";
+import { useRouter, useSelectedLayoutSegments } from 'next/navigation'
 
 export default function NavigationPath() {
-  const segments = useSelectedLayoutSegments();
+  const segments = useSelectedLayoutSegments()
+  const router = useRouter()
 
   const handleClick = (segment: string) => {
     if (segment === segments.at(-1)) {
-      return;
+      return
     }
-    const path = segments.slice(0, segments.indexOf(segment) + 1).join("/");
-    return path;
-  };
+    const path =
+      '/' + segments.slice(0, segments.indexOf(segment) + 1).join('/')
+    router.push(path)
+  }
 
   return (
     <nav className="container mx-auto my-3">
@@ -24,12 +26,12 @@ export default function NavigationPath() {
         </BreadcrumbItem>
         {segments.map((segment, index) => (
           <BreadcrumbItem className="cursor-pointer" key={index}>
-            <BreadcrumbLink href={"/" + handleClick(segment)}>
+            <BreadcrumbLink onClick={() => handleClick(segment)}>
               {segment}
             </BreadcrumbLink>
           </BreadcrumbItem>
         ))}
       </Breadcrumb>
     </nav>
-  );
+  )
 }

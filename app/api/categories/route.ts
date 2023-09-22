@@ -1,15 +1,15 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server'
 
-import { getCategories } from "@/actions/product-actions";
+import { getCategories } from '@/actions/product-actions'
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic'
 
 export const GET = async () => {
   try {
-    const categories = await getCategories();
-    return NextResponse.json(categories);
+    const categories = await getCategories()
+    return NextResponse.json(categories)
   } catch (e) {
-    console.error(e);
-    return NextResponse.error();
+    console.error(e)
+    return NextResponse.error()
   }
-};
+}
