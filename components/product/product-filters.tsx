@@ -1,25 +1,19 @@
-"use client";
+'use client'
 
-import {
-  MenuItem,
-  Checkbox,
-  Button,
-  MenuItemOption,
-  MenuOptionGroup,
-} from "@chakra-ui/react";
+import { Button, MenuItemOption, MenuOptionGroup } from '@chakra-ui/react'
 
-import { Menu, MenuButton, MenuList } from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
 
-import useFilter from "@/hooks/use-filters";
+import useFilter from '@/hooks/use-filters'
 
-import type { Categories } from "@/types/db";
+import type { Categories } from '@/types/db'
 
 type FiltersProps = {
-  categories: Categories[];
-};
+  categories: Categories[]
+}
 
 export default function ProductFilters({ categories }: FiltersProps) {
-  const { handleClick, selectedCategories } = useFilter();
+  const { handleClick, selectedCategories } = useFilter()
 
   return (
     <section className="flex w-full gap-20">
@@ -28,7 +22,7 @@ export default function ProductFilters({ categories }: FiltersProps) {
           <MenuButton as={Button} borderWidth="1px">
             Filter By
           </MenuButton>
-          <MenuList overflowY={"auto"} maxHeight="400px">
+          <MenuList overflowY={'auto'} maxHeight="400px">
             <MenuOptionGroup type="checkbox" value={selectedCategories}>
               {categories.map(({ id, name, _count }) => (
                 <MenuItemOption
@@ -47,5 +41,5 @@ export default function ProductFilters({ categories }: FiltersProps) {
         </Menu>
       </div>
     </section>
-  );
+  )
 }

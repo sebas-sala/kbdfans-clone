@@ -1,9 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import qs from 'query-string'
+import { useEffect, useState } from 'react'
 
 export default function useFilter() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])

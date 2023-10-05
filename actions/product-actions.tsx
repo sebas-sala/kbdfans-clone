@@ -76,6 +76,7 @@ export const getProductsByCategoriesId = async (
       const categoryIdsArray = Array.isArray(categoryId)
         ? categoryId.map(Number)
         : Number(categoryId)
+
       return {
         categories: {
           some: {
