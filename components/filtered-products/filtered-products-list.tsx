@@ -6,7 +6,7 @@ import type { ProductType } from '@/types/db'
 
 type FilteredProductsListProps = {
   products: ProductType[]
-  searchParams: Record<string, string | string[]>
+  searchParams?: Record<string, string | string[]>
 }
 
 export default async function FilteredProductsList({
