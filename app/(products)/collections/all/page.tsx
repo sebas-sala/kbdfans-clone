@@ -20,7 +20,7 @@ export default async function AllPage({ searchParams }: AllProps) {
       <section className="mx-auto container">
         <ProductFilters categories={categories} />
         <div className="flex w-full justify-between gap-20 flex-wrap">
-          <FilteredProducts products={products} searchParams={searchParams} />
+          <FilteredProducts products={products} />
         </div>
       </section>
     </main>

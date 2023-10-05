@@ -1,15 +1,15 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import FilteredProductsList from "./filtered-products-list";
+import FilteredProductsList from './filtered-products-list'
 
-import type { ProductType } from "@/types/db";
+import type { ProductType } from '@/types/db'
 
 type Props = {
-  title?: string;
-  linkText?: string;
-  href?: string;
-  products: ProductType[];
-};
+  title?: string
+  linkText?: string
+  href?: string
+  products: ProductType[]
+}
 
 export default async function FilteredProducts({
   title,
@@ -29,5 +29,5 @@ export default async function FilteredProducts({
       </div>
       <FilteredProductsList products={products} />
     </section>
-  );
+  )
 }
