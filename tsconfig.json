@@ -34,8 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "rastioe.js"
-, "prisma/seed.js"],
+    "prisma/seed.ts"],
   "exclude": [
     "node_modules"
   ]
