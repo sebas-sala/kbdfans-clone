@@ -36,14 +36,14 @@ export default function NavigationPath() {
             </BreadcrumbLink>
           </BreadcrumbItem>
           {segments.map((segment, index) => (
-            <>
+            <div key={index}>
               <BreadcrumbSeparator />
-              <BreadcrumbItem className="cursor-pointer" key={index}>
+              <BreadcrumbItem className="cursor-pointer">
                 <BreadcrumbLink asChild>
                   <Link href={handleClick(segment)}>{segment}</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
-            </>
+            </div>
           ))}
         </BreadcrumbList>
       </Breadcrumb>

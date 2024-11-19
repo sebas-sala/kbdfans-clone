@@ -343,31 +343,90 @@ const images = [
 
 async function main() {
   try {
-    categories.map(async (category) => {
-      await prisma.category.create({
-        data: category,
+    await Promise.all(
+      categories.map(async (category) => {
+        try {
+          await prisma.category.create({ data: category })
+        } catch (error) {
+          console.error("Error al crear la categoría:", error)
+        }
       })
-    })
-
-    await Promise.all(
-      images.map((elem) => prisma.productImages.create({ data: elem }))
-    )
-
-    await Promise.all(pcb.map((elem) => prisma.products.create({ data: elem })))
-
-    await Promise.all(
-      switches.map((elem) => prisma.products.create({ data: elem }))
-    )
-
-    await Promise.all(
-      keycaps.map((elem) => prisma.products.create({ data: elem }))
-    )
-
-    await Promise.all(
-      keyboards.map((elem) => prisma.products.create({ data: elem }))
     )
   } catch (error) {
-    console.error("Ocurrió un error al crear los datos:", error)
+    console.error("Error al procesar categorías:", error)
+  }
+  try {
+    await Promise.all(
+      images.map(async (elem) => {
+        try {
+          await prisma.productImages.create({ data: elem })
+        } catch (error) {
+          console.error("Error al crear la imagen:", error)
+        }
+      })
+    )
+  } catch (error) {
+    console.error("Error al procesar imágenes:", error)
+  }
+
+  // Procesar PCB
+  try {
+    await Promise.all(
+      pcb.map(async (elem) => {
+        try {
+          await prisma.products.create({ data: elem })
+        } catch (error) {
+          console.error("Error al crear el PCB:", error)
+        }
+      })
+    )
+  } catch (error) {
+    console.error("Error al procesar PCB:", error)
+  }
+
+  // Procesar switches
+  try {
+    await Promise.all(
+      switches.map(async (elem) => {
+        try {
+          await prisma.products.create({ data: elem })
+        } catch (error) {
+          console.error("Error al crear el switch:", error)
+        }
+      })
+    )
+  } catch (error) {
+    console.error("Error al procesar switches:", error)
+  }
+
+  // Procesar keycaps
+  try {
+    await Promise.all(
+      keycaps.map(async (elem) => {
+        try {
+          await prisma.products.create({ data: elem })
+        } catch (error) {
+          console.error("Error al crear el keycap:", error)
+        }
+      })
+    )
+  } catch (error) {
+    console.error("Error al procesar keycaps:", error)
+  }
+
+  // Procesar teclados
+  try {
+    await Promise.all(
+      keyboards.map(async (elem) => {
+        try {
+          await prisma.products.create({ data: elem })
+        } catch (error) {
+          console.error("Error al crear el teclado:", error)
+        }
+      })
+    )
+  } catch (error) {
+    console.error("Error al procesar teclados:", error)
   }
 }
 
