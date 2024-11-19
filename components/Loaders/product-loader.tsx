@@ -1,6 +1,9 @@
 "use client";
 
-import { Skeleton, SkeletonText } from "@chakra-ui/react";
+import {
+  Skeleton,
+  SkeletonText,
+} from "@/components/ui/skeleton"
 
 import ProductCard from "../product/product-card";
 

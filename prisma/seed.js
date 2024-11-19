@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client"
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 const pcb = [
   {
@@ -91,7 +91,7 @@ const pcb = [
       },
     },
   },
-];
+]
 
 const categories = [
   { id: 1, name: "keyboard" },
@@ -107,7 +107,7 @@ const categories = [
   { id: 11, name: "case" },
   { id: 12, name: "pcb" },
   { id: 13, name: "plate" },
-];
+]
 
 const keyboards = [
   {
@@ -164,7 +164,7 @@ const keyboards = [
       connect: [{ id: 1 }, { id: 8 }],
     },
   },
-];
+]
 
 const switches = [
   {
@@ -200,7 +200,7 @@ const switches = [
       },
     },
   },
-];
+]
 
 const keycaps = [
   {
@@ -236,7 +236,7 @@ const keycaps = [
       },
     },
   },
-];
+]
 
 const images = [
   {
@@ -339,39 +339,44 @@ const images = [
     url: "https://kbdfans.com/cdn/shop/files/1_f41863e7-585b-4431-9be0-3f658d91ee09_460x.jpg?v=1687228057",
     productId: 23,
   },
-];
+]
 
-const createData = async () => {
+async function main() {
   try {
     categories.map(async (category) => {
       await prisma.category.create({
         data: category,
-      });
-    });
+      })
+    })
 
     await Promise.all(
       images.map((elem) => prisma.productImages.create({ data: elem }))
-    );
+    )
 
-    await Promise.all(
-      pcb.map((elem) => prisma.products.create({ data: elem }))
-    );
+    await Promise.all(pcb.map((elem) => prisma.products.create({ data: elem })))
 
     await Promise.all(
       switches.map((elem) => prisma.products.create({ data: elem }))
-    );
+    )
 
     await Promise.all(
       keycaps.map((elem) => prisma.products.create({ data: elem }))
-    );
+    )
 
     await Promise.all(
       keyboards.map((elem) => prisma.products.create({ data: elem }))
-    );
+    )
   } catch (error) {
-    console.error("Ocurrió un error al crear los datos:", error);
+    console.error("Ocurrió un error al crear los datos:", error)
   }
-};
+}
 
-// Llama a la función para crear los datos
-createData();
+main()
+  .then(async () => {
+    await prisma.$disconnect()
+  })
+  .catch(async (e) => {
+    console.error(e)
+    await prisma.$disconnect()
+    process.exit(1)
+  })

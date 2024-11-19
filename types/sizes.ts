@@ -3,10 +3,7 @@ export type Sizes =
   | "sm"
   | "md"
   | "lg"
-  | "2xl"
   | "xs"
-  | "3xl"
-  | "4xl"
-  | "5xl"
-  | "6xl"
-  | "full";
+  | "full"
+  | "cover"
+  | undefined

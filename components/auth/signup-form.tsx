@@ -1,39 +1,39 @@
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { SubmitHandler, useForm } from "react-hook-form"
 
-import Button from "../Button";
-import Form from "../Form";
+import Button from "../Button"
+import Form from "../Form"
 
-import useAuthContext from "@/hooks/use-auth-context";
+import useAuthContext from "@/hooks/use-auth-context"
 
-import { User } from "@/types/db";
-import toast from "react-hot-toast";
+import { User } from "@/types/db"
+import toast from "react-hot-toast"
 
 type SignupFormProps = {
-  onClose: () => void;
-};
+  onClose: () => void
+}
 
 export default function SignupForm({ onClose }: SignupFormProps) {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
 
-  const { handleSignup } = useAuthContext();
-  const router = useRouter();
+  const { handleSignup } = useAuthContext()
+  const router = useRouter()
 
   const togglePassword = () => {
-    setShowPassword(!showPassword);
-  };
+    setShowPassword(!showPassword)
+  }
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<User>();
+  } = useForm<User>()
 
   const onSubmit: SubmitHandler<User> = async (data) => {
-    const { email, password } = data;
-    if (!email || !password) return;
+    const { email, password } = data
+    if (!email || !password) return
     toast
       .promise(handleSignup({ email, password }), {
         loading: "Signing up...",
@@ -41,10 +41,10 @@ export default function SignupForm({ onClose }: SignupFormProps) {
         error: "Something went wrong",
       })
       .then(() => {
-        onClose();
-        router.refresh();
-      });
-  };
+        onClose()
+        router.refresh()
+      })
+  }
 
   return (
     <Form handleSubmit={handleSubmit(onSubmit)}>
@@ -75,5 +75,5 @@ export default function SignupForm({ onClose }: SignupFormProps) {
         </Link>
       </div>
     </Form>
-  );
+  )
 }

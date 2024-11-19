@@ -1,14 +1,13 @@
 "use client";
 
 import {
-  Drawer as DrawerContainer,
+
   DrawerBody,
   DrawerHeader,
-  DrawerOverlay,
   DrawerContent,
-  useDisclosure,
   DrawerFooter,
   Button,
+  DrawerRoot,
 } from "@chakra-ui/react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -17,26 +16,30 @@ import CartList from "./cart-list";
 
 import { getSubtotal } from "@/lib/cart-utils";
 import useCart from "@/hooks/use-cart";
+import { useState } from "react";
 
 export default function Cart() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [open, setOpen] = useState(false)
 
   const { cartItems } = useCart();
 
   const subTotal = getSubtotal(cartItems);
+
+  const onOpen = () => setOpen(true);
+  const onClose = () => setOpen(false);
 
   return (
     <>
       <button type="button" onClick={onOpen} aria-label="Open cart drawer">
         <AiOutlineShoppingCart className="h-6 md:h-8" />
       </button>
-      <DrawerContainer
-        isOpen={isOpen}
-        placement="right"
+      <DrawerRoot
+        isOpen={open}
+        placement="end"
         onClose={onClose}
         size={"sm"}
       >
-        <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader className="flex items-center justify-between">
             <p>
@@ -58,7 +61,7 @@ export default function Cart() {
               </div>
               <Button
                 colorScheme="blackAlpha"
-                textColor="white"
+                // textColor="white"
                 variant="solid"
                 width="full"
                 className="bg-black py-8"
@@ -74,7 +77,7 @@ export default function Cart() {
             </DrawerFooter>
           )}
         </DrawerContent>
-      </DrawerContainer>
+      </DrawerRoot>
     </>
   );
 }

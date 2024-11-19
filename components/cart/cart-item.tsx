@@ -1,47 +1,46 @@
-import { useState } from "react";
-import Image from "next/image";
+import Image from "next/image"
+import { useState } from "react"
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
 
-import useCart from "@/hooks/use-cart";
+import useCart from "@/hooks/use-cart"
 
-import type { CartWithProducts } from "@/types/db";
-import { Button, ButtonGroup, Divider, IconButton } from "@chakra-ui/react";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import type { CartWithProducts } from "@/types/db"
 
 type CartItemProps = {
-  product: CartWithProducts;
-};
+  product: CartWithProducts
+}
 
 export default function CartItem({ product }: CartItemProps) {
-  const { addToCart, removeFromCart } = useCart();
+  const { addToCart, removeFromCart } = useCart()
 
-  const { quantity, Product } = product;
-  const { images, name, price } = Product;
-  const image = images[0].url;
-  const newPrice = price * quantity;
+  const { quantity, Product } = product
+  const { images, name, price } = Product
+  const image = images[0].url
+  const newPrice = price * quantity
 
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false)
 
   const handleAddToQuantity = async () => {
-    setButtonDisabled(true);
+    setButtonDisabled(true)
     try {
-      await addToCart(Product);
+      await addToCart(Product)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     } finally {
-      setButtonDisabled(false);
+      setButtonDisabled(false)
     }
-  };
+  }
 
   const handleRemoveFromQuantity = async () => {
-    setButtonDisabled(true);
+    setButtonDisabled(true)
     try {
-      await removeFromCart(product);
+      await removeFromCart(product)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     } finally {
-      setButtonDisabled(false);
+      setButtonDisabled(false)
     }
-  };
+  }
 
   return (
     <li className="w-full p-4 space-y-4">
@@ -53,26 +52,26 @@ export default function CartItem({ product }: CartItemProps) {
         </div>
       </div>
 
-      <ButtonGroup isAttached variant="outline" marginTop="4">
+      {/* <Group attached marginTop="4">
         <IconButton
           aria-label="decrement-quantity"
           onClick={handleRemoveFromQuantity}
-          isDisabled={buttonDisabled}
+          disabled={buttonDisabled}
         >
           <AiOutlineMinus />
         </IconButton>
-        <Button className="px-8" isDisabled>
+        <Button className="px-8" disabled>
           Quantity:<span className="text-center ml-2"> {quantity}</span>
         </Button>
         <IconButton
           aria-label="increase-quantity"
           onClick={handleAddToQuantity}
-          isDisabled={buttonDisabled}
+          disabled={buttonDisabled}
         >
           <AiOutlinePlus />
         </IconButton>
-      </ButtonGroup>
-      <Divider />
+      </Group> */}
+      {/* <Divider /> */}
     </li>
-  );
+  )
 }

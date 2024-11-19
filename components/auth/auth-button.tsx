@@ -1,15 +1,16 @@
-type AuthButtonProps = {
-  onOpen: () => void;
-  text: string;
-};
+import { Button } from "../ui/button"
 
-export default function AuthButton({ onOpen, text }: AuthButtonProps) {
+interface IProps extends React.HTMLAttributes<HTMLButtonElement> {
+  onOpen?: () => void
+}
+
+export default function AuthButton({ onOpen, children }: IProps) {
   return (
-    <button
+    <Button
       onClick={onOpen}
       className="cursor-pointer transition duration-300 hover:text-gray-400"
     >
-      {text}
-    </button>
-  );
+      {children}
+    </Button>
+  )
 }
