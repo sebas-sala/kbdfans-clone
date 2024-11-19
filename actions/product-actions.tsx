@@ -36,7 +36,7 @@ export const getProducts = async () => {
     return products
   } catch (error) {
     console.error(error)
-    throw new Error('Error getting products')
+    return []
   }
 }
 
@@ -60,7 +60,7 @@ export const getProductsByCategory = async (category: string, take: number) => {
     return products
   } catch (error) {
     console.error(error)
-    throw new Error('Error getting products')
+    return []
   }
 }
 
@@ -127,7 +127,7 @@ export const getProductsByCategoryId = async (
     return products
   } catch (error) {
     console.error(error)
-    throw new Error('Error getting products')
+    return []
   }
 }
 
@@ -145,7 +145,7 @@ export const getProductById = async (productId: number | string) => {
     return product
   } catch (e) {
     console.error(e)
-    throw new Error('Error getting products')
+    return null
   }
 }
 
@@ -189,6 +189,6 @@ export const getAllCategoriesWithProductImage = async () => {
     return categoriesFilteredWithProductImage
   } catch (error) {
     console.error(error)
-    throw new Error('Error retrieving categories with product images')
+    return []
   }
 }

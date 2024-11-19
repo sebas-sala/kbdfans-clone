@@ -1,7 +1,8 @@
 'use client'
 
+import { Skeleton } from '@/components/ui/skeleton'
 import ProductCard from '@/components/product/product-card'
-import { Skeleton } from '@chakra-ui/react'
+
 
 export default function Loading() {
   return (

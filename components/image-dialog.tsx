@@ -1,11 +1,6 @@
 import { SetStateAction, Dispatch } from "react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-} from "@chakra-ui/react";
+
+import { Dialog, DialogContent, DialogDescription, DialogHeader } from "./ui/dialog";
 
 import type { Sizes } from "@/types/sizes";
 
@@ -25,29 +20,28 @@ const ImageDialog: React.FC<Props> = ({
   onClose,
   isOpen,
   setHovered,
-  size,
   image,
 }) => {
-  const handleOnClose = () => {
+
+  const onOpenChange = () => {
     setHovered(false);
     onClose();
   };
 
   return (
-    <Modal size={size} isCentered isOpen={isOpen} onClose={handleOnClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalBody className="flex">
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+      <DialogContent >
+        <DialogDescription className="flex">
           <div className="relative h-96 w-4/6">{image}</div>
           <div className="flex-1">
-            <ModalHeader className="border-b text-4xl font-bold ">
+            <DialogHeader className="border-b text-4xl font-bold ">
               {title}
-            </ModalHeader>
+            </DialogHeader>
             {children}
           </div>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+        </DialogDescription>
+      </DialogContent>
+    </Dialog>
   );
 };
 
