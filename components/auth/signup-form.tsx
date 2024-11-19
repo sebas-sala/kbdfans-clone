@@ -4,6 +4,7 @@ import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 
 import Button from "../Button"
+import { Button as ButtonPrimitive } from "../ui/button"
 import Form from "../Form"
 
 import useAuthContext from "@/hooks/use-auth-context"
@@ -52,6 +53,7 @@ export default function SignupForm({ onClose }: SignupFormProps) {
         <input
           type="email"
           placeholder="Email"
+          autoComplete="email"
           {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
           className="w-full py-2 pl-4 outline-blue-500 rounded-lg border"
         />
@@ -60,6 +62,7 @@ export default function SignupForm({ onClose }: SignupFormProps) {
         <input
           type={showPassword ? "text" : "password"}
           placeholder="Enter password"
+          autoComplete="new-password"
           className="w-full py-2 pl-4 outline-blue-500 rounded-lg border"
           {...register("password", { required: true })}
         />
@@ -70,9 +73,9 @@ export default function SignupForm({ onClose }: SignupFormProps) {
       </div>
       <Button type="submit">Signup</Button>
       <div className="mt-6 flex items-center justify-center gap-4">
-        <Link href="/" className="text-gray-500 underline">
+        <ButtonPrimitive variant={"ghost"} onClick={onClose}>
           Return To Store
-        </Link>
+        </ButtonPrimitive>
       </div>
     </Form>
   )

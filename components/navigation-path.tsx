@@ -1,37 +1,52 @@
-'use client'
+"use client"
 
-import { BreadcrumbRoot, BreadcrumbLink } from '@/components/ui/breadcrumb'
-import Link from 'next/link'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 
-import { useRouter, useSelectedLayoutSegments } from 'next/navigation'
+import Link from "next/link"
+
+import { useSelectedLayoutSegments } from "next/navigation"
 
 export default function NavigationPath() {
   const segments = useSelectedLayoutSegments()
-  const router = useRouter()
 
   const handleClick = (segment: string) => {
     if (segment === segments.at(-1)) {
-      return
+      return "/"
     }
+
     const path =
-      '/' + segments.slice(0, segments.indexOf(segment) + 1).join('/')
-    router.push(path)
+      "/" + segments.slice(0, segments.indexOf(segment) + 1).join("/")
+
+    return path
   }
 
   return (
     <nav className="container mx-auto my-3">
-      <BreadcrumbRoot className="flex gap-x-6">
-        <BreadcrumbLink>
-          <Link href="/">Home</Link>
-        </BreadcrumbLink>
-        {segments.map((segment, index) => (
-          <BreadcrumbLink className="cursor-pointer" key={index}>
-            <BreadcrumbLink onClick={() => handleClick(segment)}>
-              {segment}
+      <Breadcrumb className="flex gap-x-6">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link href="/">Home</Link>
             </BreadcrumbLink>
-          </BreadcrumbLink>
-        ))}
-      </BreadcrumbRoot>
+          </BreadcrumbItem>
+          {segments.map((segment, index) => (
+            <>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem className="cursor-pointer" key={index}>
+                <BreadcrumbLink asChild>
+                  <Link href={handleClick(segment)}>{segment}</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+            </>
+          ))}
+        </BreadcrumbList>
+      </Breadcrumb>
     </nav>
   )
 }

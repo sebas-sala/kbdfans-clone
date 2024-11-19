@@ -1,23 +1,23 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react"
+import { motion } from "framer-motion"
 
 type Props = {
-  children: React.ReactNode;
-  trigger: React.ReactNode;
-};
+  children: React.ReactNode
+  trigger: React.ReactNode
+}
 
 const Dropdown: React.FC<Props> = ({ children, trigger }) => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
 
   const handleOnMouseEnter = () => {
-    setShow(true);
-  };
+    setShow(true)
+  }
 
   const handleOnMouseLeave = () => {
-    setShow(false);
-  };
+    setShow(false)
+  }
 
   return (
     <div className="relative z-[60]" onMouseLeave={handleOnMouseLeave}>
@@ -37,7 +37,7 @@ const Dropdown: React.FC<Props> = ({ children, trigger }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Dropdown;
+export default Dropdown

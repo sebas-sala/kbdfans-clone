@@ -1,15 +1,15 @@
-import { CgProfile } from "react-icons/cg";
+import { CgProfile } from "react-icons/cg"
 
-import Login from "@/components/auth/login-dialog";
-import Signup from "@/components/auth/signup-dialog";
-import Cart from "@/components/cart/cart-drawer";
-import Dropdown from "@/components/Dropdown";
-import SearchDialog from "@/components/search/search-dialog";
+import Login from "@/components/auth/login-dialog"
+import Signup from "@/components/auth/signup-dialog"
+import Cart from "@/components/cart/cart-drawer"
+import Dropdown from "@/components/Dropdown"
+import SearchDialog from "@/components/search/search-dialog"
 
-import useAuthContext from "@/hooks/use-auth-context";
+import useAuthContext from "@/hooks/use-auth-context"
 
 export default function NavigationIcons() {
-  const { userData, handleLogout } = useAuthContext();
+  const { userData, handleLogout } = useAuthContext()
 
   const Trigger = () => {
     return (
@@ -20,8 +20,8 @@ export default function NavigationIcons() {
       >
         <CgProfile className="cursor-pointer transition duration-200 hover:text-white/90 h-6 md:h-8" />
       </button>
-    );
-  };
+    )
+  }
 
   return (
     <div className="flex gap-5 p-2 text-3xl text-white items-center">
@@ -43,5 +43,5 @@ export default function NavigationIcons() {
       </Dropdown>
       <Cart />
     </div>
-  );
+  )
 }

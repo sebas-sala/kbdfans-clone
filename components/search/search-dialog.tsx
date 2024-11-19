@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 
-import { BsSearch } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs"
 
 import {
   Dialog,
@@ -13,43 +13,45 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
+import SearchResultList from "./search-result-list"
 
-import SearchResultList from "./search-result-list";
-
-import useProductSearch from "@/hooks/use-product-search";
-import { Input } from "../ui/input";
+import useProductSearch from "@/hooks/use-product-search"
+import { Input } from "../ui/input"
 
 export default function SearchDialog() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("")
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
-  const { filteredProducts } = useProductSearch(search);
+  const { filteredProducts } = useProductSearch(search)
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
+    setSearch(e.target.value)
+  }
+
+  const onOpenChange = (isOpen: boolean) => {
+    if (!isOpen) {
+      setOpen(false)
+      setSearch("")
+    }
+  }
 
   return (
     <>
-      <Dialog open={open}
-
-        onOpenChange={
-          (isOpen) => {
-            if (!isOpen) {
-              setOpen(false);
-              setSearch("");
-            }
-          }
-        }>
+      <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogTrigger asChild>
           <BsSearch
             className="cursor-pointer transition duration-200 hover:text-white/90 h-6 md:h-8"
             onClick={() => setOpen(true)}
           />
         </DialogTrigger>
-        <DialogContent>
-          <DialogDescription className="bg-black">
+        <DialogContent className="bg-black border-none top-20">
+          <DialogHeader>
+            <DialogTitle className="text-lg font-bold sr-only">
+              Search
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex items-center gap-2">
             <BsSearch className="text-white text-xl cursor-pointerhover:text-gray-300" />
             <Input
               value={search}
@@ -59,9 +61,9 @@ export default function SearchDialog() {
             />
 
             <SearchResultList filteredProducts={filteredProducts} />
-          </DialogDescription>
+          </div>
         </DialogContent>
       </Dialog>
     </>
-  );
+  )
 }

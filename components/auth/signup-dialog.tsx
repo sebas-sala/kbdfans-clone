@@ -2,10 +2,7 @@
 
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -14,6 +11,8 @@ import {
 import SignupForm from "./signup-form"
 import AuthButton from "./auth-button"
 import { useState } from "react"
+import { Button } from "../ui/button"
+import { DialogDescription } from "@radix-ui/react-dialog"
 
 export default function SignupDialog() {
   const [open, setOpen] = useState(false)
@@ -22,20 +21,34 @@ export default function SignupDialog() {
     setOpen(false)
   }
 
-  //className="px-8 py-10"
+  const onClick = () => {
+    setOpen(true)
+  }
+
+  const onOpenChange = (isOpen: boolean) => {
+    if (!isOpen) {
+      setOpen(false)
+    }
+  }
+
   return (
     <>
-      <Dialog open={open}>
+      <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogTrigger asChild>
-          <AuthButton>Signup</AuthButton>
+          <AuthButton onClick={onClick}>Signup</AuthButton>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader className="mx-auto text-4xl font-bold">
-            Signup
+            <DialogTitle className="mx-auto text-4xl font-bold">
+              Signup
+            </DialogTitle>
+            <DialogDescription className="sr-only">
+              Signup to your account to access your account settings, view your
+              orders, and more.
+            </DialogDescription>
           </DialogHeader>
-          <DialogDescription>
-            <SignupForm onClose={onClose} />
-          </DialogDescription>
+
+          <SignupForm onClose={onClose} />
         </DialogContent>
       </Dialog>
     </>
