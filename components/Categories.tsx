@@ -1,16 +1,16 @@
-import { Suspense } from "react";
+import { Suspense } from "react"
 
-import Container from "@/components/Container";
-import ProductsFetchingSection from "@/components/product/product-section";
+import Container from "@/components/Container"
+import ProductsFetchingSection from "@/components/product/product-section"
 
-import { getProductsByCategoryId } from "@/actions/product-actions";
-import ProductLoader from "./Loaders/product-loader";
+import { getProductsByCategoryId } from "@/actions/product-actions"
+import ProductLoader from "./Loaders/product-loader"
 
 export default async function Categories() {
-  const keyboardsData = getProductsByCategoryId(1, 4);
-  const switchesData = getProductsByCategoryId(10, 4);
-  const keycapsData = getProductsByCategoryId(9, 4);
-  const PCBData = getProductsByCategoryId(12, 8);
+  const keyboardsData = getProductsByCategoryId(1, 4)
+  const switchesData = getProductsByCategoryId(10, 4)
+  const keycapsData = getProductsByCategoryId(9, 4)
+  const PCBData = getProductsByCategoryId(12, 8)
 
   return (
     <Container>
@@ -47,5 +47,5 @@ export default async function Categories() {
         />
       </Suspense>
     </Container>
-  );
+  )
 }
