@@ -12,7 +12,7 @@ type FiltersProps = {
   categories: Categories[]
 }
 
-export default function ProductFilters({ categories }: FiltersProps) {
+export function ProductFilters({ categories }: FiltersProps) {
   const { handleClick, selectedCategories } = useFilter()
 
   return (

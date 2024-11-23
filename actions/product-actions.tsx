@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+import prisma from "@/lib/prisma"
 
 export const getProductsWithoutImages = async () => {
   return await prisma.products.findMany({
@@ -100,7 +100,7 @@ export const getProductsByCategoriesId = async (
     })
   } catch (error) {
     console.error(error)
-    throw new Error('Error getting products by categoryId')
+    throw new Error("Error getting products by categoryId")
   }
 }
 
@@ -132,6 +132,10 @@ export const getProductsByCategoryId = async (
 }
 
 export const getProductById = async (productId: number | string) => {
+  if (isNaN(Number(productId))) {
+    return null
+  }
+
   try {
     const product = await prisma.products.findUnique({
       where: {

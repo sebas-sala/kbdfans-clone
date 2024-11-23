@@ -1,8 +1,6 @@
-'use client'
+import Product from "../product/product-card"
 
-import Product from '../product/product-card'
-
-import type { ProductType } from '@/types/db'
+import type { ProductType } from "@/types/db"
 
 type FilteredProductsListProps = {
   products: ProductType[]
@@ -13,15 +11,12 @@ export default async function FilteredProductsList({
   products,
   searchParams,
 }: FilteredProductsListProps) {
-  console.log(searchParams)
   if (searchParams) {
-    console.log(Object.keys(searchParams).length)
     const conditions = Object.values(searchParams).map((categoryId) => {
       return Array.isArray(categoryId)
         ? categoryId.map(Number)
         : Number(categoryId)
     })
-    console.log(conditions)
   }
 
   return (

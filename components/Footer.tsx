@@ -1,13 +1,13 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import Background from "@/components/Background";
-import Container from "@/components/Container";
+import Background from "@/components/Background"
+import Container from "@/components/Container"
 
-import { footerLinks } from "@/data";
+import { footerLinks } from "@/data"
 
 export default function Footer() {
   return (
-    <Background styles="bg-black">
+    <Background styles="bg-black mt-auto">
       <Container>
         <div className="flex py-8 items-end ">
           <footer className="flex">
@@ -26,5 +26,5 @@ export default function Footer() {
         </div>
       </Container>
     </Background>
-  );
+  )
 }

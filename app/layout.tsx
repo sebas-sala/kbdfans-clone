@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google"
 import { Toaster } from "react-hot-toast"
+import { Toaster as SonnerToaster } from "@/components/ui/sonner"
 
 import Footer from "@/components/Footer"
 import Header from "../components/header/header"
@@ -22,9 +23,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={` ${inter.className} overflow-y-scroll relative`}>
+      <body
+        className={` ${inter.className} overflow-y-scroll relative flex flex-col min-h-screen`}
+      >
         <Providers>
           <Toaster />
+          <SonnerToaster richColors />
           <Header />
           {children}
           <Footer />

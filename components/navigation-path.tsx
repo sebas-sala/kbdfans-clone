@@ -27,7 +27,7 @@ export default function NavigationPath() {
   }
 
   return (
-    <nav className="container mx-auto my-3">
+    <nav className="container mx-auto my-3 px-2">
       <Breadcrumb className="flex gap-x-6">
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -36,7 +36,7 @@ export default function NavigationPath() {
             </BreadcrumbLink>
           </BreadcrumbItem>
           {segments.map((segment, index) => (
-            <div key={index}>
+            <div key={index} className="flex items-center gap-1">
               <BreadcrumbSeparator />
               <BreadcrumbItem className="cursor-pointer">
                 <BreadcrumbLink asChild>

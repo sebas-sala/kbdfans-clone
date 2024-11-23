@@ -32,7 +32,7 @@ export default function Cart() {
 
   return (
     <>
-      <Sheet>
+      <Sheet open={open} onOpenChange={(open) => setOpen(open)}>
         <SheetTrigger asChild>
           <AiOutlineShoppingCart className="h-6 md:h-8" />
         </SheetTrigger>
@@ -41,23 +41,22 @@ export default function Cart() {
             <SheetTitle className="text-lg font-bold">Cart</SheetTitle>
 
             <CartList cartItems={cartItems} />
-
-            {cartItems.length > 0 && (
-              <SheetFooter className="bg-gray-100 sticky bottom-0 w-full block space-y-6 min-h-fit">
-                <div className="flex justify-between items-center w-full font-bold">
-                  <p>Subtotal:</p>
-                  <p>${subTotal}</p>
-                </div>
-                <Button className="bg-black py-8 w-100">Checkout</Button>
-                <Button
-                  className="bg-transparent text-sm text-gray-600 text-center cursor-pointer hover:bg-transparent w-full hover:text-black"
-                  onClick={onClose}
-                >
-                  Or continue shopping
-                </Button>
-              </SheetFooter>
-            )}
           </SheetHeader>
+          {cartItems.length > 0 && (
+            <SheetFooter className="sticky bottom-0 ml-0 w-full block space-y-6 min-h-fit">
+              <div className="flex justify-between items-center w-full font-bold">
+                <p>Subtotal:</p>
+                <p>${subTotal}</p>
+              </div>
+              <Button className="bg-black py-8 w-full m-0">Checkout</Button>
+              <Button
+                className="bg-transparent text-sm text-gray-600 text-center cursor-pointer hover:bg-transparent w-full hover:text-black"
+                onClick={onClose}
+              >
+                Or continue shopping
+              </Button>
+            </SheetFooter>
+          )}
         </SheetContent>
       </Sheet>
     </>

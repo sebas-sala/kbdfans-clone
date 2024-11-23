@@ -1,12 +1,14 @@
-import ProductImageItem from "./product-image-item";
+"use client"
 
-import { ProductImages } from "@/types/db";
+import ProductImageItem from "./product-image-item"
+
+import type { ProductImages } from "@/types/db"
 
 type Props = {
-  images: ProductImages[];
-  selectedImageIndex: number;
-  handleImage: (index: number) => void;
-};
+  images?: ProductImages[]
+  selectedImageIndex: number
+  handleImage: (index: number) => void
+}
 
 export default function ProductImageList({
   images,
@@ -15,7 +17,7 @@ export default function ProductImageList({
 }: Props) {
   return (
     <ul className="flex md:flex-wrap md:snap-none gap-4 snap-x snap-mandatory overflow-x-auto h-96 w-full md:h-40">
-      {images.map((image, index) => (
+      {images?.map((image, index) => (
         <ProductImageItem
           key={image.id}
           image={image}
@@ -25,5 +27,5 @@ export default function ProductImageList({
         />
       ))}
     </ul>
-  );
+  )
 }

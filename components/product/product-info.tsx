@@ -1,49 +1,43 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { toast } from "react-hot-toast";
+import { toast } from "sonner"
+import { useState } from "react"
 
-import Button from "@/components/Button";
+import Button from "@/components/Button"
 
-import useCart from "@/hooks/use-cart";
-import useAuthContext from "@/hooks/use-auth-context";
+import useCart from "@/hooks/use-cart"
+import useAuthContext from "@/hooks/use-auth-context"
 
-import { ProductType } from "@/types/db";
+import type { ProductType } from "@/types/db"
 
 type Props = {
-  product: ProductType;
-};
+  product: ProductType
+}
 
 export default function ProductInfo({ product }: Props) {
-  const { id, name, stock } = product;
-  const { userData } = useAuthContext();
-  const [buttonDisabled, setButtonDisabled] = useState(false);
-  const { addToCart } = useCart();
+  const { id, name, stock } = product
+  const [buttonDisabled, setButtonDisabled] = useState(false)
+
+  const { addToCart } = useCart()
+  const { userData } = useAuthContext()
 
   const handleAddItem = async () => {
-    if (!userData) {
-      toast.error("Please login to continue shopping", {
-        duration: 1500,
-      });
-      return;
-    }
-
     try {
-      setButtonDisabled(true);
-      await addToCart(product);
+      setButtonDisabled(true)
+      await addToCart(product)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     } finally {
-      setButtonDisabled(false);
+      setButtonDisabled(false)
     }
-  };
+  }
 
   return (
-    <section className="h-96 sticky top-0">
-      <p>{id}</p>
+    <section className="sticky top-0">
       <p>{name}</p>
-      <p>{stock}</p>
+      <p>In stock: {stock}</p>
       <Button
+        className="mt-4"
         type="button"
         handleClick={handleAddItem}
         disabled={buttonDisabled}
@@ -54,5 +48,5 @@ export default function ProductInfo({ product }: Props) {
         )}
       </Button>
     </section>
-  );
+  )
 }

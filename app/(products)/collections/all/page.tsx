@@ -1,16 +1,18 @@
-import FilteredProducts from '@/components/filtered-products/filtered-products-list'
-import ProductFilters from '@/components/product/product-filters'
+import FilteredProducts from "@/components/filtered-products/filtered-products-list"
+import { ProductFilters } from "@/components/product/product-filters"
 
-import { getProductsByCategoriesId } from '@/actions/product-actions'
-import { getCategories } from '@/actions/product-actions'
+import { getProductsByCategoriesId } from "@/actions/product-actions"
+import { getCategories } from "@/actions/product-actions"
 
 type AllProps = {
-  searchParams: Record<string, string | string[]>
+  searchParams: Promise<Record<string, string | string[]>>
 }
 
 export default async function AllPage({ searchParams }: AllProps) {
+  const searchParamsObj = await searchParams
+
   const [products, categories] = await Promise.all([
-    getProductsByCategoriesId(searchParams),
+    getProductsByCategoriesId(searchParamsObj),
     getCategories(),
   ])
 
@@ -20,7 +22,10 @@ export default async function AllPage({ searchParams }: AllProps) {
       <section className="mx-auto container">
         <ProductFilters categories={categories} />
         <div className="flex w-full justify-between gap-20 flex-wrap">
-          <FilteredProducts products={products} searchParams={searchParams} />
+          <FilteredProducts
+            products={products}
+            searchParams={searchParamsObj}
+          />
         </div>
       </section>
     </main>

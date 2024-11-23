@@ -1,16 +1,17 @@
-import CartIcon from "../Icons/CartIcon";
-import CartItem from "./cart-item";
+import CartIcon from "../Icons/CartIcon"
+import { CartItem } from "./cart-item"
 
-import { sortItems } from "@/lib/cart-utils";
+import { sortCart } from "@/lib/cart-utils"
 
-import type { CartWithProducts } from "@/types/db";
+import type { ICartProduct } from "@/types/db"
 
 type CartListProps = {
-  cartItems: CartWithProducts[];
-};
+  cartItems: ICartProduct[]
+}
 
 export default function CartList({ cartItems }: CartListProps) {
-  const sortedCartItems = sortItems(cartItems);
+  const sortedCartItems = sortCart(cartItems)
+
   return (
     <>
       {cartItems && cartItems.length > 0 ? (
@@ -26,5 +27,5 @@ export default function CartList({ cartItems }: CartListProps) {
         </div>
       )}
     </>
-  );
+  )
 }

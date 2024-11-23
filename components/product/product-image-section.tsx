@@ -9,14 +9,18 @@ import ProductImageList from "./product-image-list"
 import type { ProductImages } from "@/types/db"
 
 type Props = {
-  images: ProductImages[]
-  alt: string
+  alt?: string
+  images?: ProductImages[]
 }
 
 export default function ProductImageSection({ images, alt }: Props) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
-  const url = images[selectedImageIndex]?.url || null
+  if (!images) {
+    return null
+  }
+
+  const url = images?.[selectedImageIndex]?.url || null
 
   const handleImage = (index: number) => {
     setSelectedImageIndex(index)
@@ -28,24 +32,23 @@ export default function ProductImageSection({ images, alt }: Props) {
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedImageIndex}
-            className="h-96 w-full md:block hidden relative"
+            className="w-full md:block hidden relative"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
             <Image
-              width={800}
-              height={800}
+              width={400}
+              height={400}
               src={url}
-              className="object-cover w-full h-full rounded-md"
-              alt={alt}
+              className="object-cover max-h-96 w-full rounded-md"
+              alt={alt || ""}
               priority
             />
           </motion.div>
         </AnimatePresence>
       )}
-
       <ProductImageList
         images={images}
         selectedImageIndex={selectedImageIndex}

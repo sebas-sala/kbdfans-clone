@@ -36,6 +36,11 @@ export default function SearchDialog() {
     }
   }
 
+  const handleClose = () => {
+    setOpen(false)
+    setSearch("")
+  }
+
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
@@ -45,22 +50,27 @@ export default function SearchDialog() {
             onClick={() => setOpen(true)}
           />
         </DialogTrigger>
-        <DialogContent className="bg-black border-none top-20">
+        <DialogContent className="bg-black border-none top-40">
           <DialogHeader>
             <DialogTitle className="text-lg font-bold sr-only">
               Search
             </DialogTitle>
           </DialogHeader>
-          <div className="flex items-center gap-2">
-            <BsSearch className="text-white text-xl cursor-pointerhover:text-gray-300" />
-            <Input
-              value={search}
-              onChange={handleOnChange}
-              placeholder="Search a product..."
-              className="mr-1 w-full text-white"
-            />
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <BsSearch className="text-white text-xl cursor-pointerhover:text-gray-300" />
+              <Input
+                value={search}
+                onChange={handleOnChange}
+                placeholder="Search a product..."
+                className="mr-1 w-full text-white"
+              />
+            </div>
 
-            <SearchResultList filteredProducts={filteredProducts} />
+            <SearchResultList
+              onClick={handleClose}
+              filteredProducts={filteredProducts}
+            />
           </div>
         </DialogContent>
       </Dialog>
