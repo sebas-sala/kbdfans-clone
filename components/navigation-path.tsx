@@ -1,4 +1,8 @@
-"use client"
+"use client";
+
+import Link from "next/link";
+import { memo } from "react";
+import { usePathname } from "next/navigation";
 
 import {
   Breadcrumb,
@@ -6,25 +10,12 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-
-import Link from "next/link"
-
-import { useSelectedLayoutSegments } from "next/navigation"
+} from "@/components/ui/breadcrumb";
 
 export default function NavigationPath() {
-  const segments = useSelectedLayoutSegments()
+  const pathname = usePathname();
 
-  const handleClick = (segment: string) => {
-    if (segment === segments.at(-1)) {
-      return "/"
-    }
-
-    const path =
-      "/" + segments.slice(0, segments.indexOf(segment) + 1).join("/")
-
-    return path
-  }
+  const segments = pathname.split("/").filter(Boolean);
 
   return (
     <nav className="container mx-auto my-3 px-2">
@@ -35,18 +26,33 @@ export default function NavigationPath() {
               <Link href="/">Home</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
-          {segments.map((segment, index) => (
-            <div key={index} className="flex items-center gap-1">
-              <BreadcrumbSeparator />
-              <BreadcrumbItem className="cursor-pointer">
-                <BreadcrumbLink asChild>
-                  <Link href={handleClick(segment)}>{segment}</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-            </div>
-          ))}
+          {segments.map((segment, index) => {
+            const href = "/" + segments.slice(0, index + 1).join("/");
+
+            return (
+              <NavigationBreadcrumbItem
+                key={index}
+                href={href}
+                segment={segment}
+              />
+            );
+          })}
         </BreadcrumbList>
       </Breadcrumb>
     </nav>
-  )
+  );
 }
+
+const NavigationBreadcrumbItem = memo(
+  ({ segment, href }: { segment: string; href: string }) => (
+    <div className="flex items-center gap-1">
+      <BreadcrumbSeparator />
+      <BreadcrumbItem className="cursor-pointer">
+        <BreadcrumbLink asChild>
+          <Link href={href}>{segment}</Link>
+        </BreadcrumbLink>
+      </BreadcrumbItem>
+    </div>
+  )
+);
+NavigationBreadcrumbItem.displayName = "NavigationBreadcrumbItem";
