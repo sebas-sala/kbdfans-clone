@@ -1,46 +1,48 @@
-import Image from "next/image"
-import { useState } from "react"
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
+import Image from "next/image";
+import { useState } from "react";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
-import useCart from "@/hooks/use-cart"
-
-import type { ICartProduct } from "@/types/db"
-import { Button } from "../ui/button"
+import { Button } from "../ui/button";
+import type { ICartProduct } from "@/types/db";
 
 type CartItemProps = {
-  product: ICartProduct
-}
+  product: ICartProduct;
+  addToCart: (product: ICartProduct) => void;
+  removeFromCart: (product: ICartProduct) => void;
+};
 
-export const CartItem = ({ product }: CartItemProps) => {
-  const { addToCart, removeFromCart } = useCart()
+export const CartItem = ({
+  product,
+  addToCart,
+  removeFromCart,
+}: CartItemProps) => {
+  const { images, name, price, quantity } = product;
+  const image = images?.[0].url;
+  const newPrice = quantity * price;
 
-  const { images, name, price, quantity } = product
-  const image = images?.[0].url
-  const newPrice = quantity * price
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
-  const [buttonDisabled, setButtonDisabled] = useState(false)
+  const handleAddToQuantity = async () => {
+    setButtonDisabled(true);
+    try {
+      await addToCart(product);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setButtonDisabled(false);
+    }
+  };
 
-  // const handleAddToQuantity = async () => {
-  //   setButtonDisabled(true)
-  //   try {
-  //     await addToCart(Product)
-  //   } catch (error) {
-  //     console.error(error)
-  //   } finally {
-  //     setButtonDisabled(false)
-  //   }
-  // }
-
-  // const handleRemoveFromQuantity = async () => {
-  //   setButtonDisabled(true)
-  //   try {
-  //     await removeFromCart(product)
-  //   } catch (error) {
-  //     console.error(error)
-  //   } finally {
-  //     setButtonDisabled(false)
-  //   }
-  // }
+  const handleRemoveFromQuantity = async () => {
+    setButtonDisabled(true);
+    try {
+      await removeFromCart(product);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setButtonDisabled(false);
+    }
+  };
 
   return (
     <li className="w-full p-1 space-y-4">
@@ -59,22 +61,19 @@ export const CartItem = ({ product }: CartItemProps) => {
         <div className="flex items-center">
           <Button
             aria-label="decrement-quantity"
-            //onClick={handleRemoveFromQuantity}
-            disabled={buttonDisabled}
+            onClick={handleRemoveFromQuantity}
+            disabled={buttonDisabled || quantity === 1}
             variant={"ghost"}
           >
             <AiOutlineMinus />
           </Button>
 
-          <span className="text-center mx-4 flex items-center">
-            {" "}
-            {quantity}
-          </span>
+          <span className="text-center mx-4 flex items-center">{quantity}</span>
 
           <Button
             aria-label="increase-quantity"
-            // onClick={handleAddToQuantity}
-            disabled={buttonDisabled}
+            onClick={handleAddToQuantity}
+            disabled={buttonDisabled || product.stock === quantity}
             className=""
             variant={"ghost"}
           >
@@ -83,5 +82,5 @@ export const CartItem = ({ product }: CartItemProps) => {
         </div>
       </div>
     </li>
-  )
-}
+  );
+};

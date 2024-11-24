@@ -1,23 +1,30 @@
-import CartIcon from "../Icons/CartIcon"
-import { CartItem } from "./cart-item"
+import useCart from "@/hooks/use-cart";
+import CartIcon from "../Icons/CartIcon";
+import { CartItem } from "./cart-item";
 
-import { sortCart } from "@/lib/cart-utils"
+import { sortCart } from "@/lib/cart-utils";
 
-import type { ICartProduct } from "@/types/db"
+import type { ICartProduct } from "@/types/db";
 
 type CartListProps = {
-  cartItems: ICartProduct[]
-}
+  cartItems: ICartProduct[];
+};
 
 export default function CartList({ cartItems }: CartListProps) {
-  const sortedCartItems = sortCart(cartItems)
+  const sortedCartItems = sortCart(cartItems);
+  const { addToCart, removeFromCart } = useCart();
 
   return (
     <>
       {cartItems && cartItems.length > 0 ? (
         <ul className="overflow-y-auto">
           {sortedCartItems.map((item) => (
-            <CartItem key={item.id} product={item} />
+            <CartItem
+              key={item.id}
+              product={item}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+            />
           ))}
         </ul>
       ) : (
@@ -27,5 +34,5 @@ export default function CartList({ cartItems }: CartListProps) {
         </div>
       )}
     </>
-  )
+  );
 }
