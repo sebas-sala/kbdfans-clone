@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import NavigationIcons from "./navigation-icons";
-import LinkRouter from "../link-router";
 import Dropdown from "@/components/Dropdown";
+import { LinkRouter } from "@/components/link-router";
+import { NavigationIcons } from "@/components/header/navigation-icons";
 
 import { navlinks } from "@/data/links";
 
@@ -10,7 +10,7 @@ type StickyNavProps = {
   isSticky: boolean;
 };
 
-export default function NavigationSticky({ isSticky }: StickyNavProps) {
+export function NavigationSticky({ isSticky }: StickyNavProps) {
   return (
     <div className="sticky top-0 z-50 w-full bg-black">
       <section className="sm:container mx-auto flex justify-between items-center">

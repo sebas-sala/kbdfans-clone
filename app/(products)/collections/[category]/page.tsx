@@ -1,16 +1,22 @@
-import { getProductsByCategory } from "@/actions/product-actions"
-import Product from "@/components/product/product-card"
+import { getProductsByCategory } from "@/actions/product-actions";
+import Product from "@/components/product/product-card";
 
 type Props = {
-  params: {
-    category: string
-  }
+  params: Promise<{
+    category: string;
+  }>;
+};
+
+function extractCategoryNumber(category: string): string {
+  const match = category.match(/^(\d+)-keyboards$/);
+  return match ? `${match[1]}%` : category;
 }
 
 export default async function CategoryPage({ params }: Props) {
-  const { category } = params
+  const category = (await params).category;
+  const categoryNumber = extractCategoryNumber(category);
 
-  const products = await getProductsByCategory(category, 16)
+  const products = await getProductsByCategory(categoryNumber, 10);
 
   return (
     <main className="mx-auto container">
@@ -28,5 +34,5 @@ export default async function CategoryPage({ params }: Props) {
         ))}
       </ul>
     </main>
-  )
+  );
 }

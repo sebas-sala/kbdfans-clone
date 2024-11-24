@@ -1,11 +1,11 @@
-import Link from "next/link"
+import Link from "next/link";
 
 type LinkRouterProps = {
-  title: string
-  href: string
-}
+  title: string;
+  href: string;
+};
 
-export default function LinkRouter({ title, href }: LinkRouterProps) {
+export function LinkRouter({ title, href }: LinkRouterProps) {
   return (
     <Link
       href={`/collections/${href}`}
@@ -13,5 +13,5 @@ export default function LinkRouter({ title, href }: LinkRouterProps) {
     >
       {title}
     </Link>
-  )
+  );
 }

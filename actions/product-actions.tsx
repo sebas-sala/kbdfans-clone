@@ -78,7 +78,7 @@ export const getProductsByCategory = unstable_cache(
     }
   },
   ["productsByCategory"],
-  { revalidate: 3600, tags: ["productsByCategory"] }
+  { revalidate: 60, tags: ["productsByCategory"] }
 );
 
 export const getProductsByCategoriesId = unstable_cache(
