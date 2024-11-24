@@ -1,40 +1,45 @@
-"use client"
+"use client";
 
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
+} from "@/components/ui/sheet";
 
-import { AiFillCloseCircle } from "react-icons/ai"
-import { AiOutlineShoppingCart } from "react-icons/ai"
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
-import CartList from "./cart-list"
+import CartList from "./cart-list";
 
-import { getSubtotal } from "@/lib/cart-utils"
-import useCart from "@/hooks/use-cart"
-import { useState } from "react"
-import { Button } from "../ui/button"
+import { getSubtotal } from "@/lib/cart-utils";
+import useCart from "@/hooks/use-cart";
+import { useState } from "react";
+import { Button } from "../ui/button";
 
 export default function Cart() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
-  const { cartItems } = useCart()
+  const { cartItems, cartCount } = useCart();
 
-  const subTotal = getSubtotal(cartItems)
+  const subTotal = getSubtotal(cartItems);
 
-  const onOpen = () => setOpen(true)
-  const onClose = () => setOpen(false)
+  const onClose = () => setOpen(false);
 
   return (
     <>
       <Sheet open={open} onOpenChange={(open) => setOpen(open)}>
         <SheetTrigger asChild>
-          <AiOutlineShoppingCart className="h-6 md:h-8" />
+          <div className="relative">
+            <AiOutlineShoppingCart className="cursor-pointer h-6 md:h-8" />
+
+            {cartCount > 0 && (
+              <span className="text-sm text-red-500 absolute -top-4 -right-4 font-bold">
+                {cartCount}
+              </span>
+            )}
+          </div>
         </SheetTrigger>
         <SheetContent className="z-[70]">
           <SheetHeader className="flex h-full flex-col">
@@ -60,5 +65,5 @@ export default function Cart() {
         </SheetContent>
       </Sheet>
     </>
-  )
+  );
 }

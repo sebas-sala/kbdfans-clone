@@ -1,62 +1,63 @@
-"use client"
+"use client";
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
-import toast from "react-hot-toast"
-import { create } from "zustand"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { create } from "zustand";
 
 import {
   decrementQuantity,
   addToCart as fetchingCart,
   removeFromCart as removeItem,
-} from "@/services/cart-services"
+} from "@/services/cart-services";
 
-import type { ProductType } from "@/types/db"
-import { toast as SonnerToast } from "sonner"
+import type { ICartProduct } from "@/types/db";
 
 type State = {
-  cartItems: ProductType[]
-}
+  cartItems: ICartProduct[];
+  cartCount: number;
+};
 
 type Action = {
-  setCartItems: (items: ProductType[]) => void
-  addToCart: (product: ProductType) => void
-  removeFromCart: (item: ProductType) => void
-  clearCart: () => void
-}
+  setCartItems: (items: ICartProduct[]) => void;
+  addToCart: (product: ICartProduct) => void;
+  removeFromCart: (item: ICartProduct) => void;
+  clearCart: () => void;
+};
 
 const useCart = create<State & Action>((set) => ({
   cartItems: [],
+  cartCount: 0,
 
   setCartItems: (items) => {
     set(() => ({
       cartItems: items,
-    }))
+    }));
   },
 
   addToCart: async (product) => {
     set((state) => {
-      const index = state.cartItems.findIndex((item) => item.id === product.id)
+      const index = state.cartItems.findIndex((item) => item.id === product.id);
+
+      state.cartCount += 1;
 
       if (index !== -1) {
-        const updatedCartItems = structuredClone(state.cartItems)
-        const item = updatedCartItems[index]
+        const updatedCartItems = structuredClone(state.cartItems);
+        const item = updatedCartItems[index];
 
         if (!item.quantity) {
-          item.quantity = 1
+          item.quantity = 1;
         }
 
-        item.quantity += 1
-        updatedCartItems[index] = item
+        item.quantity += 1;
+        updatedCartItems[index] = item;
 
-        return { cartItems: updatedCartItems }
+        return { cartItems: updatedCartItems };
       } else {
         return {
           cartItems: [...state.cartItems, { ...product, quantity: 1 }],
-        }
+        };
       }
-    })
+    });
 
-    SonnerToast.success("Product added to cart")
     // const supabase = createClientComponentClient()
 
     // const {
@@ -88,20 +89,24 @@ const useCart = create<State & Action>((set) => ({
 
   removeFromCart: async (item) => {
     if (!item.quantity) {
-      return
+      return;
     }
 
     set((state) => {
-      const index = state.cartItems.findIndex((item) => item.id === item.id)
+      const index = state.cartItems.findIndex((item) => item.id === item.id);
       if (index !== -1) {
-        const updatedCartItems = structuredClone(state.cartItems)
-        updatedCartItems.splice(index, 1)
-        return { cartItems: updatedCartItems }
+        const updatedCartItems = structuredClone(state.cartItems);
+
+        const updatedItem = updatedCartItems[index];
+        updatedItem.quantity -= 1;
+
+        state.cartCount -= 1;
+
+        return { cartItems: updatedCartItems };
       } else {
-        return { cartItems: [] }
+        return { cartItems: [] };
       }
-    })
-    SonnerToast.success("Product removed from cart")
+    });
 
     // const supabase = createClientComponentClient()
 
@@ -154,6 +159,6 @@ const useCart = create<State & Action>((set) => ({
     //     })
     // }
   },
-}))
+}));
 
-export default useCart
+export default useCart;
