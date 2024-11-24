@@ -1,11 +1,11 @@
-import type { ICartProduct, ProductType } from "@/types/db"
+import type { ICartProduct } from "@/types/db";
 
-export const getSubtotal = (cartItems: ProductType[]) => {
+export const getSubtotal = (cartItems: ICartProduct[]) => {
   return cartItems.reduce((acc, cartItem) => {
-    return acc + cartItem.price * cartItem.stock
-  }, 0)
-}
+    return acc + cartItem.price * cartItem.quantity;
+  }, 0);
+};
 
 export const sortCart = (cartItems: ICartProduct[]) => {
-  return cartItems.sort((a, b) => (a.quantity > b.quantity ? -1 : 1))
-}
+  return cartItems.sort((a, b) => (a.quantity > b.quantity ? -1 : 1));
+};
