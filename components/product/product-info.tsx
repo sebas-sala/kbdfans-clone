@@ -1,36 +1,36 @@
-"use client"
+"use client";
 
-import { toast } from "sonner"
-import { useState } from "react"
+import { toast } from "sonner";
+import { useState } from "react";
 
-import Button from "@/components/Button"
+import Button from "@/components/Button";
 
-import useCart from "@/hooks/use-cart"
-import useAuthContext from "@/hooks/use-auth-context"
+import useCart from "@/hooks/use-cart";
+import useAuthContext from "@/hooks/use-auth-context";
 
-import type { ProductType } from "@/types/db"
+import type { ProductType } from "@/types/db";
 
 type Props = {
-  product: ProductType
-}
+  product: ProductType;
+};
 
 export default function ProductInfo({ product }: Props) {
-  const { id, name, stock } = product
-  const [buttonDisabled, setButtonDisabled] = useState(false)
+  const { id, name, stock } = product;
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
-  const { addToCart } = useCart()
-  const { userData } = useAuthContext()
+  const { addToCart } = useCart();
+  const { userData } = useAuthContext();
 
   const handleAddItem = async () => {
     try {
-      setButtonDisabled(true)
-      await addToCart(product)
+      setButtonDisabled(true);
+      await addToCart(product);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     } finally {
-      setButtonDisabled(false)
+      setButtonDisabled(false);
     }
-  }
+  };
 
   return (
     <section className="sticky top-0">
@@ -48,5 +48,5 @@ export default function ProductInfo({ product }: Props) {
         )}
       </Button>
     </section>
-  )
+  );
 }
