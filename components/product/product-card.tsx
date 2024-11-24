@@ -1,13 +1,13 @@
-import Link from "next/link"
-import Image from "next/image"
+import Link from "next/link";
+import Image from "next/image";
 
-import type { ProductType } from "@/types/db"
+import type { ProductType } from "@/types/db";
 
 export default function ProductCard({ id, images, name, price }: ProductType) {
-  const firstImage = images?.[0]?.url
+  const firstImage = images?.[0]?.url;
 
   return (
-    <li className="h-full">
+    <li className="h-full max-w-full">
       <Link
         href={`/collections/all/${id}`}
         className="px-10 sm:px-0 h-full cursor-pointer flex w-full max-w-max shrink-0 sm:shrink snap-center rounded-2xl flex-col items-center gap-3 hover:shadow-lg transition"
@@ -29,5 +29,5 @@ export default function ProductCard({ id, images, name, price }: ProductType) {
         </div>
       </Link>
     </li>
-  )
+  );
 }
