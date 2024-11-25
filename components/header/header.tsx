@@ -4,13 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { CgProfile } from "react-icons/cg";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import Container from "@/components/Container";
 import { NavigationIcons } from "@/components/header/navigation-icons";
 import { NavigationSticky } from "@/components/header/navigation-sticky";
 
 import { useScrollFixed } from "@/hooks/use-scroll-fixed";
-import { toast } from "sonner";
 
 export function Trigger() {
   return (
@@ -28,21 +30,24 @@ export default function Header() {
   const headerRef = useRef<HTMLDivElement>(null);
   const isSticky = useScrollFixed(headerRef);
 
+  const router = useRouter();
+  const pathname = usePathname();
+
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
 
     if (query.get("success")) {
       toast.success("Order placed! You will receive an email confirmation.");
+      router.replace(pathname);
     }
 
     if (query.get("canceled")) {
       toast.error(
         "Order canceled -- continue to shop around and checkout when you’re ready."
       );
+      router.replace(pathname);
     }
-
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }, []);
+  }, [router, pathname]);
 
   return (
     <>
