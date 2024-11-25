@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 
-import { BsSearch } from "react-icons/bs"
+import { BsSearch } from "react-icons/bs";
 
 import {
   Dialog,
@@ -11,35 +11,35 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
+import { SearchResultItem } from "./search-result-item";
 
-import SearchResultList from "./search-result-list"
-
-import useProductSearch from "@/hooks/use-product-search"
-import { Input } from "../ui/input"
+import useProductSearch from "@/hooks/use-product-search";
+import { Input } from "../ui/input";
+import { ScrollArea } from "../ui/scroll-area";
 
 export default function SearchDialog() {
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
-  const { filteredProducts } = useProductSearch(search)
+  const { filteredProducts } = useProductSearch(search);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value)
-  }
+    setSearch(e.target.value);
+  };
 
   const onOpenChange = (isOpen: boolean) => {
     if (!isOpen) {
-      setOpen(false)
-      setSearch("")
+      setOpen(false);
+      setSearch("");
     }
-  }
+  };
 
   const handleClose = () => {
-    setOpen(false)
-    setSearch("")
-  }
+    setOpen(false);
+    setSearch("");
+  };
 
   return (
     <>
@@ -55,10 +55,13 @@ export default function SearchDialog() {
             <DialogTitle className="text-lg font-bold sr-only">
               Search
             </DialogTitle>
+            <DialogDescription className="text-white sr-only">
+              Search for a product
+            </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <BsSearch className="text-white text-xl cursor-pointerhover:text-gray-300" />
+              <BsSearch className="text-white text-xl cursor-pointer hover:text-gray-300" />
               <Input
                 value={search}
                 onChange={handleOnChange}
@@ -67,13 +70,23 @@ export default function SearchDialog() {
               />
             </div>
 
-            <SearchResultList
-              onClick={handleClose}
-              filteredProducts={filteredProducts}
-            />
+            {filteredProducts.length > 0 && (
+              <ScrollArea className="h-[200px] rounded-md p-2">
+                <ul className="text-white space-y-2 p-2 h-full overflow-y-auto">
+                  {filteredProducts.map(({ id, name }) => (
+                    <SearchResultItem
+                      key={id}
+                      id={id}
+                      onClick={handleClose}
+                      name={name}
+                    />
+                  ))}
+                </ul>
+              </ScrollArea>
+            )}
           </div>
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }

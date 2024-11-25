@@ -1,5 +1,4 @@
 import { Inter } from "next/font/google";
-import { Toaster } from "react-hot-toast";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -28,7 +27,6 @@ export default function RootLayout({
         className={` ${inter.className} overflow-y-scroll relative flex flex-col min-h-screen`}
       >
         <Providers>
-          <Toaster />
           <SonnerToaster richColors />
           <Header />
           {children}

@@ -1,4 +1,5 @@
 import AuthProvider from "@/contexts/auth-context";
+import { SWRConfig } from "swr";
 // import CartProvider from "@/contexts/cart-context"
 
 export default function Providers({ children }: { children: React.ReactNode }) {

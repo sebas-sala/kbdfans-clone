@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 import { Button } from "../ui/button";
 import type { ICartProduct } from "@/types/db";
@@ -17,7 +17,7 @@ export const CartItem = ({
   removeFromCart,
 }: CartItemProps) => {
   const { images, name, price, quantity } = product;
-  const image = images?.[0].url;
+  const image = images?.[0]?.url;
   const newPrice = quantity * price;
 
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -33,7 +33,7 @@ export const CartItem = ({
     }
   };
 
-  const handleRemoveFromQuantity = async () => {
+  const handleRemoveFromCart = async () => {
     setButtonDisabled(true);
     try {
       await removeFromCart(product);
@@ -59,21 +59,32 @@ export const CartItem = ({
         </div>
 
         <div className="flex items-center">
-          <Button
-            aria-label="decrement-quantity"
-            onClick={handleRemoveFromQuantity}
-            disabled={buttonDisabled || quantity === 1}
-            variant={"ghost"}
-          >
-            <AiOutlineMinus />
-          </Button>
+          {quantity > 1 ? (
+            <Button
+              aria-label="decrement-quantity"
+              onClick={handleRemoveFromCart}
+              disabled={buttonDisabled || quantity === 1}
+              variant={"ghost"}
+            >
+              <AiOutlineMinus />
+            </Button>
+          ) : (
+            <Button
+              aria-label="decrement-quantity"
+              onClick={handleRemoveFromCart}
+              disabled={buttonDisabled}
+              variant={"ghost"}
+            >
+              <AiOutlineClose />
+            </Button>
+          )}
 
           <span className="text-center mx-4 flex items-center">{quantity}</span>
 
           <Button
             aria-label="increase-quantity"
             onClick={handleAddToQuantity}
-            disabled={buttonDisabled || product.stock === quantity}
+            disabled={buttonDisabled}
             className=""
             variant={"ghost"}
           >

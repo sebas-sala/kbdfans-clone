@@ -2,8 +2,6 @@ import useCart from "@/hooks/use-cart";
 import CartIcon from "../Icons/CartIcon";
 import { CartItem } from "./cart-item";
 
-import { sortCart } from "@/lib/cart-utils";
-
 import type { ICartProduct } from "@/types/db";
 
 type CartListProps = {
@@ -11,14 +9,13 @@ type CartListProps = {
 };
 
 export default function CartList({ cartItems }: CartListProps) {
-  const sortedCartItems = sortCart(cartItems);
   const { addToCart, removeFromCart } = useCart();
 
   return (
     <>
       {cartItems && cartItems.length > 0 ? (
         <ul className="overflow-y-auto">
-          {sortedCartItems.map((item) => (
+          {cartItems.map((item) => (
             <CartItem
               key={item.id}
               product={item}

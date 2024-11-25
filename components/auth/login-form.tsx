@@ -1,52 +1,51 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { SubmitHandler, useForm } from "react-hook-form"
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-import Button from "../Button"
-import Form from "../Form"
+import Button from "../Button";
+import Form from "../Form";
 
-import useAuthContext from "@/hooks/use-auth-context"
+import useAuthContext from "@/hooks/use-auth-context";
 
-import type { User } from "@/types/db"
-import toast from "react-hot-toast"
+import type { User } from "@/types/db";
+import { toast } from "sonner";
 
 type LoginFormProps = {
-  onClose: () => void
-}
+  onClose: () => void;
+};
 
 export default function LoginForm({ onClose }: LoginFormProps) {
-  const [showForm, setShowForm] = useState(false)
-  const { handleLogin } = useAuthContext()
+  const [showForm, setShowForm] = useState(false);
+  const { handleLogin } = useAuthContext();
 
-  const router = useRouter()
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<User>()
+  } = useForm<User>();
 
   const toggleForm = () => {
-    setShowForm(!showForm)
-  }
+    setShowForm(!showForm);
+  };
 
-  const onSubmit: SubmitHandler<User> = (data) => {
-    const { email, password } = data
-    if (!email || !password) return
-    toast
-      .promise(handleLogin({ email, password }), {
-        loading: "Logging in...",
-        success: "Login successful",
-        error: "Something went wrong",
-      })
-      .then(() => {
-        onClose()
-        router.refresh()
-      })
-  }
+  const onSubmit: SubmitHandler<User> = async (data) => {
+    const { email, password } = data;
+    if (!email || !password) return;
+
+    try {
+      await handleLogin({ email, password });
+      onClose();
+      toast.success("Login successful");
+      router.refresh();
+    } catch {
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
     <Form handleSubmit={handleSubmit(onSubmit)}>
@@ -96,5 +95,5 @@ export default function LoginForm({ onClose }: LoginFormProps) {
         </p>
       </div>
     </Form>
-  )
+  );
 }

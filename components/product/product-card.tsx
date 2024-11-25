@@ -3,7 +3,13 @@ import Image from "next/image";
 
 import type { IProduct } from "@/types/db";
 
-export default function ProductCard({ id, images, name, price }: IProduct) {
+interface IProductCardProps {
+  product: IProduct;
+}
+
+export function ProductCard({ product }: IProductCardProps) {
+  const { id, name, price, images } = product;
+
   const firstImage = images?.[0]?.url;
 
   return (

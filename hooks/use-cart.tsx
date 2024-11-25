@@ -102,6 +102,10 @@ const useCart = create<State & Action>((set) => ({
 
         state.cartCount -= 1;
 
+        if (updatedItem.quantity <= 0) {
+          updatedCartItems.splice(index, 1);
+        }
+
         return { cartItems: updatedCartItems };
       } else {
         return { cartItems: [] };

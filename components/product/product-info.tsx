@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function ProductInfo({ product }: Props) {
-  const { id, name, stock } = product;
+  const { name } = product;
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const { addToCart } = useCart();

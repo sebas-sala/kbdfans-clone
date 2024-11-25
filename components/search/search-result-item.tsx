@@ -1,16 +1,12 @@
-import Link from "next/link"
+import Link from "next/link";
 
 type SearchResultListProps = {
-  id: number
-  name: string
-  onClick: () => void
-}
+  id: number;
+  name: string;
+  onClick: () => void;
+};
 
-export default function SearchResultItem({
-  id,
-  name,
-  onClick,
-}: SearchResultListProps) {
+export function SearchResultItem({ id, name, onClick }: SearchResultListProps) {
   return (
     <li key={id} className="w-full" onClick={onClick}>
       <Link
@@ -20,5 +16,5 @@ export default function SearchResultItem({
         {name}
       </Link>
     </li>
-  )
+  );
 }

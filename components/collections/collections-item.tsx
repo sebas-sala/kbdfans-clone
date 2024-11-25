@@ -7,7 +7,7 @@ type Props = {
   productImage: string | null;
 };
 
-export default function CollectionItem({ id, name, productImage }: Props) {
+export function CollectionItem({ id, name, productImage }: Props) {
   return (
     <li key={id} className="w-full p-2 shadow-md">
       <Link href={`collections/${name}`}>
