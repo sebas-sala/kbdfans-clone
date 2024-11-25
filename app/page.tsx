@@ -1,7 +1,7 @@
-import Category from "@/components/Category"
-import Container from "@/components/Container"
-import InstagramPostSection from "@/components/instagram-post-section"
-import Categories from "../components/Categories"
+import Category from "@/components/Category";
+import Container from "@/components/Container";
+import InstagramPostSection from "@/components/instagram-post-section";
+import Categories from "../components/Categories";
 
 export default function Home() {
   return (
@@ -21,5 +21,5 @@ export default function Home() {
       <Categories />
       <InstagramPostSection />
     </main>
-  )
+  );
 }
