@@ -1,4 +1,4 @@
-import type { ProductType } from "@/types/db";
+import type { ICartProduct, ProductType } from "@/types/db";
 
 export const fetchCartByUserId = async (userId: string) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/carts/${userId}`);
@@ -47,6 +47,24 @@ export const decrementQuantity = async (productId: number, userId: string) => {
   );
   if (!response.ok) {
     throw new Error("Error decrementing quantity");
+  }
+  return response.json();
+};
+
+interface ICheckoutBody {
+  cancel_url: string;
+  success_url: string;
+  cartItems: ICartProduct[];
+}
+
+export const checkout = async (body: ICheckoutBody) => {
+  const response = await fetch("/api/checkout_sessions", {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    throw new Error("Error checking out");
   }
   return response.json();
 };
