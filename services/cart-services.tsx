@@ -1,4 +1,4 @@
-import type { ICartProduct, ProductType } from "@/types/db";
+import type { ICartProduct, IProduct } from "@/types/db";
 
 export const fetchCartByUserId = async (userId: string) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/carts/${userId}`);
@@ -8,7 +8,7 @@ export const fetchCartByUserId = async (userId: string) => {
   return await res.json();
 };
 
-export const addToCart = async (product: ProductType, userId: string) => {
+export const addToCart = async (product: IProduct, userId: string) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/carts/${userId}`,
     {
