@@ -1,6 +1,7 @@
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient } from "@prisma/client";
+import Stripe from "stripe";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 const pcb = [
   {
@@ -91,7 +92,7 @@ const pcb = [
       },
     },
   },
-]
+];
 
 const categories = [
   { id: 1, name: "keyboard" },
@@ -107,7 +108,7 @@ const categories = [
   { id: 11, name: "case" },
   { id: 12, name: "pcb" },
   { id: 13, name: "plate" },
-]
+];
 
 const keyboards = [
   {
@@ -164,7 +165,7 @@ const keyboards = [
       connect: [{ id: 1 }, { id: 8 }],
     },
   },
-]
+];
 
 const switches = [
   {
@@ -200,7 +201,7 @@ const switches = [
       },
     },
   },
-]
+];
 
 const keycaps = [
   {
@@ -236,7 +237,7 @@ const keycaps = [
       },
     },
   },
-]
+];
 
 const images = [
   {
@@ -339,103 +340,130 @@ const images = [
     url: "https://kbdfans.com/cdn/shop/files/1_f41863e7-585b-4431-9be0-3f658d91ee09_460x.jpg?v=1687228057",
     productId: 23,
   },
-]
+];
 
 async function main() {
-  try {
-    await Promise.all(
-      categories.map(async (category) => {
-        try {
-          await prisma.category.create({ data: category })
-        } catch (error) {
-          console.error("Error al crear la categoría:", error)
-        }
-      })
-    )
-  } catch (error) {
-    console.error("Error al procesar categorías:", error)
-  }
-  try {
-    await Promise.all(
-      images.map(async (elem) => {
-        try {
-          await prisma.productImages.create({ data: elem })
-        } catch (error) {
-          console.error("Error al crear la imagen:", error)
-        }
-      })
-    )
-  } catch (error) {
-    console.error("Error al procesar imágenes:", error)
-  }
+  // try {
+  //   await Promise.all(
+  //     categories.map(async (category) => {
+  //       try {
+  //         await prisma.category.create({ data: category });
+  //       } catch (error) {
+  //         console.error("Error al crear la categoría:", error);
+  //       }
+  //     })
+  //   );
+  // } catch (error) {
+  //   console.error("Error al procesar categorías:", error);
+  // }
+  // try {
+  //   await Promise.all(
+  //     images.map(async (elem) => {
+  //       try {
+  //         await prisma.productImages.create({ data: elem });
+  //       } catch (error) {
+  //         console.error("Error al crear la imagen:", error);
+  //       }
+  //     })
+  //   );
+  // } catch (error) {
+  //   console.error("Error al procesar imágenes:", error);
+  // }
 
-  // Procesar PCB
-  try {
-    await Promise.all(
-      pcb.map(async (elem) => {
-        try {
-          await prisma.products.create({ data: elem })
-        } catch (error) {
-          console.error("Error al crear el PCB:", error)
-        }
-      })
-    )
-  } catch (error) {
-    console.error("Error al procesar PCB:", error)
-  }
+  // // Procesar PCB
+  // try {
+  //   await Promise.all(
+  //     pcb.map(async (elem) => {
+  //       try {
+  //         await prisma.products.create({ data: elem });
+  //       } catch (error) {
+  //         console.error("Error al crear el PCB:", error);
+  //       }
+  //     })
+  //   );
+  // } catch (error) {
+  //   console.error("Error al procesar PCB:", error);
+  // }
 
-  // Procesar switches
-  try {
-    await Promise.all(
-      switches.map(async (elem) => {
-        try {
-          await prisma.products.create({ data: elem })
-        } catch (error) {
-          console.error("Error al crear el switch:", error)
-        }
-      })
-    )
-  } catch (error) {
-    console.error("Error al procesar switches:", error)
-  }
+  // // Procesar switches
+  // try {
+  //   await Promise.all(
+  //     switches.map(async (elem) => {
+  //       try {
+  //         await prisma.products.create({ data: elem });
+  //       } catch (error) {
+  //         console.error("Error al crear el switch:", error);
+  //       }
+  //     })
+  //   );
+  // } catch (error) {
+  //   console.error("Error al procesar switches:", error);
+  // }
 
-  // Procesar keycaps
-  try {
-    await Promise.all(
-      keycaps.map(async (elem) => {
-        try {
-          await prisma.products.create({ data: elem })
-        } catch (error) {
-          console.error("Error al crear el keycap:", error)
-        }
-      })
-    )
-  } catch (error) {
-    console.error("Error al procesar keycaps:", error)
-  }
+  // // Procesar keycaps
+  // try {
+  //   await Promise.all(
+  //     keycaps.map(async (elem) => {
+  //       try {
+  //         await prisma.products.create({ data: elem });
+  //       } catch (error) {
+  //         console.error("Error al crear el keycap:", error);
+  //       }
+  //     })
+  //   );
+  // } catch (error) {
+  //   console.error("Error al procesar keycaps:", error);
+  // }
 
-  // Procesar teclados
+  // // Procesar teclados
+  // try {
+  //   await Promise.all(
+  //     keyboards.map(async (elem) => {
+  //       try {
+  //         await prisma.products.create({ data: elem });
+  //       } catch (error) {
+  //         console.error("Error al crear el teclado:", error);
+  //       }
+  //     })
+  //   );
+  // } catch (error) {
+  //   console.error("Error al procesar teclados:", error);
+  // }
+
   try {
-    await Promise.all(
-      keyboards.map(async (elem) => {
-        try {
-          await prisma.products.create({ data: elem })
-        } catch (error) {
-          console.error("Error al crear el teclado:", error)
-        }
-      })
-    )
+    const stripe = new Stripe(
+      process.env.STRIPE_SECRET_KEY || "sk_test_IKYCHOAmUhC7IPTdaoVtO58D"
+    );
+
+    const products = await prisma.products.findMany();
+
+    for (const product of products) {
+      const res = await stripe.prices.create({
+        unit_amount: product.price * 100,
+        currency: "usd",
+        product_data: {
+          name: product.name,
+        },
+      });
+
+      await prisma.products.update({
+        where: { id: product.id },
+        data: {
+          stripe_price_id: res.id,
+        },
+      });
+    }
   } catch (error) {
-    console.error("Error al procesar teclados:", error)
+    console.error("Error al crear los precios en Stripe:", error);
   }
 }
 
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   })
   .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
