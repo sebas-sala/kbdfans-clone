@@ -28,7 +28,6 @@ export default async function FilteredProductsList({
           price={price}
           id={id}
           stock={stock}
-          stripe_price_id={stripe_price_id}
           key={id}
         />
       ))}
