@@ -9,7 +9,7 @@ import {
   removeFromCart as removeItem,
 } from "@/services/cart-services";
 
-import type { ICartProduct, ProductType } from "@/types/db";
+import type { ICartProduct, IProduct } from "@/types/db";
 
 type State = {
   cartItems: ICartProduct[];
@@ -18,7 +18,7 @@ type State = {
 
 type Action = {
   setCartItems: (items: ICartProduct[]) => void;
-  addToCart: (product: ICartProduct | ProductType) => void;
+  addToCart: (product: ICartProduct | IProduct) => void;
   removeFromCart: (item: ICartProduct) => void;
   clearCart: () => void;
 };

@@ -2,13 +2,13 @@ import Link from "next/link";
 
 import ProductsList from "./product-list";
 
-import type { ProductType } from "@/types/db";
+import type { IProduct } from "@/types/db";
 
 type ProductSectionProps = {
   title?: string;
   linkText?: string;
   href?: string;
-  promise: Promise<ProductType[]>;
+  promise: Promise<IProduct[]>;
 };
 
 export default async function ProductSection({

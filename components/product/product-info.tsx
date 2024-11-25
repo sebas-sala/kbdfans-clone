@@ -8,10 +8,10 @@ import Button from "@/components/Button";
 import useCart from "@/hooks/use-cart";
 import useAuthContext from "@/hooks/use-auth-context";
 
-import type { ProductType } from "@/types/db";
+import type { IProduct } from "@/types/db";
 
 type Props = {
-  product: ProductType;
+  product: IProduct;
 };
 
 export default function ProductInfo({ product }: Props) {

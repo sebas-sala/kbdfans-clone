@@ -38,15 +38,6 @@ export interface ICartProduct extends IProduct {
   quantity: number;
 }
 
-export type ProductType = {
-  id: number;
-  name: string;
-  price: number;
-  stock: number;
-  quantity?: number;
-  images?: ProductImages[];
-};
-
 export type Category = {
   id: number;
   name: string;

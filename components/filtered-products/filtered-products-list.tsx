@@ -1,11 +1,11 @@
-import Product from "../product/product-card"
+import Product from "../product/product-card";
 
-import type { ProductType } from "@/types/db"
+import type { IProduct } from "@/types/db";
 
 type FilteredProductsListProps = {
-  products: ProductType[]
-  searchParams?: Record<string, string | string[]>
-}
+  products: IProduct[];
+  searchParams?: Record<string, string | string[]>;
+};
 
 export default async function FilteredProductsList({
   products,
@@ -15,8 +15,8 @@ export default async function FilteredProductsList({
     const conditions = Object.values(searchParams).map((categoryId) => {
       return Array.isArray(categoryId)
         ? categoryId.map(Number)
-        : Number(categoryId)
-    })
+        : Number(categoryId);
+    });
   }
 
   return (
@@ -32,5 +32,5 @@ export default async function FilteredProductsList({
         />
       ))}
     </ul>
-  )
+  );
 }

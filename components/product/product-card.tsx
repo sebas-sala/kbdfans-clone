@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import type { ProductType } from "@/types/db";
+import type { IProduct } from "@/types/db";
 
-export default function ProductCard({ id, images, name, price }: ProductType) {
+export default function ProductCard({ id, images, name, price }: IProduct) {
   const firstImage = images?.[0]?.url;
 
   return (

@@ -1,9 +1,9 @@
 import Product from "./product-card";
 
-import type { ProductType } from "@/types/db";
+import type { IProduct } from "@/types/db";
 
 type ProductsListProps = {
-  products: ProductType[];
+  products: IProduct[];
 };
 
 export default function ProductsList({ products }: ProductsListProps) {

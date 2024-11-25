@@ -1,11 +1,11 @@
-import SearchResultItem from "./search-result-item"
+import SearchResultItem from "./search-result-item";
 
-import type { ProductType } from "@/types/db"
+import type { IProduct } from "@/types/db";
 
 type SearchResultListProps = {
-  onClick: () => void
-  filteredProducts: ProductType[]
-}
+  onClick: () => void;
+  filteredProducts: IProduct[];
+};
 
 export default function SearchResultList({
   onClick,
@@ -21,5 +21,5 @@ export default function SearchResultList({
         </ul>
       )}
     </>
-  )
+  );
 }
