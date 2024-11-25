@@ -35,7 +35,6 @@ export default function ProductInfo({ product }: Props) {
   return (
     <section className="sticky top-0">
       <p>{name}</p>
-      <p>In stock: {stock}</p>
       <Button
         className="mt-4"
         type="button"
