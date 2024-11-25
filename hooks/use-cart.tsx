@@ -30,32 +30,28 @@ const useCart = create<State & Action>((set) => ({
   setCartItems: (items) => {
     set(() => ({
       cartItems: items,
+      cartCount: items.reduce((acc, item) => acc + item.quantity, 0),
     }));
   },
 
   addToCart: async (product) => {
     set((state) => {
-      const index = state.cartItems.findIndex((item) => item.id === product.id);
+      const updatedCart = state.cartItems.map((cartItem) =>
+        cartItem.id === product.id
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      );
 
-      state.cartCount += 1;
-
-      if (index !== -1) {
-        const updatedCartItems = structuredClone(state.cartItems);
-        const item = updatedCartItems[index];
-
-        if (!item.quantity) {
-          item.quantity = 1;
-        }
-
-        item.quantity += 1;
-        updatedCartItems[index] = item;
-
-        return { cartItems: updatedCartItems };
-      } else {
-        return {
-          cartItems: [...state.cartItems, { ...product, quantity: 1 }],
-        };
+      if (!updatedCart.some((cartItem) => cartItem.id === product.id)) {
+        updatedCart.push({ ...product, quantity: 1 });
       }
+
+      const updatedCartCount = updatedCart.reduce(
+        (acc, item) => acc + item.quantity,
+        0
+      );
+
+      return { cartItems: updatedCart, cartCount: updatedCartCount };
     });
 
     // const supabase = createClientComponentClient()
@@ -93,23 +89,28 @@ const useCart = create<State & Action>((set) => ({
     }
 
     set((state) => {
-      const index = state.cartItems.findIndex((item) => item.id === item.id);
-      if (index !== -1) {
-        const updatedCartItems = structuredClone(state.cartItems);
+      const updatedCart = state.cartItems
+        .map((cartItem) => {
+          if (cartItem.id === item.id) {
+            const updatedQuantity = cartItem.quantity - 1;
 
-        const updatedItem = updatedCartItems[index];
-        updatedItem.quantity -= 1;
+            if (updatedQuantity > 0) {
+              return { ...cartItem, quantity: updatedQuantity };
+            }
 
-        state.cartCount -= 1;
+            return null;
+          }
 
-        if (updatedItem.quantity <= 0) {
-          updatedCartItems.splice(index, 1);
-        }
+          return cartItem;
+        })
+        .filter((cartItem): cartItem is ICartProduct => cartItem !== null);
 
-        return { cartItems: updatedCartItems };
-      } else {
-        return { cartItems: [] };
-      }
+      const updatedCartCount = updatedCart.reduce(
+        (acc, item) => acc + item.quantity,
+        0
+      );
+
+      return { cartItems: updatedCart, cartCount: updatedCartCount };
     });
 
     // const supabase = createClientComponentClient()
