@@ -26,10 +26,16 @@ export async function POST(request: Request) {
       );
     }
 
-    const lineItems = cartItems.map((item) => ({
-      price: item.stripe_price_id,
-      quantity: item.quantity,
-    }));
+    const lineItems = cartItems.map((item) => {
+      if (!item.stripe_price_id) {
+        throw new Error("Item does not have a valid price id");
+      }
+
+      return {
+        price: item.stripe_price_id,
+        quantity: item.quantity,
+      };
+    });
 
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
