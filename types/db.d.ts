@@ -1,61 +1,62 @@
 export type Categories = {
-  id: number
-  name: string
+  id: number;
+  name: string;
   _count: {
-    products: number
-  }
-}
+    products: number;
+  };
+};
 
 export type User = {
-  id: string
-  password?: string
-  email: string
-  cart: Cart[]
-}
+  id: string;
+  password?: string;
+  email: string;
+  cart: Cart[];
+};
 
 export type Cart = {
-  id: number
-  userId: string
-  quantity: number
-  productId: number
-}
+  id: number;
+  userId: string;
+  quantity: number;
+  productId: number;
+};
 
 export type CartWithProducts = Cart & {
-  User: User
-  Product: Product
-}
+  User: User;
+  Product: Product;
+};
 
 export interface IProduct {
-  id: number
-  name: string
-  price: number
-  stock: number
-  images?: ProductImages[]
+  id: number;
+  name: string;
+  price: number;
+  stock: number;
+  stripe_price_id: string;
+  images?: ProductImages[];
 }
 
 export interface ICartProduct extends IProduct {
-  quantity: number
+  quantity: number;
 }
 
 export type ProductType = {
-  id: number
-  name: string
-  price: number
-  stock: number
-  quantity?: number
-  images?: ProductImages[]
-}
+  id: number;
+  name: string;
+  price: number;
+  stock: number;
+  quantity?: number;
+  images?: ProductImages[];
+};
 
 export type Category = {
-  id: number
-  name: string
+  id: number;
+  name: string;
   _count?: {
-    products: number
-  }
-}
+    products: number;
+  };
+};
 export type ProductImages = {
-  id: number
-  url: string
-  product?: Product
-  productId: number
-}
+  id: number;
+  url: string;
+  product?: Product;
+  productId: number;
+};

@@ -1,7 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
@@ -32,13 +31,14 @@ model Carts {
 }
 
 model Products {
-  id         Int             @id @default(autoincrement())
-  name       String
-  price      Float
-  stock      Int
-  images     ProductImages[]
-  cart       Carts[]
-  categories Category[]
+  id              Int             @id @default(autoincrement())
+  name            String
+  price           Float
+  stock           Int
+  stripe_price_id String?
+  images          ProductImages[]
+  cart            Carts[]
+  categories      Category[]
 
   @@map("products")
 }
