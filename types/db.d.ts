@@ -30,7 +30,7 @@ export interface IProduct {
   name: string;
   price: number;
   stock: number;
-  stripe_price_id?: string;
+  stripe_price_id?: string | null;
   images?: ProductImages[];
 }
 
