@@ -10,7 +10,7 @@ export const getProductsWithoutImages = unstable_cache(
     });
   },
   ["productsWithoutImages"],
-  { revalidate: 3600, tags: ["productsWithoutImages"] }
+  { revalidate: 60, tags: ["productsWithoutImages"] }
 );
 
 export const getCategories = unstable_cache(
@@ -50,7 +50,7 @@ export const getProducts = unstable_cache(
     }
   },
   ["products"],
-  { revalidate: 3600, tags: ["products"] }
+  { revalidate: 60, tags: ["products"] }
 );
 
 export const getProductsByCategory = unstable_cache(
@@ -130,7 +130,7 @@ export const getProductsByCategoriesId = unstable_cache(
     }
   },
   ["productsByCategoriesId"],
-  { revalidate: 3600, tags: ["productsByCategoriesId"] }
+  { revalidate: 60, tags: ["productsByCategoriesId"] }
 );
 
 export const getProductsByCategoryId = unstable_cache(
@@ -184,7 +184,7 @@ export const getProductById = unstable_cache(
     }
   },
   ["productById"],
-  { revalidate: 3600, tags: ["productById"] }
+  { revalidate: 60, tags: ["productById"] }
 );
 
 export const getAllCategoriesWithProductImage = unstable_cache(
