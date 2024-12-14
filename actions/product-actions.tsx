@@ -10,7 +10,7 @@ export const getProductsWithoutImages = unstable_cache(
     });
   },
   ["productsWithoutImages"],
-  { revalidate: 3600, tags: ["productsWithoutImages"] }
+  { revalidate: 60, tags: ["productsWithoutImages"] }
 );
 
 export const getCategories = unstable_cache(
@@ -31,7 +31,7 @@ export const getCategories = unstable_cache(
     }
   },
   ["categories"],
-  { revalidate: 3600, tags: ["categories"] }
+  { revalidate: 60, tags: ["categories"] }
 );
 
 export const getProducts = unstable_cache(
@@ -50,7 +50,7 @@ export const getProducts = unstable_cache(
     }
   },
   ["products"],
-  { revalidate: 3600, tags: ["products"] }
+  { revalidate: 60, tags: ["products"] }
 );
 
 export const getProductsByCategory = unstable_cache(
@@ -78,7 +78,7 @@ export const getProductsByCategory = unstable_cache(
     }
   },
   ["productsByCategory"],
-  { revalidate: 3600, tags: ["productsByCategory"] }
+  { revalidate: 60, tags: ["productsByCategory"] }
 );
 
 export const getProductsByCategoriesId = unstable_cache(
@@ -130,7 +130,7 @@ export const getProductsByCategoriesId = unstable_cache(
     }
   },
   ["productsByCategoriesId"],
-  { revalidate: 3600, tags: ["productsByCategoriesId"] }
+  { revalidate: 60, tags: ["productsByCategoriesId"] }
 );
 
 export const getProductsByCategoryId = unstable_cache(
@@ -158,7 +158,7 @@ export const getProductsByCategoryId = unstable_cache(
     }
   },
   ["productsByCategoryId"],
-  { revalidate: 3600, tags: ["productsByCategoryId"] }
+  { revalidate: 60, tags: ["productsByCategoryId"] }
 );
 
 export const getProductById = unstable_cache(
@@ -184,7 +184,7 @@ export const getProductById = unstable_cache(
     }
   },
   ["productById"],
-  { revalidate: 3600, tags: ["productById"] }
+  { revalidate: 60, tags: ["productById"] }
 );
 
 export const getAllCategoriesWithProductImage = unstable_cache(
@@ -232,5 +232,5 @@ export const getAllCategoriesWithProductImage = unstable_cache(
     }
   },
   ["allCategoriesWithProductImage"],
-  { revalidate: 3600, tags: ["allCategoriesWithProductImage"] }
+  { revalidate: 60, tags: ["allCategoriesWithProductImage"] }
 );
