@@ -1,3 +1,5 @@
+"use cache";
+
 import { Inter } from "next/font/google";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { SpeedInsights } from "@vercel/speed-insights/next";
