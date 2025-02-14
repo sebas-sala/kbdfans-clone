@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { BsSearch } from 'react-icons/bs';
+import { Search } from 'lucide-react';
 
 import {
   Dialog,
@@ -45,7 +45,7 @@ export default function SearchDialog() {
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogTrigger asChild>
-          <BsSearch
+          <Search
             className='cursor-pointer transition duration-200 hover:text-white/90 h-6 md:h-8'
             onClick={() => setOpen(true)}
           />

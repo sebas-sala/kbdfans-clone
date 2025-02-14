@@ -10,7 +10,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 
-import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { ShoppingCart } from 'lucide-react';
 
 import CartList from './cart-list';
 
@@ -52,7 +52,7 @@ export default function Cart() {
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <div className='relative'>
-            <AiOutlineShoppingCart className='cursor-pointer h-6 md:h-8' />
+            <ShoppingCart className='cursor-pointer h-6 md:h-8' />
 
             {cartCount > 0 && (
               <span className='text-sm text-red-500 absolute -top-4 -right-4 font-bold'>

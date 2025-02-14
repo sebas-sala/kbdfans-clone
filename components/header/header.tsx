@@ -1,27 +1,28 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import Image from "next/image";
-import { useEffect, useRef } from "react";
-import { CgProfile } from "react-icons/cg";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 
-import Container from "@/components/Container";
-import { NavigationIcons } from "@/components/header/navigation-icons";
-import { NavigationSticky } from "@/components/header/navigation-sticky";
+import { User } from 'lucide-react';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
-import { useScrollFixed } from "@/hooks/use-scroll-fixed";
+import Container from '@/components/Container';
+import { NavigationIcons } from '@/components/header/navigation-icons';
+import { NavigationSticky } from '@/components/header/navigation-sticky';
+
+import { useScrollFixed } from '@/hooks/use-scroll-fixed';
 
 export function Trigger() {
   return (
     <button
-      type="button"
-      aria-label="Open dropdown"
-      className="flex items-center"
+      type='button'
+      aria-label='Open dropdown'
+      className='flex items-center'
     >
-      <CgProfile className="cursor-pointer transition duration-200 hover:text-white/90 h-6 md:h-8" />
+      <User className='cursor-pointer transition duration-200 hover:text-white/90 h-6 md:h-8' />
     </button>
   );
 }
@@ -36,14 +37,14 @@ export default function Header() {
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
 
-    if (query.get("success")) {
-      toast.success("Order placed! You will receive an email confirmation.");
+    if (query.get('success')) {
+      toast.success('Order placed! You will receive an email confirmation.');
       router.replace(pathname);
     }
 
-    if (query.get("canceled")) {
+    if (query.get('canceled')) {
       toast.error(
-        "Order canceled -- continue to shop around and checkout when you’re ready."
+        'Order canceled -- continue to shop around and checkout when you’re ready.'
       );
       router.replace(pathname);
     }
@@ -51,16 +52,16 @@ export default function Header() {
 
   return (
     <>
-      <header className="inset-0 relative bg-black w-full" ref={headerRef}>
-        <Container className="flex items-center justify-between py-6 h-full">
-          <Link href="/">
+      <header className='inset-0 relative bg-black w-full' ref={headerRef}>
+        <Container className='flex items-center justify-between py-6 h-full'>
+          <Link href='/'>
             <Image
-              src="/logo.webp"
+              src='/logo.webp'
               width={1000}
               height={1000}
-              className="h-full w-40 object-cover"
+              className='h-full w-40 object-cover'
               priority
-              alt="Logo"
+              alt='Logo'
             />
           </Link>
           {!isSticky && <NavigationIcons />}
