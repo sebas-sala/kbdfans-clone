@@ -1,10 +1,10 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import Dropdown from "@/components/Dropdown";
-import { LinkRouter } from "@/components/link-router";
-import { NavigationIcons } from "@/components/header/navigation-icons";
+import Dropdown from '@/components/Dropdown';
+import { LinkRouter } from '@/components/link-router';
+import { NavigationIcons } from '@/components/header/navigation-icons';
 
-import { navlinks } from "@/data/links";
+import { navlinks } from '@/data/links';
 
 type StickyNavProps = {
   isSticky: boolean;
@@ -12,12 +12,12 @@ type StickyNavProps = {
 
 export function NavigationSticky({ isSticky }: StickyNavProps) {
   return (
-    <div className="sticky top-0 z-50 w-full bg-black">
-      <section className="sm:container mx-auto flex justify-between items-center">
-        <nav className="z-50 flex w-full items-center gap-4 text-white">
+    <div className='sticky top-0 z-50 w-full bg-black'>
+      <section className='sm:container mx-auto flex justify-between items-center'>
+        <nav className='z-50 flex w-full items-center gap-4 text-white'>
           <Link
-            href="/"
-            className="p-2 font-bold tracking-wider text-xs sm:text-sm md:text-base"
+            href='/'
+            className='p-2 font-bold tracking-wider text-xs sm:text-sm md:text-base'
           >
             Home
           </Link>

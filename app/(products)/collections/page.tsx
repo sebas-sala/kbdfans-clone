@@ -1,7 +1,7 @@
-import { CollectionList } from "@/components/collections/collections-list";
+import { CollectionList } from '@/components/collections/collections-list';
 
-import { formatCategoryNumber } from "@/lib/categories-utils";
-import { getAllCategoriesWithProductImage } from "@/actions/product-actions";
+import { formatCategoryNumber } from '@/lib/categories-utils';
+import { getAllCategoriesWithProductImage } from '@/actions/product-actions';
 
 export default async function CollectionsSection() {
   const categories = await getAllCategoriesWithProductImage();
@@ -14,7 +14,7 @@ export default async function CollectionsSection() {
   });
 
   return (
-    <main className="container mx-auto py-20">
+    <main className='container mx-auto py-10'>
       <CollectionList categories={transformedCategories} />
     </main>
   );

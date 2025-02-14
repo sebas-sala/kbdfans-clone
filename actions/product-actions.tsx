@@ -1,6 +1,4 @@
-"use cache";
-
-import prisma from "@/lib/prisma";
+import prisma from '@/lib/prisma';
 
 export const getProductsWithoutImages = async () => {
   return await prisma.products.findMany({
@@ -112,7 +110,7 @@ export const getProductsByCategoriesId = async (
     });
   } catch (error) {
     console.error(error);
-    throw new Error("Error getting products by categoryId");
+    throw new Error('Error getting products by categoryId');
   }
 };
 

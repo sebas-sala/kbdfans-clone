@@ -1,4 +1,4 @@
-import { CollectionItem } from "./collections-item";
+import { CollectionItem } from './collections-item';
 
 type Props = {
   categories: {
@@ -10,7 +10,7 @@ type Props = {
 
 export function CollectionList({ categories }: Props) {
   return (
-    <ul className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 md:gap-4 md:gap-y-14 ">
+    <ul className='grid sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-3 md:gap-4 gap-4'>
       {categories?.map((category) => (
         <CollectionItem {...category} key={category.id} />
       ))}
