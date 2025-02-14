@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { create } from "zustand";
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { create } from 'zustand';
 
 import {
   decrementQuantity,
   addToCart as fetchingCart,
   removeFromCart as removeItem,
-} from "@/services/cart-services";
+} from '@/services/cart-services';
 
-import type { ICartProduct, IProduct } from "@/types/db";
+import type { ICartProduct, IProduct } from '@/types/db';
 
 type State = {
   cartItems: ICartProduct[];
@@ -50,6 +50,8 @@ const useCart = create<State & Action>((set) => ({
         (acc, item) => acc + item.quantity,
         0
       );
+
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
 
       return { cartItems: updatedCart, cartCount: updatedCartCount };
     });
